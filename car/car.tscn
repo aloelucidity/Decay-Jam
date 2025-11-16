@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=3 uid="uid://cktgqcvf538ar"]
+
+[ext_resource type="Script" uid="uid://cerba5raajrve" path="res://car/car.gd" id="1_2gitb"]
+[ext_resource type="PackedScene" uid="uid://cvn5pkt2owfc8" path="res://car/wheel.tscn" id="2_dxy33"]
+[ext_resource type="Script" uid="uid://b0eevn3xd0r8g" path="res://car/light.gd" id="3_hkabp"]
+[ext_resource type="AudioStream" uid="uid://dd2j373pxmxyx" path="res://car/sounds/engine.wav" id="4_jpe8o"]
+[ext_resource type="Script" uid="uid://c4sl7b5kg0au0" path="res://car/sounds/engine.gd" id="5_h3fet"]
+[ext_resource type="AudioStream" uid="uid://dk0eywi462wo6" path="res://car/sounds/jump.wav" id="6_bkrhx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xm2m"]
+radius = 7.0
+
+[sub_resource type="Gradient" id="Gradient_dxy33"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hkabp"]
+gradient = SubResource("Gradient_dxy33")
+width = 288
+height = 288
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("wheels")]
+mass = 200.0
+center_of_mass_mode = 1
+can_sleep = false
+continuous_cd = 2
+script = ExtResource("1_2gitb")
+wheels = [NodePath("PinJoint2D/Wheel"), NodePath("PinJoint2D2/Wheel")]
+wheel_torque = 100000.0
+wheel_energy = 0.05
+jump_impulse = 60000.0
+jump_energy = 1.0
+fall_thrust = 50000.0
+can_hover = true
+hover_thrust = 2500.0
+hover_rot_speed = 4.0
+hover_rotation = 0.5235987755982988
+hover_energy = 0.15
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -15.0
+offset_top = -21.0
+offset_right = 15.0
+offset_bottom = -7.0
+color = Color(0.6368979, 0.64051306, 0.7053417, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_0xm2m")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(-8, -4)
+node_a = NodePath("..")
+node_b = NodePath("Wheel")
+
+[node name="Wheel" parent="PinJoint2D" instance=ExtResource("2_dxy33")]
+can_sleep = false
+continuous_cd = 2
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(8, -4)
+node_a = NodePath("..")
+node_b = NodePath("Wheel")
+
+[node name="Wheel" parent="PinJoint2D2" instance=ExtResource("2_dxy33")]
+can_sleep = false
+continuous_cd = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -12)
+blend_mode = 2
+texture = SubResource("GradientTexture2D_hkabp")
+script = ExtResource("3_hkabp")
+
+[node name="Engine" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_jpe8o")
+volume_db = -2.0
+autoplay = true
+bus = &"Sounds"
+script = ExtResource("5_h3fet")
+max_pitch = 4.0
+pitch_up_speed = 4.0
+pitch_down_speed = 1.0
+sound_grace_frames = 4
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_bkrhx")
+bus = &"Sounds"
