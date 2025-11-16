@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cktgqcvf538ar"]
+[gd_scene load_steps=13 format=3 uid="uid://cktgqcvf538ar"]
 
 [ext_resource type="Script" uid="uid://cerba5raajrve" path="res://car/car.gd" id="1_2gitb"]
 [ext_resource type="PackedScene" uid="uid://cvn5pkt2owfc8" path="res://car/wheel.tscn" id="2_dxy33"]
@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://dd2j373pxmxyx" path="res://car/sounds/engine.wav" id="4_jpe8o"]
 [ext_resource type="Script" uid="uid://c4sl7b5kg0au0" path="res://car/sounds/engine.gd" id="5_h3fet"]
 [ext_resource type="AudioStream" uid="uid://dk0eywi462wo6" path="res://car/sounds/jump.wav" id="6_bkrhx"]
+[ext_resource type="AudioStream" uid="uid://cpvyjui0stbjh" path="res://car/sounds/thruster.wav" id="6_vl2bd"]
+[ext_resource type="Script" uid="uid://cd26h357ngp5e" path="res://car/sounds/thruster.gd" id="7_72ido"]
+[ext_resource type="AudioStream" uid="uid://dkce7qxlw2sdn" path="res://car/sounds/outage.wav" id="9_72ido"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0xm2m"]
 radius = 7.0
@@ -88,7 +91,23 @@ pitch_up_speed = 4.0
 pitch_down_speed = 1.0
 sound_grace_frames = 4
 
+[node name="Thruster" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_vl2bd")
+autoplay = true
+bus = &"Sounds"
+script = ExtResource("7_72ido")
+max_pitch = 4.0
+pitch_up_speed = 4.0
+pitch_down_speed = 1.0
+
 [node name="Jump" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_bkrhx")
+bus = &"Sounds"
+
+[node name="Outage" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_72ido")
+volume_db = 12.0
 bus = &"Sounds"

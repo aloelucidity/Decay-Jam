@@ -4,8 +4,8 @@ extends RigidBody2D
 
 @export_group("Nodes")
 @export var wheels: Array[Wheel]
-@onready var engine_sound = %Engine
 @onready var jump_sound = %Jump
+@onready var outage_sound = %Outage
 
 @export_group("Stats")
 @export var money: int
@@ -81,6 +81,8 @@ func use_battery(amount: float) -> void:
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+	var last_battery = get_total_battery()
+	
 	on_ground = is_on_ground()
 	if Input.is_action_just_pressed("move_up") and on_ground and has_battery(jump_energy):
 		apply_central_impulse(Vector2(0, -jump_impulse).rotated(rotation))
@@ -103,6 +105,8 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 		var target_rot: float = hover_rotation * direction
 		rotation = lerp_angle(rotation, target_rot, delta * hover_rot_speed)
 	
+	if is_zero_approx(round(get_total_battery())) and not is_zero_approx(round(last_battery)):
+		outage_sound.play()
 
 
 func _physics_process(delta: float) -> void:
