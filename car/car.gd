@@ -4,12 +4,16 @@ extends RigidBody2D
 
 @export_group("Nodes")
 @export var wheels: Array[Wheel]
-@onready var jump_sound = %Jump
-@onready var outage_sound = %Outage
+@onready var jump_sound := %Jump
+@onready var outage_sound := %Outage
+@onready var coin_sound := %Coin
 
 @export_group("Stats")
 @export var money: int
-@export var multiplier: float = 1
+@export var multiplier: float = 1000 # times 1000 so i can add to it :P
+
+@export var multiplier_gain: float
+@export var rise_multiplier_gain: float
 
 @export var batteries: Array[float] = [100]
 @export var battery_efficiency: float = 1 ## higher values = less battery usage
@@ -36,9 +40,25 @@ extends RigidBody2D
 var on_ground: bool
 var end_timer: float
 var last_pos: Vector2
+var furthest_distance: float
 
+@export var coyote_time: int
+var coyote_timer: int
 
 signal run_ended
+
+
+func collect_coin(amount: int, stream: AudioStream) -> void:
+	money += amount
+	
+	var pitch_scale: float = snappedf(randf_range(0.25, 1.5), 0.25)
+	if is_equal_approx(pitch_scale, 0.75):
+		pitch_scale = 0.5
+	if is_equal_approx(pitch_scale, 1.25):
+		pitch_scale = 1
+		
+	coin_sound.play()
+	coin_sound.get_stream_playback().play_stream(stream, 0, 0, pitch_scale)
 
 
 func is_on_ground() -> bool:
@@ -84,7 +104,12 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var last_battery = get_total_battery()
 	
 	on_ground = is_on_ground()
-	if Input.is_action_just_pressed("move_up") and on_ground and has_battery(jump_energy):
+	if on_ground:
+		coyote_timer = coyote_time
+	else:
+		coyote_timer -= 1
+	
+	if Input.is_action_just_pressed("move_up") and coyote_timer > 0 and has_battery(jump_energy):
 		apply_central_impulse(Vector2(0, -jump_impulse).rotated(rotation))
 		angular_velocity = 0
 		use_battery(jump_energy)
@@ -112,6 +137,10 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 func _physics_process(delta: float) -> void:
 	var movement: Vector2 = position - last_pos
 	var total_speed: float = linear_velocity.length() + abs(angular_velocity)
+	
+	if position.x > furthest_distance:
+		furthest_distance = position.x
+		multiplier += movement.x * (multiplier_gain if movement.y >= 0 else rise_multiplier_gain)
 	
 	var stationary_condition: bool = (
 		movement.length() < end_movement_threshold or total_speed < end_speed_threshold 

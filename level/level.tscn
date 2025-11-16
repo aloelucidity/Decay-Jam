@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=18 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
 [ext_resource type="AudioStream" uid="uid://dqwdbfu3sswpw" path="res://music/main/sfx.ogg" id="8_m3nah"]
+[ext_resource type="Script" uid="uid://b7y01j2gn8i1o" path="res://level/ui/stat_tracker.gd" id="9_7jqyl"]
 [ext_resource type="AudioStream" uid="uid://f75smqgej453" path="res://music/main/drums.ogg" id="9_fm1jd"]
 [ext_resource type="AudioStream" uid="uid://bo158a1bh5w5v" path="res://music/main/arp.ogg" id="10_7jqyl"]
 [ext_resource type="AudioStream" uid="uid://dba0mp1l2vavc" path="res://music/main/pad.ogg" id="11_m5ivw"]
@@ -49,9 +50,6 @@ offset_lerp_speed = 3.0
 [node name="Car" parent="." instance=ExtResource("2_44x8d")]
 position = Vector2(-462.99994, -110)
 rotation = 1.00048
-end_speed_threshold = 100.0
-end_movement_threshold = 0.01
-end_time_threshold = 3.0
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
 script = ExtResource("5_6gtgk")
@@ -68,8 +66,10 @@ max_hill_strength = 10000.0
 bump_frequency = 5.0
 bump_strength = 10.0
 
-[node name="LevelObjects" type="Node2D" parent="."]
+[node name="LevelObjects" type="Node2D" parent="." node_paths=PackedStringArray("level_generator", "camera")]
 script = ExtResource("5_fm1jd")
+level_generator = NodePath("../LevelGenerator")
+camera = NodePath("../Camera2D")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." node_paths=PackedStringArray("car")]
 script = ExtResource("3_ivpvi")
@@ -101,19 +101,28 @@ layout_mode = 2
 size_flags_horizontal = 8
 alignment = 2
 
-[node name="Money" type="Label" parent="UI/HUD/Earnings"]
+[node name="Money" type="Label" parent="UI/HUD/Earnings" node_paths=PackedStringArray("target_node")]
 layout_mode = 2
 text = "$0"
 horizontal_alignment = 2
+script = ExtResource("9_7jqyl")
+target_node = NodePath("../../../../Car")
+prefix = "$"
+stat_to_track = "money"
 
-[node name="Money2" type="Label" parent="UI/HUD/Earnings"]
+[node name="Multiplier" type="Label" parent="UI/HUD/Earnings" node_paths=PackedStringArray("target_node")]
 layout_mode = 2
 text = "x1.0"
 horizontal_alignment = 2
+script = ExtResource("9_7jqyl")
+target_node = NodePath("../../../../Car")
+prefix = "x"
+stat_to_track = "multiplier"
+factor = 1000.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("car")]
 stream = SubResource("AudioStreamSynchronized_tv7ir")
-volume_db = -3.0
+volume_db = -5.0
 autoplay = true
 bus = &"Music"
 script = ExtResource("12_sui6v")

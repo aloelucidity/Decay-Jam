@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://degh58bttmqng"]
+
+[ext_resource type="Script" uid="uid://dnttt3ps0y8vm" path="res://level/scenes/coin/coin.gd" id="1_5ok3k"]
+[ext_resource type="AudioStream" uid="uid://cab45qb3hqlyp" path="res://level/scenes/coin/sound.wav" id="2_qqpdq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjwop"]
+radius = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r7gjq"]
+radius = 6.0
+
+[node name="Coin" type="Area2D"]
+monitorable = false
+script = ExtResource("1_5ok3k")
+stream = ExtResource("2_qqpdq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_xjwop")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+color = Color(1, 0.8784314, 0.34117648, 1)
+
+[node name="CollectArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
+shape = SubResource("CircleShape2D_r7gjq")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(-8, -8, 16, 16)
+
+[connection signal="body_entered" from="." to="." method="body_entered"]
+[connection signal="body_exited" from="." to="." method="body_exited"]
+[connection signal="body_entered" from="CollectArea" to="." method="collect_body_entered"]

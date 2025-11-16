@@ -20,6 +20,7 @@ extends Node2D
 @export var bump_frequency: float
 @export var bump_strength: float
 
+var rng_seed: int
 var polygon: Polygon2D
 var height_map: PackedFloat64Array
 
@@ -29,7 +30,9 @@ func _ready() -> void:
 	generate_level(randi_range(-100000, 100000))
 
 
-func generate_level(rng_seed: int) -> void:
+func generate_level(_rng_seed: int) -> void:
+	rng_seed = _rng_seed
+	
 	var hill_noise := FastNoiseLite.new()
 	hill_noise.frequency = hill_frequency / 1000
 	hill_noise.noise_type = FastNoiseLite.TYPE_PERLIN
