@@ -70,7 +70,7 @@ func generate_level(_rng_seed: int) -> void:
 	platform_placer_noise.seed = rng_seed + 1
 	
 	var slope_length: float = base_slope_length + extra_slope_length * Globals.slope_length
-	var slope_angle_mult := float(Globals.slope_angle) / 8.0
+	var slope_angle_mult := float(Globals.slope_angle) / 4.0
 	var slope_angle: float = max_slope_angle * slope_angle_mult
 	
 	var poly: PackedVector2Array
@@ -92,11 +92,11 @@ func generate_level(_rng_seed: int) -> void:
 		var platform_placer: float = platform_placer_noise.get_noise_1d(x)
 		if platform_placer > platform_placer_threshold:
 			var platform_height: float = y - min_platform_offset 
-			platform_height -= platform_hill_noise.get_noise_1d(x) * hill_strength
+			platform_height -= (platform_hill_noise.get_noise_1d(x) + 0.1) * hill_strength
 			platform_height = clamp(platform_height, y - max_platform_offset, y - min_platform_offset)
 			platform_buffer.append(Vector2(x, platform_height))
 		else:
-			if platform_buffer.size() > 3:
+			if platform_buffer.size() > 10:
 				place_platform(platform_buffer, static_body_2d)
 			platform_buffer.clear()
 		
@@ -126,12 +126,9 @@ func generate_level(_rng_seed: int) -> void:
 
 func place_platform(points: PackedVector2Array, body: StaticBody2D) -> void:
 	var poly_points = points.duplicate()
-	poly_points.append(
-		points[points.size() - 1] + Vector2(0, 100000)
-	)
-	poly_points.append(
-		points[0] + Vector2(0, 100000)
-	)
+	var reverse_points = points.duplicate()
+	reverse_points.reverse()
+	poly_points.append_array(reverse_points)
 	
 	var collision_2d := CollisionPolygon2D.new()
 	collision_2d.build_mode = collision_2d.BUILD_SEGMENTS

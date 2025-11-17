@@ -34,10 +34,14 @@ size_flags_horizontal = 3
 
 [node name="SlopeLength" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
+max_upgrades = 4
+price = 25
 
 [node name="SlopeAngle" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 upgrade_id = "slope_angle"
+max_upgrades = 4
+price = 25
 
 [node name="BatteryEfficiency" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2

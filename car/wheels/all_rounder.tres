@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_cgvly"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
-friction = 0.9
+friction = 0.8
 
 [resource]
 script = ExtResource("1_cgvly")
-torque = 200000.0
+torque = 165000.0
 energy_usage = 0.05
 physics_material = SubResource("PhysicsMaterial_3afhm")
 size = 10.0
