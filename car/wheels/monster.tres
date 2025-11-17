@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=3 format=3 uid="uid://figy7xsr8sep"]
+
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_u38bt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
+bounce = 1.0
+absorbent = true
+
+[resource]
+script = ExtResource("1_u38bt")
+torque = 400000.0
+energy_usage = 0.075
+physics_material = SubResource("PhysicsMaterial_3afhm")
+size = 14.0

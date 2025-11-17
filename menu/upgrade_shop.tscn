@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://baesc757bnuca"]
+
+[ext_resource type="Script" uid="uid://dgj1ianh1wihs" path="res://menu/upgrade_shop.gd" id="1_y5r56"]
+
+[node name="UpgradeShop" type="HBoxContainer"]
+script = ExtResource("1_y5r56")
+upgrade_id = "slope_length"
+max_upgrades = 8
+price = 10
+price_multiplier = 1.5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Upgrade:"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 8.0
+step = 1.0
+show_percentage = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "+ ($10)"
+
+[connection signal="pressed" from="Button" to="." method="purchase"]

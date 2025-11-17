@@ -1,7 +1,9 @@
 extends AudioStreamPlayer2D
 
 
-@onready var car: Car = get_owner()
+@onready var body: HoverBody = get_owner()
+@onready var car: Car = body.car
+
 @onready var target_volume: float = volume_linear
 
 @export var max_pitch: float
@@ -18,9 +20,8 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var thrust_conditions: bool = (
 		Input.is_action_pressed("move_up") and 
-		not car.on_ground and 
-		car.has_battery(car.hover_energy) and 
-		car.can_hover
+		not car.on_ground and
+		car.has_battery(body.hover_energy)
 	)
 	
 	var sound_playing: bool = thrust_conditions

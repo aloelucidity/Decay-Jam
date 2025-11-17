@@ -2,9 +2,12 @@ class_name Car
 extends RigidBody2D
 
 
+const BODY_OFFSET := Vector2(0, -14)
+const BODY_PATH: String = "res://car/bodies/%s.tscn"
+
 @export_group("Nodes")
 @export var wheels: Array[Wheel]
-@onready var jump_sound := %Jump
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var outage_sound := %Outage
 @onready var coin_sound := %Coin
 
@@ -15,39 +18,47 @@ extends RigidBody2D
 @export var multiplier_gain: float
 @export var rise_multiplier_gain: float
 
-@export var batteries: Array[float] = [100]
+@export var batteries: Array[float]
 @export var battery_efficiency: float = 1 ## higher values = less battery usage
+@export var battery_efficiency_step: float
 
 @export_group("Physics")
-@export var wheel_torque: float
-@export var wheel_energy: float
-
-@export var jump_impulse: float
-@export var jump_energy: float
-@export var jump_cancel_multiplier: float = 1
-
+@export var body_stats: BodyStats
+@export var wheel_stats: WheelStats
 @export var fall_thrust: float
-
-@export var can_hover: bool
-@export var hover_thrust: float
-@export var hover_rot_speed: float
-@export_range(0, 360, 0.1, "radians_as_degrees") var hover_rotation: float
-@export var hover_energy: float
-
 @export var end_speed_threshold: float
 @export var end_movement_threshold: float
 @export var end_time_threshold: float
 
+@export var coyote_time: float
+var coyote_timer: float
+
+var body: Body
 var on_ground: bool
 var end_timer: float
 var last_pos: Vector2
 var furthest_distance: float
 
-@export var coyote_time: float
-var coyote_timer: float
-var jump_cancelled: bool
-
 signal run_ended
+signal battery_used
+
+
+func _ready() -> void:
+	collision_shape_2d.shape = body_stats.collision_shape
+	collision_shape_2d.position = body_stats.collision_offset + BODY_OFFSET
+	
+	body = load(BODY_PATH % body_stats.base).instantiate()
+	body.position = BODY_OFFSET
+	body.car = self
+	add_child(body)
+	move_child(body, 1)
+	
+	for wheel in wheels:
+		wheel.load_wheel_stats(wheel_stats)
+	
+	battery_efficiency = 1 + battery_efficiency_step * Globals.battery_efficiency
+	batteries.resize(1 + Globals.extra_batteries)
+	batteries.fill(100)
 
 
 func collect_coin(amount: int, stream: AudioStream) -> void:
@@ -100,6 +111,7 @@ func use_battery(amount: float) -> void:
 			usage -= power_left
 			if batteries[0] <= 0:
 				batteries.pop_front()
+				emit_signal("battery_used")
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
@@ -112,30 +124,12 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	else:
 		coyote_timer -= delta
 	
-	if Input.is_action_just_pressed("move_up") and coyote_timer > 0 and has_battery(jump_energy):
-		angular_velocity = 0
-		apply_central_impulse(Vector2(0, -jump_impulse).rotated(rotation))
-		use_battery(jump_energy)
-		jump_sound.play()
-		jump_cancelled = false
-	
-	if not on_ground and not jump_cancelled and not Input.is_action_pressed("move_up"):
-		linear_velocity.y *= jump_cancel_multiplier
-		jump_cancelled = true
+	body.integrate_forces()
 	
 	if Input.is_action_pressed("move_down") and not on_ground:
 		var fall_force := Vector2(0, fall_thrust).rotated(rotation)
 		if fall_force.y > 0:
 			apply_central_force(fall_force)
-	
-	var direction: float = Input.get_axis("move_left", "move_right")
-	if Input.is_action_pressed("move_up") and not on_ground and has_battery(hover_energy) and can_hover:
-		if linear_velocity.y > -hover_thrust * delta:
-			apply_central_impulse(Vector2(0, -hover_thrust).rotated(rotation))
-			use_battery(hover_energy)
-		
-		var target_rot: float = hover_rotation * direction
-		rotation = lerp_angle(rotation, target_rot, delta * hover_rot_speed)
 	
 	if is_zero_approx(round(get_total_battery())) and not is_zero_approx(round(last_battery)):
 		outage_sound.play()
@@ -150,8 +144,9 @@ func _physics_process(delta: float) -> void:
 		multiplier += movement.x * (multiplier_gain if movement.y >= 0 else rise_multiplier_gain)
 	
 	var stationary_condition: bool = (
-		movement.length() < end_movement_threshold or total_speed < end_speed_threshold 
-	) and on_ground
+		(movement.length() < end_movement_threshold and on_ground) or 
+		total_speed < end_speed_threshold
+	) and position.x > 0
 	var backwards_condition: bool = round(get_total_battery()) < 1 and linear_velocity.x < 0
 	
 	if stationary_condition or backwards_condition:

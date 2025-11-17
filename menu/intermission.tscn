@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=4 format=3 uid="uid://tjrj1bcjleo"]
 
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
+[ext_resource type="PackedScene" uid="uid://baesc757bnuca" path="res://menu/upgrade_shop.tscn" id="2_fpmmv"]
+[ext_resource type="Script" uid="uid://cnwph2wramvjg" path="res://menu/globals_display.gd" id="2_wfkj1"]
 
 [node name="Intermission" type="Control"]
 layout_mode = 3
@@ -26,17 +28,50 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 alignment = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Shop" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SlopeLength" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+
+[node name="SlopeAngle" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+upgrade_id = "slope_angle"
+
+[node name="BatteryEfficiency" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+upgrade_id = "battery_efficiency"
+max_upgrades = 4
+price = 1000
+
+[node name="ExtraBatteries" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+upgrade_id = "extra_batteries"
+max_upgrades = 2
+price = 1000
+
+[node name="Stats" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Day" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
 layout_mode = 2
-text = "Day 3"
+text = "Day %s"
+horizontal_alignment = 2
+script = ExtResource("2_wfkj1")
+display_var = "day"
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Money" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
+layout_mode = 2
+text = "Money: $%s"
+horizontal_alignment = 2
+script = ExtResource("2_wfkj1")
+display_var = "money"
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/Stats"]
 layout_mode = 2
 focus_mode = 0
 text = "Go!"
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Button" to="." method="start_run"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/Stats/Button" to="." method="start_run"]

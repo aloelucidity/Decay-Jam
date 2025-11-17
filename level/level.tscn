@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://8jvrirsicmsi"]
 
-[ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://camera_2d.gd" id="1_ktfr2"]
+[ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
-[ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://canvas_modulate.gd" id="3_ivpvi"]
+[ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
 [ext_resource type="Script" uid="uid://bawauf012neu6" path="res://level/level_objects.gd" id="5_fm1jd"]
@@ -26,15 +26,16 @@ stream_1/volume = 0.0
 stream_2/stream = ExtResource("8_m3nah")
 stream_2/volume = 0.0
 stream_3/stream = ExtResource("9_fm1jd")
-stream_3/volume = -60.0
+stream_3/volume = 0.0
 stream_4/stream = ExtResource("10_7jqyl")
-stream_4/volume = -60.0
+stream_4/volume = 0.0
 stream_5/stream = ExtResource("11_m5ivw")
-stream_5/volume = -60.0
+stream_5/volume = 0.0
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("car")]
 script = ExtResource("1_l5lfc")
 intermission_path = "res://menu/intermission.tscn"
+car = NodePath("Car")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("car")]
 offset = Vector2(0, -10)
@@ -50,22 +51,27 @@ offset_lerp_speed = 3.0
 [node name="Car" parent="." instance=ExtResource("2_44x8d")]
 position = Vector2(-462.99994, -110)
 rotation = 1.00048
-jump_cancel_multiplier = 0.55
+battery_efficiency_step = 0.5
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
 script = ExtResource("5_6gtgk")
 car = NodePath("../Car")
 car_pos_offset = Vector2(16, -24)
 camera = NodePath("../Camera2D")
-slope_length = 1000.0
-slope_angle = 0.25
 level_length = 50000.0
 level_depth = 1000.0
 sample_rate = 10.0
+base_slope_length = 100.0
+extra_slope_length = 100.0
+max_slope_angle = 0.375
 hill_frequency = 0.1
 max_hill_strength = 10000.0
 bump_frequency = 5.0
 bump_strength = 10.0
+platform_hill_frequency = 0.25
+platform_placer_frequency = 0.3
+min_platform_offset = 48.0
+max_platform_offset = 160.0
 
 [node name="LevelObjects" type="Node2D" parent="." node_paths=PackedStringArray("level_generator", "camera")]
 script = ExtResource("5_fm1jd")

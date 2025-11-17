@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction: float = Input.get_axis("move_left", "move_right")
-	var engine_playing: bool = car.on_ground and car.has_battery(car.wheel_energy * abs(direction)) and sign(direction) != -sign(car.linear_velocity.x)
+	var engine_playing: bool = car.on_ground and car.has_battery(car.wheel_stats.energy_usage * abs(direction)) and sign(direction) != -sign(car.linear_velocity.x)
 	if engine_playing:
 		grace_timer = sound_grace_frames
 	else:
@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 		delta * 4
 	)
 	
-	var accel_speed: float = min(abs(car.linear_velocity.x) / (car.wheel_torque / car.mass), 1.0)
+	var accel_speed: float = min(abs(car.linear_velocity.x) / (car.wheel_stats.torque / car.mass), 1.0)
 	pitch_scale = lerp(
 		pitch_scale, 
 		(abs(direction) * max_pitch) if sound_playing else 1.0, 
