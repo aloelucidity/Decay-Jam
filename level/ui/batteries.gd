@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends HBoxContainer
 
 
 @export var car: Car
@@ -10,6 +10,8 @@ func _ready() -> void:
 		car.connect("battery_used", battery_used)
 		for battery: float in car.batteries:
 			var bar := ProgressBar.new()
+			bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			bar.fill_mode = bar.FILL_END_TO_BEGIN
 			add_child(bar)
 			bars.append(bar)
 

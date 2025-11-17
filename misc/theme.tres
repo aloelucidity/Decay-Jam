@@ -1,0 +1,45 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bkavqyofikvxb"]
+
+[ext_resource type="FontFile" uid="uid://dxl8vp3ajwwm5" path="res://misc/fonts/Audiowide-Regular.ttf" id="1_yobfc"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_yobfc"]
+color = Color(1, 1, 1, 0.5019608)
+
+[sub_resource type="Gradient" id="Gradient_yobfc"]
+colors = PackedColorArray(0.067549996, 0.066999994, 0.1, 1, 0.541, 0.54, 0.6, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gwh2h"]
+gradient = SubResource("Gradient_yobfc")
+fill_from = Vector2(0, 0.7)
+fill_to = Vector2(0, 0)
+repeat = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kfyo1"]
+texture = SubResource("GradientTexture2D_gwh2h")
+
+[sub_resource type="Gradient" id="Gradient_7pjvw"]
+colors = PackedColorArray(0.1373933, 0.09829258, 0.28198513, 1, 0, 0.5951419, 0.6464304, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f70oy"]
+gradient = SubResource("Gradient_7pjvw")
+fill_from = Vector2(0, 0.7)
+fill_to = Vector2(0, 0)
+repeat = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gwsko"]
+texture = SubResource("GradientTexture2D_f70oy")
+
+[resource]
+default_font = ExtResource("1_yobfc")
+default_font_size = 9
+HSeparator/constants/separation = 2
+HSeparator/styles/separator = SubResource("StyleBoxLine_yobfc")
+Label/colors/font_shadow_color = Color(1, 1, 1, 0.09411765)
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
+Label/constants/shadow_outline_size = 5
+ProgressBar/font_sizes/font_size = 7
+ProgressBar/styles/background = SubResource("StyleBoxTexture_kfyo1")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_gwsko")

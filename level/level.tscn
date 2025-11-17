@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=34 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -10,12 +10,83 @@
 [ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://level/ui/hud.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="7_tv7ir"]
 [ext_resource type="AudioStream" uid="uid://dqwdbfu3sswpw" path="res://music/main/sfx.ogg" id="8_m3nah"]
 [ext_resource type="Script" uid="uid://b7y01j2gn8i1o" path="res://level/ui/stat_tracker.gd" id="9_7jqyl"]
 [ext_resource type="AudioStream" uid="uid://f75smqgej453" path="res://music/main/drums.ogg" id="9_fm1jd"]
 [ext_resource type="AudioStream" uid="uid://bo158a1bh5w5v" path="res://music/main/arp.ogg" id="10_7jqyl"]
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="10_m5ivw"]
 [ext_resource type="AudioStream" uid="uid://dba0mp1l2vavc" path="res://music/main/pad.ogg" id="11_m5ivw"]
+[ext_resource type="Script" uid="uid://esr0d5andrel" path="res://level/ui/animate_gradient.gd" id="11_sui6v"]
+[ext_resource type="Texture2D" uid="uid://tkboymtcjjj1" path="res://level/ui/grid.png" id="12_b7y0n"]
+[ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
+[ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/stripes.png" id="12_v4yay"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sui6v"]
+shader = ExtResource("10_m5ivw")
+shader_parameter/highlight_color = Color(0.7019608, 0.6862745, 0.8, 0)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 0.7
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 3.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 1.5
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_tv7ir"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.077999994, 0.077999994, 0.12, 1, 0.228, 0.228, 0.3, 1, 0.078431375, 0.078431375, 0.12156863, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kp5pi"]
+gradient = SubResource("Gradient_tv7ir")
+width = 128
+height = 128
+fill_from = Vector2(0.2, 0.2)
+fill_to = Vector2(1, 0.5)
+repeat = 1
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_m5ivw"]
+offsets = PackedFloat32Array(0.7, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sui6v"]
+gradient = SubResource("Gradient_m5ivw")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5ivw"]
+shader = ExtResource("10_m5ivw")
+shader_parameter/highlight_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_color = Color(0.7029333, 0.688, 0.8, 1)
+shader_parameter/strength = 0.7
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 2.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 1.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_sui6v"]
+colors = PackedColorArray(0.029000007, 0.29, 0.19865002, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tv7ir"]
+gradient = SubResource("Gradient_sui6v")
+width = 72
+height = 72
+fill = 1
+fill_from = Vector2(0.6, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tv7ir"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tv7ir"]
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_tv7ir"]
 stream_count = 6
@@ -26,11 +97,11 @@ stream_1/volume = 0.0
 stream_2/stream = ExtResource("8_m3nah")
 stream_2/volume = 0.0
 stream_3/stream = ExtResource("9_fm1jd")
-stream_3/volume = 0.0
+stream_3/volume = -60.0
 stream_4/stream = ExtResource("10_7jqyl")
-stream_4/volume = 0.0
+stream_4/volume = -60.0
 stream_5/stream = ExtResource("11_m5ivw")
-stream_5/volume = 0.0
+stream_5/volume = -60.0
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("car")]
 script = ExtResource("1_l5lfc")
@@ -89,41 +160,194 @@ darkness_color = Color(0.019607844, 0.023529412, 0.101960786, 1)
 [node name="HUD" type="MarginContainer" parent="UI"]
 offset_right = 512.0
 offset_bottom = 288.0
+theme = ExtResource("7_tv7ir")
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 script = ExtResource("6_m3nah")
 
-[node name="Batteries" type="VBoxContainer" parent="UI/HUD" node_paths=PackedStringArray("car")]
-custom_minimum_size = Vector2(80, 0)
+[node name="Control" type="Control" parent="UI/HUD"]
+custom_minimum_size = Vector2(80, 60)
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/HUD/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.017453292
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="Panel" type="TextureRect" parent="UI/HUD/Control/PanelContainer"]
+material = SubResource("ShaderMaterial_sui6v")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_kp5pi")
+expand_mode = 1
+script = ExtResource("11_sui6v")
+metadata/_edit_group_ = true
+
+[node name="Shadow" type="TextureRect" parent="UI/HUD/Control/PanelContainer/Panel"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 6.0
+offset_right = 4.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_sui6v")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 20
+
+[node name="Control" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -1.0
+anchor_right = 0.675
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.5, 1)
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 0.29803923)
+theme_override_font_sizes/font_size = 6
+text = "whitefruit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Screen" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+clip_children = 2
+material = SubResource("ShaderMaterial_m5ivw")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_tv7ir")
+expand_mode = 1
+
+[node name="Pattern3" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+modulate = Color(2.117753e-06, 0.70300174, 0.82874405, 0.0627451)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 2.0
+anchor_bottom = 2.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_v4yay")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("12_kp5pi")
+scroll_speed = Vector2(0, 7)
+
+[node name="Pattern" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+modulate = Color(0, 0.89677805, 0.8821105, 0.0627451)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 2.0
+anchor_bottom = 2.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_b7y0n")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("12_kp5pi")
+
+[node name="Pattern2" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+modulate = Color(0, 0.89677805, 0.8821105, 0.0627451)
+show_behind_parent = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 2.0
+anchor_bottom = 2.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_b7y0n")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("12_kp5pi")
+scroll_speed = Vector2(-5, -5)
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Batteries" type="HBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car")]
+layout_mode = 2
 mouse_filter = 2
 alignment = 2
 script = ExtResource("4_0v1st")
-car = NodePath("../../../Car")
+car = NodePath("../../../../../../../../Car")
 
-[node name="Earnings" type="VBoxContainer" parent="UI/HUD"]
+[node name="Padding" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
-size_flags_horizontal = 8
-alignment = 2
 
-[node name="Money" type="Label" parent="UI/HUD/Earnings" node_paths=PackedStringArray("target_node")]
+[node name="HSeparator" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+material = SubResource("CanvasItemMaterial_tv7ir")
+layout_mode = 2
+
+[node name="Stats" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
+texture_filter = 2
+material = SubResource("ShaderMaterial_tv7ir")
 layout_mode = 2
 text = "$0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-target_node = NodePath("../../../../Car")
+target_node = NodePath("../../../../../../../../../Car")
 prefix = "$"
 stat_to_track = "money"
 
-[node name="Multiplier" type="Label" parent="UI/HUD/Earnings" node_paths=PackedStringArray("target_node")]
+[node name="HSeparator" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats"]
+material = SubResource("CanvasItemMaterial_tv7ir")
+layout_mode = 2
+
+[node name="Multiplier" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
+texture_filter = 2
 layout_mode = 2
 text = "x1.0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-target_node = NodePath("../../../../Car")
+target_node = NodePath("../../../../../../../../../Car")
 prefix = "x"
 stat_to_track = "multiplier"
 factor = 1000.0
