@@ -50,6 +50,7 @@ offset_lerp_speed = 3.0
 [node name="Car" parent="." instance=ExtResource("2_44x8d")]
 position = Vector2(-462.99994, -110)
 rotation = 1.00048
+jump_cancel_multiplier = 0.55
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
 script = ExtResource("5_6gtgk")
@@ -70,6 +71,7 @@ bump_strength = 10.0
 script = ExtResource("5_fm1jd")
 level_generator = NodePath("../LevelGenerator")
 camera = NodePath("../Camera2D")
+object_chance = 0.03
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." node_paths=PackedStringArray("car")]
 script = ExtResource("3_ivpvi")
@@ -122,7 +124,7 @@ factor = 1000.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("car")]
 stream = SubResource("AudioStreamSynchronized_tv7ir")
-volume_db = -5.0
+volume_db = -4.0
 autoplay = true
 bus = &"Music"
 script = ExtResource("12_sui6v")

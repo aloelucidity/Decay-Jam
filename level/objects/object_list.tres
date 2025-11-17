@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b8qnammlsj0hh"]
+
+[ext_resource type="Script" uid="uid://hpsqtsrovtpm" path="res://level/objects/object_list.gd" id="3_7t3du"]
+
+[resource]
+script = ExtResource("3_7t3du")
+object_list = Dictionary[String, float]({
+"coin_arc": 0.05,
+"coin_line": 0.0
+})

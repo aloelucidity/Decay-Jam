@@ -4,10 +4,10 @@
 [ext_resource type="AudioStream" uid="uid://cab45qb3hqlyp" path="res://level/scenes/coin/sound.wav" id="2_qqpdq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjwop"]
-radius = 24.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7gjq"]
-radius = 6.0
+radius = 8.0
 
 [node name="Coin" type="Area2D"]
 monitorable = false

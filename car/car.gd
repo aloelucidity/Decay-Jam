@@ -24,6 +24,7 @@ extends RigidBody2D
 
 @export var jump_impulse: float
 @export var jump_energy: float
+@export var jump_cancel_multiplier: float = 1
 
 @export var fall_thrust: float
 
@@ -42,8 +43,9 @@ var end_timer: float
 var last_pos: Vector2
 var furthest_distance: float
 
-@export var coyote_time: int
-var coyote_timer: int
+@export var coyote_time: float
+var coyote_timer: float
+var jump_cancelled: bool
 
 signal run_ended
 
@@ -102,18 +104,24 @@ func use_battery(amount: float) -> void:
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	var last_battery = get_total_battery()
+	var delta: float = get_physics_process_delta_time()
 	
 	on_ground = is_on_ground()
 	if on_ground:
 		coyote_timer = coyote_time
 	else:
-		coyote_timer -= 1
+		coyote_timer -= delta
 	
 	if Input.is_action_just_pressed("move_up") and coyote_timer > 0 and has_battery(jump_energy):
-		apply_central_impulse(Vector2(0, -jump_impulse).rotated(rotation))
 		angular_velocity = 0
+		apply_central_impulse(Vector2(0, -jump_impulse).rotated(rotation))
 		use_battery(jump_energy)
 		jump_sound.play()
+		jump_cancelled = false
+	
+	if not on_ground and not jump_cancelled and not Input.is_action_pressed("move_up"):
+		linear_velocity.y *= jump_cancel_multiplier
+		jump_cancelled = true
 	
 	if Input.is_action_pressed("move_down") and not on_ground:
 		var fall_force := Vector2(0, fall_thrust).rotated(rotation)
@@ -121,7 +129,6 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 			apply_central_force(fall_force)
 	
 	var direction: float = Input.get_axis("move_left", "move_right")
-	var delta: float = get_physics_process_delta_time()
 	if Input.is_action_pressed("move_up") and not on_ground and has_battery(hover_energy) and can_hover:
 		if linear_velocity.y > -hover_thrust * delta:
 			apply_central_impulse(Vector2(0, -hover_thrust).rotated(rotation))
