@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=36 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/stripes.png" id="12_v4yay"]
+[ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sui6v"]
 shader = ExtResource("10_m5ivw")
@@ -87,6 +88,34 @@ metadata/_snap_enabled = true
 blend_mode = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tv7ir"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0wo3"]
+shader = ExtResource("16_xl7j7")
+shader_parameter/indictor_color = Color(1, 1, 1, 1)
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/centre_color = Color(1, 1, 1, 1)
+shader_parameter/region1_color = Color(0, 1, 0, 1)
+shader_parameter/region2_color = Color(1, 1, 0, 1)
+shader_parameter/region3_color = Color(1, 0, 0, 1)
+shader_parameter/scale_mark_color = Color(0.56, 0.56, 0.56, 0.53333336)
+shader_parameter/show_edges = false
+shader_parameter/bottom_border = false
+shader_parameter/meter_start_angle = 0.050000002375
+shader_parameter/indicator_angle = 0.0
+shader_parameter/indicator_length = 0.6
+shader_parameter/indicator_width = 0.01
+shader_parameter/border_width = 0.0400000019
+shader_parameter/centre_width = 0.1
+shader_parameter/region1 = 1.0
+shader_parameter/region2 = 1.0
+shader_parameter/region3 = 0.850000040375
+shader_parameter/regions_end = 1.0
+shader_parameter/scale_marks = 5.0
+shader_parameter/major_scale_marks = 1.0
+shader_parameter/scale_mark_width = 0.03700000105898
+shader_parameter/scale_minor_outer = 0.75
+shader_parameter/scale_major_outer = 0.8
+shader_parameter/scale_inner = 0.650000030875
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_tv7ir"]
 stream_count = 6
@@ -351,6 +380,20 @@ target_node = NodePath("../../../../../../../../../Car")
 prefix = "x"
 stat_to_track = "multiplier"
 factor = 1000.0
+
+[node name="HSeparator2" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+material = SubResource("CanvasItemMaterial_tv7ir")
+layout_mode = 2
+
+[node name="Padding2" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+material = SubResource("ShaderMaterial_o0wo3")
+layout_mode = 2
+size_flags_vertical = 3
+color = Color(0, 0, 0, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("car")]
 stream = SubResource("AudioStreamSynchronized_tv7ir")
