@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=38 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/stripes.png" id="12_v4yay"]
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
+[ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/speedometer.gd" id="17_o0wo3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sui6v"]
 shader = ExtResource("10_m5ivw")
@@ -30,7 +31,7 @@ shader_parameter/highlight_color = Color(0.7019608, 0.6862745, 0.8, 0)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 3.0
+shader_parameter/bevel_offset = 2.0
 shader_parameter/knockout = false
 shader_parameter/blur_radius = 1.5
 shader_parameter/sample_count = 9
@@ -84,10 +85,16 @@ fill_from = Vector2(0.6, 1)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
+[sub_resource type="Gradient" id="Gradient_xl7j7"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o0wo3"]
+gradient = SubResource("Gradient_xl7j7")
+width = 96
+height = 40
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tv7ir"]
 blend_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tv7ir"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0wo3"]
 shader = ExtResource("16_xl7j7")
@@ -96,23 +103,23 @@ shader_parameter/border_color = Color(1, 1, 1, 1)
 shader_parameter/centre_color = Color(1, 1, 1, 1)
 shader_parameter/region1_color = Color(0, 1, 0, 1)
 shader_parameter/region2_color = Color(1, 1, 0, 1)
-shader_parameter/region3_color = Color(1, 0, 0, 1)
-shader_parameter/scale_mark_color = Color(0.56, 0.56, 0.56, 0.53333336)
+shader_parameter/region3_color = Color(1.2982324, 0, 0.12243827, 0.47843137)
+shader_parameter/scale_mark_color = Color(1, 1, 1, 0.627451)
 shader_parameter/show_edges = false
 shader_parameter/bottom_border = false
 shader_parameter/meter_start_angle = 0.050000002375
 shader_parameter/indicator_angle = 0.0
 shader_parameter/indicator_length = 0.6
 shader_parameter/indicator_width = 0.01
-shader_parameter/border_width = 0.0400000019
+shader_parameter/border_width = 0.0750000035625
 shader_parameter/centre_width = 0.1
 shader_parameter/region1 = 1.0
 shader_parameter/region2 = 1.0
-shader_parameter/region3 = 0.850000040375
+shader_parameter/region3 = 0.750000035625
 shader_parameter/regions_end = 1.0
 shader_parameter/scale_marks = 5.0
 shader_parameter/major_scale_marks = 1.0
-shader_parameter/scale_mark_width = 0.03700000105898
+shader_parameter/scale_mark_width = 0.05000000074506
 shader_parameter/scale_minor_outer = 0.75
 shader_parameter/scale_major_outer = 0.8
 shader_parameter/scale_inner = 0.650000030875
@@ -219,6 +226,7 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_kp5pi")
 expand_mode = 1
 script = ExtResource("11_sui6v")
+animate_speed = 1.5
 metadata/_edit_group_ = true
 
 [node name="Shadow" type="TextureRect" parent="UI/HUD/Control/PanelContainer/Panel"]
@@ -259,7 +267,7 @@ scale = Vector2(1.5, 1)
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 0.29803923)
 theme_override_font_sizes/font_size = 6
-text = "whitefruit"
+text = "dragonfruit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -341,6 +349,7 @@ mouse_filter = 2
 alignment = 2
 script = ExtResource("4_0v1st")
 car = NodePath("../../../../../../../../Car")
+bevel_image = SubResource("GradientTexture2D_o0wo3")
 
 [node name="Padding" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 3)
@@ -357,7 +366,6 @@ theme_override_constants/separation = 0
 
 [node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
 texture_filter = 2
-material = SubResource("ShaderMaterial_tv7ir")
 layout_mode = 2
 text = "$0"
 horizontal_alignment = 2
@@ -365,6 +373,19 @@ script = ExtResource("9_7jqyl")
 target_node = NodePath("../../../../../../../../../Car")
 prefix = "$"
 stat_to_track = "money"
+
+[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Money"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 6
+text = "funds:"
+vertical_alignment = 2
 
 [node name="HSeparator" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats"]
 material = SubResource("CanvasItemMaterial_tv7ir")
@@ -381,6 +402,19 @@ prefix = "x"
 stat_to_track = "multiplier"
 factor = 1000.0
 
+[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Multiplier"]
+texture_filter = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 6
+text = "multiplier:"
+vertical_alignment = 2
+
 [node name="HSeparator2" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 material = SubResource("CanvasItemMaterial_tv7ir")
 layout_mode = 2
@@ -389,11 +423,31 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+ratio = 2.0
+
+[node name="Speedometer" type="ColorRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer" node_paths=PackedStringArray("car")]
 material = SubResource("ShaderMaterial_o0wo3")
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 0)
+script = ExtResource("17_o0wo3")
+car = NodePath("../../../../../../../../../Car")
+
+[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer/Speedometer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 5
+text = "
+%s km/h"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("car")]
 stream = SubResource("AudioStreamSynchronized_tv7ir")

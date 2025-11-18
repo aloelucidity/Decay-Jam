@@ -7,4 +7,7 @@ extends Resource
 @export var collision_offset: Vector2
 
 @export var armor: float = 1
+@export var drag: float = 15
+@export var drag_threshold: float = 800
+
 @export var modifiers: Dictionary[StringName, Variant]
