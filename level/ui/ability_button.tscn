@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://bauvu2tr2dx3b"]
+
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="1_uw7q4"]
+[ext_resource type="Script" uid="uid://cu27pns58pmid" path="res://level/ui/ability_button.gd" id="2_i0kyf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
+shader = ExtResource("1_uw7q4")
+shader_parameter/highlight_color = Color(0.2688, 0.43775994, 0.48, 0)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 0.7
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 7.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 2.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_ml0fe"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.039013356, 0.013200001, 0.11, 1, 0.14190002, 0.114, 0.3, 1, 0.039215688, 0.011764706, 0.10980392, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_h74y2"]
+gradient = SubResource("Gradient_ml0fe")
+width = 128
+height = 128
+fill_from = Vector2(0.2, 0.2)
+fill_to = Vector2(1, 0.5)
+repeat = 1
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7cdnq"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_lsj08"]
+colors = PackedColorArray(0.12131339, 0.052700005, 0.31, 1, 0.14629999, 0.43736, 0.77, 0.8117647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5n7q"]
+gradient = SubResource("Gradient_lsj08")
+width = 12
+height = 12
+fill = 1
+fill_from = Vector2(0.6, 1)
+fill_to = Vector2(0.4, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_m5ivw"]
+offsets = PackedFloat32Array(0.7, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sui6v"]
+gradient = SubResource("Gradient_m5ivw")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[node name="Button" type="TextureButton"]
+material = SubResource("ShaderMaterial_kdsbj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+texture_normal = SubResource("GradientTexture2D_h74y2")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_i0kyf")
+float_speed = 0.5
+float_intensity = 1.0
+rotate_speed = 0.25
+rotate_intensity = 2.0
+animate_speed = 2.0
+
+[node name="ProgressBar" type="TextureProgressBar" parent="."]
+material = SubResource("CanvasItemMaterial_7cdnq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture2D_u5n7q")
+
+[node name="Shadow" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.3764706)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3.0
+offset_top = 4.0
+offset_right = 3.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_sui6v")
+expand_mode = 1

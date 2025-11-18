@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=40 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://f75smqgej453" path="res://music/main/drums.ogg" id="9_fm1jd"]
 [ext_resource type="AudioStream" uid="uid://bo158a1bh5w5v" path="res://music/main/arp.ogg" id="10_7jqyl"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="10_m5ivw"]
+[ext_resource type="PackedScene" uid="uid://bauvu2tr2dx3b" path="res://level/ui/ability_button.tscn" id="10_ml0fe"]
 [ext_resource type="AudioStream" uid="uid://dba0mp1l2vavc" path="res://music/main/pad.ogg" id="11_m5ivw"]
 [ext_resource type="Script" uid="uid://esr0d5andrel" path="res://level/ui/animate_gradient.gd" id="11_sui6v"]
 [ext_resource type="Texture2D" uid="uid://tkboymtcjjj1" path="res://level/ui/grid.png" id="12_b7y0n"]
@@ -24,6 +25,17 @@
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/stripes.png" id="12_v4yay"]
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/speedometer.gd" id="17_o0wo3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
+shader = ExtResource("10_m5ivw")
+shader_parameter/highlight_color = Color(0.2688, 0.43775994, 0.48, 0)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 0.7
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 7.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 2.0
+shader_parameter/sample_count = 9
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sui6v"]
 shader = ExtResource("10_m5ivw")
@@ -203,6 +215,56 @@ theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 script = ExtResource("6_m3nah")
 
+[node name="AbilityContainer" type="GridContainer" parent="UI/HUD"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+columns = 3
+
+[node name="Padding" type="Control" parent="UI/HUD/AbilityContainer"]
+material = SubResource("ShaderMaterial_kdsbj")
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonHolder" type="Control" parent="UI/HUD/AbilityContainer"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder" instance=ExtResource("10_ml0fe")]
+layout_mode = 1
+
+[node name="Padding2" type="Control" parent="UI/HUD/AbilityContainer"]
+material = SubResource("ShaderMaterial_kdsbj")
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ButtonHolder2" type="Control" parent="UI/HUD/AbilityContainer"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder2" instance=ExtResource("10_ml0fe")]
+layout_mode = 1
+
+[node name="ButtonHolder3" type="Control" parent="UI/HUD/AbilityContainer"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder3" instance=ExtResource("10_ml0fe")]
+layout_mode = 1
+
+[node name="ButtonHolder4" type="Control" parent="UI/HUD/AbilityContainer"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder4" instance=ExtResource("10_ml0fe")]
+layout_mode = 1
+
 [node name="Control" type="Control" parent="UI/HUD"]
 custom_minimum_size = Vector2(80, 60)
 layout_mode = 2
@@ -223,6 +285,7 @@ size_flags_vertical = 8
 [node name="Panel" type="TextureRect" parent="UI/HUD/Control/PanelContainer"]
 material = SubResource("ShaderMaterial_sui6v")
 layout_mode = 2
+mouse_filter = 0
 texture = SubResource("GradientTexture2D_kp5pi")
 expand_mode = 1
 script = ExtResource("11_sui6v")
@@ -241,11 +304,13 @@ offset_right = 4.0
 offset_bottom = 6.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = SubResource("GradientTexture2D_sui6v")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 6
@@ -265,6 +330,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1)
 size_flags_vertical = 0
+mouse_filter = 0
 theme_override_colors/font_color = Color(0.78, 0.78, 0.78, 0.29803923)
 theme_override_font_sizes/font_size = 6
 text = "dragonfruit"
@@ -275,6 +341,7 @@ vertical_alignment = 1
 clip_children = 2
 material = SubResource("ShaderMaterial_m5ivw")
 layout_mode = 2
+mouse_filter = 0
 texture = SubResource("GradientTexture2D_tv7ir")
 expand_mode = 1
 
@@ -290,6 +357,7 @@ offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("12_v4yay")
 expand_mode = 1
 stretch_mode = 1
@@ -308,6 +376,7 @@ offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("12_b7y0n")
 expand_mode = 1
 stretch_mode = 1
@@ -325,6 +394,7 @@ offset_right = 16.0
 offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("12_b7y0n")
 expand_mode = 1
 stretch_mode = 1
@@ -333,6 +403,7 @@ scroll_speed = Vector2(-5, -5)
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
@@ -341,11 +412,12 @@ theme_override_constants/margin_bottom = 4
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 0
 
 [node name="Batteries" type="HBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car")]
 layout_mode = 2
-mouse_filter = 2
+mouse_filter = 0
 alignment = 2
 script = ExtResource("4_0v1st")
 car = NodePath("../../../../../../../../Car")
@@ -362,11 +434,13 @@ layout_mode = 2
 [node name="Stats" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 0
 
 [node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
 texture_filter = 2
 layout_mode = 2
+mouse_filter = 0
 text = "$0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
@@ -382,6 +456,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 6
 text = "funds:"
@@ -394,6 +469,7 @@ layout_mode = 2
 [node name="Multiplier" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
 texture_filter = 2
 layout_mode = 2
+mouse_filter = 0
 text = "x1.0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
@@ -410,6 +486,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 6
 text = "multiplier:"
@@ -426,6 +503,7 @@ layout_mode = 2
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 0
 ratio = 2.0
 
 [node name="Speedometer" type="ColorRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer" node_paths=PackedStringArray("car")]
@@ -443,6 +521,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 theme_override_font_sizes/font_size = 5
 text = "
 %s km/h"
