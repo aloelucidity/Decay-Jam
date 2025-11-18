@@ -14,7 +14,7 @@ extends AnimateGradient
 @export var scale_intensity: float = 1.075
 
 @export var click_decay: float = 5
-@export var click_intensity: float = 0.25
+@export var click_intensity: float = 0.2
 @export var click_ease: float = 0.7
 
 var time_offset: float

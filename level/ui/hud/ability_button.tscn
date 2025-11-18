@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bauvu2tr2dx3b"]
 
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="1_uw7q4"]
-[ext_resource type="Script" uid="uid://cu27pns58pmid" path="res://level/ui/ability_button.gd" id="2_i0kyf"]
+[ext_resource type="Script" uid="uid://cu27pns58pmid" path="res://level/ui/hud/ability_button.gd" id="2_i0kyf"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("1_uw7q4")

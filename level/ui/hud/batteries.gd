@@ -3,6 +3,7 @@ extends HBoxContainer
 
 @export var car: Car
 @export var bevel_image: Texture2D
+@export var bevel_material: Material
 var bars: Array[ProgressBar]
 
 
@@ -17,7 +18,7 @@ func _ready() -> void:
 			
 			var bevel := TextureRect.new()
 			bevel.texture = bevel_image
-			bevel.material = preload("res://level/ui/battery_bevel.tres")
+			bevel.material = bevel_material
 			bevel.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			bevel.set_anchors_preset(Control.PRESET_FULL_RECT)
 			bar.add_child(bevel)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=43 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
 [ext_resource type="Script" uid="uid://bawauf012neu6" path="res://level/level_objects.gd" id="5_fm1jd"]
-[ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://misc/auto_resizer.gd" id="6_m3nah"]
+[ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://level/ui/hud/hud.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="7_tv7ir"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="12_v4yay"]
-[ext_resource type="Material" uid="uid://tvuyymkegtfl" path="res://level/ui/hud/battery_bevel.tres" id="16_7cdnq"]
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
@@ -141,74 +140,11 @@ shader_parameter/scale_inner = 0.650000030875
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h74y2"]
 shader = ExtResource("19_ml0fe")
-shader_parameter/tint = Color(0.69, 0.69, 1, 1)
-shader_parameter/brightness = 0.7
-shader_parameter/contrast = 0.9
+shader_parameter/brightness = 0.5
+shader_parameter/contrast = 0.75
 shader_parameter/saturation = 2.0
 shader_parameter/blur = 3.0
-shader_parameter/mix_amount = 1.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7cdnq"]
-bg_color = Color(0, 0, 0, 0.7529412)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0, 1, 0.1833334, 0)
-border_blend = true
-
-[sub_resource type="Gradient" id="Gradient_lsj08"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_u5n7q"]
-gradient = SubResource("Gradient_lsj08")
-fill = 1
-fill_from = Vector2(0.6, 0.7)
-fill_to = Vector2(0.5, 0.2)
-metadata/_snap_enabled = true
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7cdnq"]
-blend_mode = 1
-
-[sub_resource type="Gradient" id="Gradient_u5n7q"]
-colors = PackedColorArray(1, 1, 1, 0, 0.5, 1, 0.7166667, 0.1254902)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qslh7"]
-gradient = SubResource("Gradient_u5n7q")
-fill_from = Vector2(0.5, 1)
-fill_to = Vector2(0.5, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7cdnq"]
-shader = ExtResource("10_m5ivw")
-shader_parameter/highlight_color = Color(1, 1, 1, 0)
-shader_parameter/shadow_color = Color(0.24579367, 0.36901143, 0.6107791, 1)
-shader_parameter/strength = 0.75
-shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 3.0
-shader_parameter/knockout = false
-shader_parameter/blur_radius = 3.0
-shader_parameter/sample_count = 9
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_lsj08"]
-viewport_path = NodePath("UI/Results/results")
-
-[sub_resource type="Gradient" id="Gradient_7cdnq"]
-offsets = PackedFloat32Array(0.3, 0.6)
-colors = PackedColorArray(0, 0.07916671, 0.25, 0.3764706, 1, 1, 1, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lsj08"]
-gradient = SubResource("Gradient_7cdnq")
-width = 32
-height = 32
-fill_from = Vector2(0, 1)
-fill_to = Vector2(0, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_7cdnq"]
-viewport_path = NodePath("UI/Results/continue")
+shader_parameter/mix_amount = 0.0
 
 [sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_tv7ir"]
 stream_count = 6
@@ -496,7 +432,6 @@ alignment = 2
 script = ExtResource("4_0v1st")
 car = NodePath("../../../../../../../../Car")
 bevel_image = SubResource("GradientTexture2D_o0wo3")
-bevel_material = ExtResource("16_7cdnq")
 
 [node name="Padding" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 3)
@@ -603,8 +538,7 @@ text = "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car")]
-process_mode = 3
+[node name="Results" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -612,12 +546,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-theme = ExtResource("7_tv7ir")
 script = ExtResource("19_h74y2")
-car = NodePath("../../Car")
 
 [node name="Blur" type="ColorRect" parent="UI/Results"]
-unique_name_in_owner = true
 material = SubResource("ShaderMaterial_h74y2")
 layout_mode = 1
 anchors_preset = 15
@@ -627,34 +558,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="results" type="SubViewport" parent="UI/Results"]
-transparent_bg = true
-size = Vector2i(156, 48)
-
-[node name="Label" type="Label" parent="UI/Results/results"]
-custom_minimum_size = Vector2(224, 224)
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(3, 3)
-theme = ExtResource("7_tv7ir")
-theme_override_colors/font_color = Color(0, 0.86, 0.3583334, 1)
-theme_override_font_sizes/font_size = 13
-text = "results"
-
-[node name="continue" type="SubViewport" parent="UI/Results"]
-transparent_bg = true
-size = Vector2i(568, 56)
-
-[node name="Label" type="Label" parent="UI/Results/continue"]
-custom_minimum_size = Vector2(224, 224)
-offset_right = 40.0
-offset_bottom = 23.0
-scale = Vector2(3, 3)
-theme = ExtResource("7_tv7ir")
-theme_override_colors/font_color = Color(0, 0.86, 0.3583334, 1)
-theme_override_font_sizes/font_size = 13
-text = "press any key to continue"
-
 [node name="CenterContainer" type="CenterContainer" parent="UI/Results"]
 layout_mode = 1
 anchors_preset = 15
@@ -663,195 +566,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Results/CenterContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_7cdnq")
-
-[node name="Gradient" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_u5n7q")
-
-[node name="Gradient2" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer"]
-material = SubResource("CanvasItemMaterial_7cdnq")
-layout_mode = 2
-texture = SubResource("GradientTexture2D_qslh7")
-
-[node name="Lines" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer"]
-modulate = Color(0.1711, 0.29, 0.23847666, 0.2509804)
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("12_v4yay")
-stretch_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Results/CenterContainer/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_7cdnq")
-custom_minimum_size = Vector2(78, 24)
-layout_mode = 2
-texture = SubResource("ViewportTexture_lsj08")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="ColorRect" type="ColorRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect"]
-show_behind_parent = true
-clip_children = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Pattern" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect/ColorRect"]
-modulate = Color(0.014999998, 0.08866668, 0.1, 0.53333336)
-show_behind_parent = true
-texture_filter = 1
-layout_mode = 0
-offset_right = 768.0
-offset_bottom = 64.0
-mouse_filter = 0
-texture = ExtResource("12_b7y0n")
-expand_mode = 1
-stretch_mode = 1
-script = ExtResource("12_kp5pi")
-
-[node name="Pattern2" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect/ColorRect"]
-modulate = Color(0.014999998, 0.08866668, 0.1, 0.53333336)
-show_behind_parent = true
-texture_filter = 1
-layout_mode = 0
-offset_right = 768.0
-offset_bottom = 64.0
-mouse_filter = 0
-texture = ExtResource("12_b7y0n")
-expand_mode = 1
-stretch_mode = 1
-script = ExtResource("12_kp5pi")
-scroll_speed = Vector2(-5, -5)
-
-[node name="HSeparator" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-clip_children = 2
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.9411765)
-theme_override_font_sizes/font_size = 14
-text = "fragments - 45"
-horizontal_alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_lsj08")
-expand_mode = 1
-
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "$45"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "robots - 10"
-horizontal_alignment = 1
-
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "$100"
-horizontal_alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "distance - 13453 km"
-horizontal_alignment = 1
-
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "x1.30"
-horizontal_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "ascent - 4530 km"
-horizontal_alignment = 1
-
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "x1.13"
-horizontal_alignment = 1
-
-[node name="HSeparator2" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label5" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "$145 x 1.43 = $504"
-horizontal_alignment = 1
-
-[node name="HSeparator3" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureRect2" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-material = SubResource("ShaderMaterial_7cdnq")
-custom_minimum_size = Vector2(329, 20)
-layout_mode = 2
-texture = SubResource("ViewportTexture_7cdnq")
-expand_mode = 1
-stretch_mode = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." node_paths=PackedStringArray("car")]
 stream = SubResource("AudioStreamSynchronized_tv7ir")
@@ -863,4 +577,4 @@ car = NodePath("../Car")
 speed_thresholds = Array[float]([200.0, 600.0])
 tween_time = 2.0
 
-[connection signal="run_ended" from="Car" to="UI/Results" method="end_run"]
+[connection signal="run_ended" from="Car" to="." method="end_run"]

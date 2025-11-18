@@ -153,7 +153,6 @@ func _physics_process(delta: float) -> void:
 		end_timer -= delta
 		if end_timer <= 0:
 			emit_signal("run_ended")
-			set_process(false)
 	else:
 		end_timer = end_time_threshold
 	
