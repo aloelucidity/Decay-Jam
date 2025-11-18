@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=60 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
 [ext_resource type="Script" uid="uid://bawauf012neu6" path="res://level/level_objects.gd" id="5_fm1jd"]
-[ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://misc/auto_resizer.gd" id="6_m3nah"]
+[ext_resource type="Script" path="res://misc/auto_resizer.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="7_tv7ir"]
@@ -27,7 +27,8 @@
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
-[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Shader" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("10_m5ivw")
@@ -139,6 +140,116 @@ shader_parameter/scale_minor_outer = 0.75
 shader_parameter/scale_major_outer = 0.8
 shader_parameter/scale_inner = 0.650000030875
 
+[sub_resource type="Animation" id="Animation_7cdnq"]
+resource_name = "transition"
+length = 0.8
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.8),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.9), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.19999999, 0.19999999, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1, 0.8),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(0, 8), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lsj08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u5n7q"]
+_data = {
+&"RESET": SubResource("Animation_lsj08"),
+&"transition": SubResource("Animation_7cdnq")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h74y2"]
 shader = ExtResource("19_ml0fe")
 shader_parameter/tint = Color(0.69, 0.69, 1, 1)
@@ -194,9 +305,16 @@ shader_parameter/sample_count = 9
 [sub_resource type="ViewportTexture" id="ViewportTexture_lsj08"]
 viewport_path = NodePath("UI/Results/results")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsj08"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
 [sub_resource type="Gradient" id="Gradient_7cdnq"]
-offsets = PackedFloat32Array(0.3, 0.6)
-colors = PackedColorArray(0, 0.07916671, 0.25, 0.3764706, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.05, 0.35)
+colors = PackedColorArray(0, 0.49019608, 0.24705882, 0, 0, 0.34, 0.16433334, 0.39215687, 0, 0.49159664, 0.24812374, 0)
 metadata/_snap_enabled = true
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_lsj08"]
@@ -605,6 +723,7 @@ vertical_alignment = 1
 
 [node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car")]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -615,6 +734,11 @@ mouse_filter = 2
 theme = ExtResource("7_tv7ir")
 script = ExtResource("19_h74y2")
 car = NodePath("../../Car")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results"]
+libraries = {
+&"": SubResource("AnimationLibrary_u5n7q")
+}
 
 [node name="Blur" type="ColorRect" parent="UI/Results"]
 unique_name_in_owner = true
@@ -647,21 +771,31 @@ size = Vector2i(568, 56)
 
 [node name="Label" type="Label" parent="UI/Results/continue"]
 custom_minimum_size = Vector2(224, 224)
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -52.0
+offset_right = 172.0
+offset_bottom = 224.0
 scale = Vector2(3, 3)
 theme = ExtResource("7_tv7ir")
 theme_override_colors/font_color = Color(0, 0.86, 0.3583334, 1)
 theme_override_font_sizes/font_size = 13
 text = "press any key to continue"
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+script = ExtResource("22_lsj08")
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Results"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.9)
+pivot_offset = Vector2(256, 216)
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/Results/CenterContainer"]
@@ -713,20 +847,20 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Pattern" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect/ColorRect"]
-modulate = Color(0.014999998, 0.08866668, 0.1, 0.53333336)
+modulate = Color(0.185, 0.37, 0.2466667, 0.53333336)
 show_behind_parent = true
 texture_filter = 1
 layout_mode = 0
 offset_right = 768.0
 offset_bottom = 64.0
 mouse_filter = 0
-texture = ExtResource("12_b7y0n")
+texture = ExtResource("12_v4yay")
 expand_mode = 1
 stretch_mode = 1
 script = ExtResource("12_kp5pi")
 
 [node name="Pattern2" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect/ColorRect"]
-modulate = Color(0.014999998, 0.08866668, 0.1, 0.53333336)
+modulate = Color(0.185, 0.37, 0.2466667, 0.53333336)
 show_behind_parent = true
 texture_filter = 1
 layout_mode = 0
@@ -739,21 +873,32 @@ stretch_mode = 1
 script = ExtResource("12_kp5pi")
 scroll_speed = Vector2(-5, -5)
 
+[node name="Panel" type="Panel" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/TextureRect/ColorRect"]
+modulate = Color(0.18431373, 0.36862746, 0.24705882, 0.53333336)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lsj08")
+
 [node name="HSeparator" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="FragmentsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-clip_children = 2
+[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.9411765)
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "fragments - 45"
+text = "fragments - %s"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Label"]
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -763,84 +908,237 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_lsj08")
 expand_mode = 1
 
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "$45"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "robots - 10"
+text = "new record!"
 horizontal_alignment = 1
 
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount/NewRecord"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
 
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "$100"
+text = "$%s"
 horizontal_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount/Value"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="RobotsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "distance - 13453 km"
+text = "robots - %s"
 horizontal_alignment = 1
 
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 14
-text = "x1.30"
-horizontal_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "ascent - 4530 km"
+text = "new record!"
 horizontal_alignment = 1
 
-[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount/NewRecord"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "$%s"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount/Value"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="DistanceMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 14
+text = "distance - %s km"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 14
+text = "new record!"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult/NewRecord"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-text = "x1.13"
+text = "x%s"
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult/Value"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="AscentMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 14
+text = "ascent - %s km"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Padding" type="Control" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
+theme_override_font_sizes/font_size = 14
+text = "new record!"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult/NewRecord"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
+
+[node name="Value" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "x%s"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult/Value"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
 
 [node name="HSeparator2" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label5" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Sum" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 14
-text = "$145 x 1.43 = $504"
+text = "$%s x %s = $%s"
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Sum"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_lsj08")
+expand_mode = 1
 
 [node name="HSeparator3" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

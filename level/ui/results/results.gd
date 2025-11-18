@@ -2,6 +2,7 @@ extends AutoResizer
 
 
 @export var car: Car
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var blur: ColorRect = %Blur
 var mix_amount: float = 0.0
 var run_ended: bool
@@ -18,4 +19,5 @@ func end_run() -> void:
 	if run_ended: return
 	run_ended = true
 	blur.material.set_shader_parameter("mix_amount", 1.0)
+	animation_player.play("transition")
 	get_tree().paused = true

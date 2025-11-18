@@ -14,7 +14,15 @@ uniform float blur_radius = 5.0; // Adjust to control the blur amount.
 // The number of samples to take along one axis. 
 // Must be an odd number. Lower values are faster but lower quality.
 uniform int sample_count = 9; 
-const int MAX_SAMPLES = 13; 
+const int MAX_SAMPLES = 13;
+
+
+// Workaround to make modulate work again.
+varying vec4 modulate;
+
+void vertex() {
+	modulate = COLOR;
+}
 
 
 vec4 safe_texture_sample(sampler2D tex, vec2 uv) {
@@ -104,23 +112,24 @@ void fragment() {
     // Calculate the final glow/emboss color
     vec4 glow = highlight_color * highlight_alpha + shadow_color * shadow_alpha;
     
+	COLOR = modulate;
     if (is_inner && is_outer) {
         if (knockout) {
-            COLOR = glow;
+            COLOR *= glow;
         } else {
-            COLOR = dest - dest * glow.a + glow; 
+            COLOR *= dest - dest * glow.a + glow; 
         }
     } else if (is_inner) {
         if (knockout) {
-            COLOR = glow * dest.a; 
+            COLOR *= glow * dest.a; 
         } else {
-            COLOR = glow * dest.a + dest * (1.0 - glow.a); 
+            COLOR *= glow * dest.a + dest * (1.0 - glow.a); 
         }
     } else {
         if (knockout) {
-            COLOR = glow - glow * dest.a; 
+            COLOR *= glow - glow * dest.a; 
         } else {
-            COLOR = dest + glow - glow * dest.a; 
+            COLOR *= dest + glow - glow * dest.a; 
         }
     }
 }
