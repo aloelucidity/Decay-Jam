@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=48 format=3 uid="uid://tjrj1bcjleo"]
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cnwph2wramvjg" path="res://menu/globals_display.gd" id="2_wfkj1"]
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="4_mmlud"]
 [ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/window.tscn" id="4_ne1tf"]
+[ext_resource type="Shader" uid="uid://qlr10m6f783b" path="res://misc/shaders/rounded_corners.gdshader" id="5_1c0vf"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
 
@@ -54,6 +55,62 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
+[sub_resource type="SystemFont" id="SystemFont_1c0vf"]
+font_names = PackedStringArray("Georgia")
+font_italic = true
+multichannel_signed_distance_field = true
+
+[sub_resource type="Gradient" id="Gradient_w70kp"]
+offsets = PackedFloat32Array(0.1, 0.4, 0.5)
+colors = PackedColorArray(0.59000003, 0.6856668, 1, 1, 0.65, 0.5841333, 0.403, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qefxf"]
+gradient = SubResource("Gradient_w70kp")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vees0"]
+bg_color = Color(0.45651668, 0.44099998, 0.49, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27383333, 0.24800001, 0.31, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmtue"]
+shader = ExtResource("5_1c0vf")
+shader_parameter/corner_scale = 0.250000011875
+
+[sub_resource type="Gradient" id="Gradient_vees0"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.89318895, 0.89318895, 0.8931888, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4nseo"]
+gradient = SubResource("Gradient_vees0")
+fill = 1
+fill_from = Vector2(0.6, 1)
+fill_to = Vector2(0.6, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_qefxf"]
+colors = PackedColorArray(0, 0, 0, 0.3764706, 0.01, 0.01, 0.01, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vees0"]
+gradient = SubResource("Gradient_qefxf")
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_1c0vf"]
+colors = PackedColorArray(0.23681614, 0.23681614, 0.23681611, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w70kp"]
+gradient = SubResource("Gradient_1c0vf")
+fill = 1
+fill_from = Vector2(0.5, 0.8)
+metadata/_snap_enabled = true
+
 [sub_resource type="Gradient" id="Gradient_ne1tf"]
 colors = PackedColorArray(1, 1, 1, 1, 0.82, 0.82, 0.7708, 1)
 metadata/_snap_enabled = true
@@ -79,15 +136,6 @@ fill_to = Vector2(0, 0.1)
 metadata/_snap_enabled = true
 
 [sub_resource type="SystemFont" id="SystemFont_w70kp"]
-
-[sub_resource type="Gradient" id="Gradient_1c0vf"]
-colors = PackedColorArray(0.23681614, 0.23681614, 0.23681611, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w70kp"]
-gradient = SubResource("Gradient_1c0vf")
-fill = 1
-fill_from = Vector2(0.5, 0.8)
-metadata/_snap_enabled = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o1c51"]
 texture = SubResource("GradientTexture2D_w70kp")
@@ -257,14 +305,13 @@ text = "Browser"
 theme_override_styles/panel = SubResource("StyleBoxTexture_lmtue")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel" index="0"]
-custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
-size_flags_vertical = 0
 theme_override_constants/separation = 0
 
 [node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_w70kp")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel"]
@@ -286,6 +333,151 @@ theme_override_fonts/font = SubResource("SystemFont_o1c51")
 theme_override_font_sizes/font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_qefxf")
 text = "https://www.voltaireauto.com/"
+
+[node name="Shop" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+clip_children = 2
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_1c0vf")
+theme_override_font_sizes/font_size = 11
+text = "-Vøltaire Autø-"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qefxf")
+expand_mode = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+clip_children = 2
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_1c0vf")
+theme_override_font_sizes/font_size = 8
+text = "Wheels"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qefxf")
+expand_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vees0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer"]
+material = SubResource("ShaderMaterial_lmtue")
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+texture_normal = SubResource("GradientTexture2D_4nseo")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("8_yxe8q")
+color_tint = Color(0.87350005, 0.66999996, 1, 1)
+float_intensity = 0.5
+rotate_intensity = 1.0
+scale_intensity = 1.025
+click_intensity = 0.05
+do_animation = false
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_vees0")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = -2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer/MarginContainer"]
+material = SubResource("ShaderMaterial_lmtue")
+layout_mode = 2
+texture = SubResource("GradientTexture2D_w70kp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09411765)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = SubResource("SystemFont_1c0vf")
+theme_override_font_sizes/font_size = 8
+text = "All-Rounder
+[$4000]"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Notes" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
@@ -425,13 +617,14 @@ texture_normal = SubResource("GradientTexture2D_o1c51")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("8_yxe8q")
-color_tint = Color(0.73, 1, 0.90550005, 1)
+color_tint = Color(0.19999999, 0.94666654, 1, 1)
 float_intensity = 0.75
 float_offset = 2.0
 rotate_intensity = 1.5
 scale_intensity = 1.04
 click_intensity = 0.1
-do_animation = false
+animate_index = 0
+animate_range = Vector2(0, 0.2)
 
 [node name="Label" type="Label" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer/Button"]
 layout_mode = 1

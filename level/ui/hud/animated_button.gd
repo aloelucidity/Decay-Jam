@@ -2,6 +2,7 @@ class_name AnimatedButton
 extends AnimateGradient
 
 
+@export var modulate_self: bool = true
 @export var color_tint: Color = Color.DODGER_BLUE
 @export var tint_speed: float = 8
 
@@ -60,8 +61,9 @@ func _process(delta: float) -> void:
 	position.y += float_offset
 	rotation_degrees = sin(time_offset + unix * rotate_speed) * rotate_intensity
 	
-	modulate = lerp(
-		modulate, 
+	var modulate_var: String = "self_modulate" if modulate_self else "modulate"
+	self[modulate_var] = lerp(
+		self[modulate_var], 
 		color_tint if hovered else Color.WHITE, 
 		delta * tint_speed
 	)
