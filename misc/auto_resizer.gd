@@ -16,5 +16,5 @@ func window_resized() -> void:
 	if is_instance_valid(window):
 		var new_zoom: float = float(window.size.x + window.size.y) / base_size
 		scale = Vector2(new_zoom, new_zoom)
-		size = Vector2(window.size) / scale
+		set_deferred("size", Vector2(window.size) / scale)
 		position = Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=66 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
 [ext_resource type="Script" uid="uid://bawauf012neu6" path="res://level/level_objects.gd" id="5_fm1jd"]
-[ext_resource type="Script" path="res://misc/auto_resizer.gd" id="6_m3nah"]
+[ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://misc/auto_resizer.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="7_tv7ir"]
@@ -27,8 +27,10 @@
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
-[ext_resource type="Shader" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
+[ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
+[ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/sum.gd" id="24_qslh7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("10_m5ivw")
@@ -47,7 +49,7 @@ shader_parameter/highlight_color = Color(0.7019608, 0.6862745, 0.8, 0)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 2.0
+shader_parameter/bevel_offset = 5.0
 shader_parameter/knockout = false
 shader_parameter/blur_radius = 1.5
 shader_parameter/sample_count = 9
@@ -84,7 +86,7 @@ shader_parameter/highlight_color = Color(0, 0, 0, 1)
 shader_parameter/shadow_color = Color(0.7029333, 0.688, 0.8, 1)
 shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 2.0
+shader_parameter/bevel_offset = 5.0
 shader_parameter/knockout = false
 shader_parameter/blur_radius = 1.0
 shader_parameter/sample_count = 9
@@ -140,6 +142,109 @@ shader_parameter/scale_minor_outer = 0.75
 shader_parameter/scale_major_outer = 0.8
 shader_parameter/scale_inner = 0.650000030875
 
+[sub_resource type="Animation" id="Animation_lsj08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 8)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CenterContainer:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("continue/Label:visible_ratio")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("continue/Label:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kdj2k"]
+resource_name = "continue"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("continue/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("continue/Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_7cdnq"]
 resource_name = "transition"
 length = 0.8
@@ -183,7 +288,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
+tracks/3/path = NodePath("CenterContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -193,60 +298,10 @@ tracks/3/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_lsj08"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CenterContainer:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.8, 0.9)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CenterContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 1, 0.5019608, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CenterContainer:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 8)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u5n7q"]
 _data = {
 &"RESET": SubResource("Animation_lsj08"),
+&"continue": SubResource("Animation_kdj2k"),
 &"transition": SubResource("Animation_7cdnq")
 }
 
@@ -324,6 +379,92 @@ height = 32
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_qslh7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_u5n7q"]
+resource_name = "transition"
+length = 0.9
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NewRecord:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 0.9),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(0, 1, 0.5019608, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kdj2k"]
+_data = {
+&"RESET": SubResource("Animation_qslh7"),
+&"transition": SubResource("Animation_u5n7q")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_7cdnq"]
 viewport_path = NodePath("UI/Results/continue")
@@ -630,16 +771,14 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
+[node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
 texture_filter = 2
 layout_mode = 2
 mouse_filter = 0
 text = "$0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-target_node = NodePath("../../../../../../../../../Car")
-prefix = "$"
-stat_to_track = "money"
+car = NodePath("../../../../../../../../../Car")
 
 [node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Money"]
 texture_filter = 2
@@ -659,17 +798,15 @@ vertical_alignment = 2
 material = SubResource("CanvasItemMaterial_tv7ir")
 layout_mode = 2
 
-[node name="Multiplier" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("target_node")]
+[node name="Multiplier" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
 texture_filter = 2
 layout_mode = 2
 mouse_filter = 0
 text = "x1.0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-target_node = NodePath("../../../../../../../../../Car")
-prefix = "x"
-stat_to_track = "multiplier"
-factor = 1000.0
+car = NodePath("../../../../../../../../../Car")
+stat_to_track = 1
 
 [node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Multiplier"]
 texture_filter = 2
@@ -721,7 +858,7 @@ text = "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car")]
+[node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car", "counters")]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -734,6 +871,7 @@ mouse_filter = 2
 theme = ExtResource("7_tv7ir")
 script = ExtResource("19_h74y2")
 car = NodePath("../../Car")
+counters = [NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results"]
 libraries = {
@@ -753,23 +891,26 @@ mouse_filter = 2
 
 [node name="results" type="SubViewport" parent="UI/Results"]
 transparent_bg = true
-size = Vector2i(156, 48)
+size = Vector2i(640, 48)
 
-[node name="Label" type="Label" parent="UI/Results/results"]
-custom_minimum_size = Vector2(224, 224)
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="ResultsLabel" type="Label" parent="UI/Results/results"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(106, 224)
+offset_right = 213.0
+offset_bottom = 224.0
 scale = Vector2(3, 3)
 theme = ExtResource("7_tv7ir")
 theme_override_colors/font_color = Color(0, 0.86, 0.3583334, 1)
 theme_override_font_sizes/font_size = 13
-text = "results"
+text = "day %s results"
+horizontal_alignment = 1
 
 [node name="continue" type="SubViewport" parent="UI/Results"]
 transparent_bg = true
 size = Vector2i(568, 56)
 
 [node name="Label" type="Label" parent="UI/Results/continue"]
+modulate = Color(0, 1, 0.5019608, 0)
 custom_minimum_size = Vector2(224, 224)
 offset_left = -52.0
 offset_right = 172.0
@@ -783,8 +924,10 @@ horizontal_alignment = 1
 visible_characters = 0
 visible_ratio = 0.0
 script = ExtResource("22_lsj08")
+flash_color = Color(0.4128, 0.86, 0.83764005, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Results"]
+visible = false
 modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -887,16 +1030,21 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_lsj08")
 [node name="HSeparator" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="FragmentsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="FragmentsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("23_u5n7q")
+car = NodePath("../../../../../../../Car")
 
 [node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
 text = "fragments - %s"
 horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount/Label"]
 layout_mode = 1
@@ -913,6 +1061,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
+visible = false
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 12
@@ -945,16 +1095,27 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_lsj08")
 expand_mode = 1
 
-[node name="RobotsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
+libraries = {
+&"": SubResource("AnimationLibrary_kdj2k")
+}
+
+[node name="RobotsCount" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("23_u5n7q")
+car = NodePath("../../../../../../../Car")
+stat = 1
 
 [node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
 text = "robots - %s"
 horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount/Label"]
 layout_mode = 1
@@ -971,6 +1132,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 12
@@ -1003,16 +1165,27 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_lsj08")
 expand_mode = 1
 
-[node name="DistanceMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
+libraries = {
+&"": SubResource("AnimationLibrary_kdj2k")
+}
+
+[node name="DistanceMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("23_u5n7q")
+car = NodePath("../../../../../../../Car")
+stat = 2
 
 [node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "distance - %s km"
+text = "distance - %s m"
 horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult/Label"]
 layout_mode = 1
@@ -1029,6 +1202,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 12
@@ -1061,16 +1235,27 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_lsj08")
 expand_mode = 1
 
-[node name="AscentMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
+libraries = {
+&"": SubResource("AnimationLibrary_kdj2k")
+}
+
+[node name="AscentMult" type="HBoxContainer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("23_u5n7q")
+car = NodePath("../../../../../../../Car")
+stat = 3
 
 [node name="Label" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 14
-text = "ascent - %s km"
+text = "ascent - %s m"
 horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult/Label"]
 layout_mode = 1
@@ -1087,6 +1272,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+modulate = Color(0, 1, 0.5019608, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
 theme_override_font_sizes/font_size = 12
@@ -1119,16 +1305,23 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_lsj08")
 expand_mode = 1
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
+libraries = {
+&"": SubResource("AnimationLibrary_kdj2k")
+}
+
 [node name="HSeparator2" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Sum" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Sum" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 14
 text = "$%s x %s = $%s"
 horizontal_alignment = 1
+script = ExtResource("24_qslh7")
+car = NodePath("../../../../../../../Car")
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Sum"]
 layout_mode = 1
@@ -1162,3 +1355,4 @@ speed_thresholds = Array[float]([200.0, 600.0])
 tween_time = 2.0
 
 [connection signal="run_ended" from="Car" to="UI/Results" method="end_run"]
+[connection signal="sum_calculated" from="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Sum" to="UI/Results/AnimationPlayer" method="play" binds= ["continue"]]

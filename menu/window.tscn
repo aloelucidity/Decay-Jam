@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://pr55jgxpx1cn"]
+
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="1_qr0sp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7uy6"]
+shader = ExtResource("1_qr0sp")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0.5946001, 0.44990474, 0.97831744, 0.78431374)
+shader_parameter/strength = 2.0
+shader_parameter/bevel_type = 0
+shader_parameter/bevel_offset = 7.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 5.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_ne1tf"]
+colors = PackedColorArray(0.78, 0.95966667, 1, 1, 0.2816, 0.3054933, 0.64, 0.7529412)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_amxgp"]
+gradient = SubResource("Gradient_ne1tf")
+width = 192
+height = 192
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0.4)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yxe8q"]
+texture = SubResource("GradientTexture2D_amxgp")
+
+[node name="Window" type="VBoxContainer"]
+offset_right = 71.0
+offset_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Titlebar" type="PanelContainer" parent="."]
+material = SubResource("ShaderMaterial_j7uy6")
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yxe8q")
+
+[node name="MarginContainer" type="MarginContainer" parent="Titlebar"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="Title" type="Label" parent="Titlebar/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_y = 1
+text = "Window"
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3

@@ -41,6 +41,7 @@ folder_colors={
 [gui]
 
 common/snap_controls_to_pixels=false
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
@@ -69,6 +70,8 @@ move_right={
 
 common/physics_ticks_per_second=120
 2d/default_gravity=686.0
+2d/default_linear_damp=0.0
+2d/default_angular_damp=0.0
 
 [rendering]
 

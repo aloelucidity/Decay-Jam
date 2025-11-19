@@ -4,7 +4,7 @@ uniform vec4 highlight_color : source_color;
 uniform vec4 shadow_color : source_color;
 uniform float strength = 1.0;
 uniform int bevel_type = 0;
-uniform float bevel_offset = 3.0;
+uniform float bevel_offset = 5.0;
 uniform bool knockout = false;
 
 
@@ -19,9 +19,13 @@ const int MAX_SAMPLES = 13;
 
 // Workaround to make modulate work again.
 varying vec4 modulate;
+// Workaround to make aspect ratio work properly.
+varying vec2 pixel_pos;
+
 
 void vertex() {
 	modulate = COLOR;
+	pixel_pos = VERTEX;
 }
 
 
@@ -87,7 +91,10 @@ vec4 gaussian_2d_sample(sampler2D tex, vec2 uv, vec2 pixel_size, float sigma, in
 }
 
 void fragment() {
-    vec2 offset = vec2(bevel_offset / 100.0);
+	vec2 node_size = pixel_pos / UV;
+	float aspect_ratio = node_size.x / node_size.y;
+
+    vec2 offset = vec2(bevel_offset / (aspect_ratio * 2.0), bevel_offset * (aspect_ratio / 2.0)) / length(node_size);
     vec2 blur_uv_left = UV + offset;
     vec2 blur_uv_right = UV - offset;
      

@@ -5,6 +5,13 @@ extends RigidBody2D
 const BODY_OFFSET := Vector2(0, -14)
 const BODY_PATH: String = "res://car/bodies/%s.tscn"
 
+enum CarStat {
+	Fragments,
+	Robots,
+	Distance,
+	Ascent
+}
+
 @export_group("Nodes")
 @export var wheels: Array[Wheel]
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -12,11 +19,10 @@ const BODY_PATH: String = "res://car/bodies/%s.tscn"
 @onready var coin_sound := %Coin
 
 @export_group("Stats")
-@export var money: int
-@export var multiplier: float = 1000 # times 1000 so i can add to it :P
-
-@export var multiplier_gain: float
-@export var rise_multiplier_gain: float
+@export var fragments_collected: int
+@export var robots_destroyed: int
+@export var distance_traveled: float
+@export var distance_ascended: float
 
 @export var batteries: Array[float]
 @export var battery_efficiency: float = 1 ## higher values = less battery usage
@@ -62,7 +68,7 @@ func _ready() -> void:
 
 
 func collect_coin(amount: int, stream: AudioStream) -> void:
-	money += amount
+	fragments_collected += amount
 	
 	var pitch_scale: float = snappedf(randf_range(0.25, 1.5), 0.25)
 	if is_equal_approx(pitch_scale, 0.75):
@@ -141,7 +147,9 @@ func _physics_process(delta: float) -> void:
 	
 	if position.x > furthest_distance:
 		furthest_distance = position.x
-		multiplier += movement.x * (multiplier_gain if movement.y >= 0 else rise_multiplier_gain)
+		distance_traveled += movement.x
+		if movement.y < 0:
+			distance_ascended += movement.x
 	
 	var stationary_condition: bool = (
 		(movement.length() < end_movement_threshold and on_ground) or 

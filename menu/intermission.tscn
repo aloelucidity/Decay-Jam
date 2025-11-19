@@ -1,81 +1,450 @@
-[gd_scene load_steps=4 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=38 format=3 uid="uid://tjrj1bcjleo"]
 
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
 [ext_resource type="PackedScene" uid="uid://baesc757bnuca" path="res://menu/upgrade_shop.tscn" id="2_fpmmv"]
 [ext_resource type="Script" uid="uid://cnwph2wramvjg" path="res://menu/globals_display.gd" id="2_wfkj1"]
+[ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="4_mmlud"]
+[ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/window.tscn" id="4_ne1tf"]
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
+[ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
+
+[sub_resource type="SystemFont" id="SystemFont_yxe8q"]
+subpixel_positioning = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ff7d"]
+
+[sub_resource type="Gradient" id="Gradient_amxgp"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.098799996, 0.11399998, 0.19, 1, 0, 0, 0, 1, 0.14039998, 0.19820663, 0.26, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1c0vf"]
+gradient = SubResource("Gradient_amxgp")
+fill_from = Vector2(1, 0.6)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lmtue"]
+texture = SubResource("GradientTexture2D_1c0vf")
+
+[sub_resource type="Gradient" id="Gradient_yxe8q"]
+colors = PackedColorArray(0.6586, 0.6993, 0.74, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lmtue"]
+gradient = SubResource("Gradient_yxe8q")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_w70kp"]
+texture = SubResource("GradientTexture2D_lmtue")
+
+[sub_resource type="SystemFont" id="SystemFont_o1c51"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qefxf"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 1
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="Gradient" id="Gradient_ne1tf"]
+colors = PackedColorArray(1, 1, 1, 1, 0.82, 0.82, 0.7708, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yxe8q"]
+gradient = SubResource("Gradient_ne1tf")
+fill = 1
+fill_from = Vector2(0.5, 0.8)
+fill_to = Vector2(0.7, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1c0vf"]
+texture = SubResource("GradientTexture2D_yxe8q")
+
+[sub_resource type="Gradient" id="Gradient_o1c51"]
+offsets = PackedFloat32Array(0, 0)
+colors = PackedColorArray(0.16, 0.073599994, 0.073599994, 0.1882353, 0.16, 0.073599994, 0.073599994, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_amxgp"]
+gradient = SubResource("Gradient_o1c51")
+fill_to = Vector2(0, 0.1)
+metadata/_snap_enabled = true
+
+[sub_resource type="SystemFont" id="SystemFont_w70kp"]
+
+[sub_resource type="Gradient" id="Gradient_1c0vf"]
+colors = PackedColorArray(0.23681614, 0.23681614, 0.23681611, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w70kp"]
+gradient = SubResource("Gradient_1c0vf")
+fill = 1
+fill_from = Vector2(0.5, 0.8)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o1c51"]
+texture = SubResource("GradientTexture2D_w70kp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yxe8q"]
+shader = ExtResource("6_amxgp")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 1.0
+shader_parameter/bevel_type = 0
+shader_parameter/bevel_offset = 5.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 5.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_3ff7d"]
+offsets = PackedFloat32Array(0, 0.3, 0.5, 0.85, 1)
+colors = PackedColorArray(0.10799995, 0, 0.24, 0.7529412, 0.13, 0, 0.26, 0.8784314, 0.20702502, 0.08449999, 0.65, 0.7529412, 0.1411, 0.49703166, 0.83, 0.3764706, 0, 0.52156866, 0.50980395, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mmlud"]
+gradient = SubResource("Gradient_3ff7d")
+fill_from = Vector2(0.5, 0.90000004)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ne1tf"]
+texture = SubResource("GradientTexture2D_mmlud")
+
+[sub_resource type="Gradient" id="Gradient_mmlud"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.30833322, 0, 0.74, 1, 1, 1, 1, 1, 0.63, 1, 0.7101667, 1)
+metadata/_snap_enabled = true
+metadata/_snap_count = 20
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ne1tf"]
+gradient = SubResource("Gradient_mmlud")
+fill = 1
+fill_from = Vector2(0.2, 0.6)
+fill_to = Vector2(0.8, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_3ff7d"]
+color = Color(0.0696, 0.117879994, 0.24, 0.7529412)
+grow_begin = -3.0
+grow_end = -3.0
+vertical = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amxgp"]
+shader = ExtResource("6_amxgp")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 0.75
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 2.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 5.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="Gradient" id="Gradient_lmtue"]
+colors = PackedColorArray(0.1197, 0.264285, 0.63, 1, 0.40420002, 0.94, 0.43992, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o1c51"]
+gradient = SubResource("Gradient_lmtue")
+fill = 1
+fill_from = Vector2(0.6, 0.7)
+fill_to = Vector2(0.3, 0)
+metadata/_snap_enabled = true
 
 [node name="Intermission" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 512.0
 offset_bottom = 288.0
+theme = ExtResource("1_3ff7d")
 script = ExtResource("1_8m4c8")
 level_path = "res://level/level.tscn"
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer_MarginContainer_GridContainer_Notes_Panel_MarginContainer#Label" type="Label" parent="."]
+layout_mode = 0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.06, 0.06, 0.06, 0.7921569)
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = SubResource("SystemFont_yxe8q")
+theme_override_font_sizes/font_size = 10
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc libero mauris, commodo id fermentum ac, laoreet eget lectus. Vivamus nec mi a nisl commodo maximus. Sed justo ipsum, vehicula eget orci vel, bibendum finibus lectus. Fusce vitae porta purus. Duis ullamcorper eleifend eros, et bibendum elit. Duis elementum lectus in ligula facilisis dapibus. Vivamus ornare neque non iaculis pharetra. "
+autowrap_mode = 2
+
+[node name="Wallpaper" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3ff7d")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
+color = Color(0.55200005, 0.62560004, 0.92, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 alignment = 2
 
-[node name="Shop" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Shop" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SlopeLength" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+[node name="SlopeLength" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 max_upgrades = 4
 price = 25
 
-[node name="SlopeAngle" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+[node name="SlopeAngle" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 upgrade_id = "slope_angle"
 max_upgrades = 4
 price = 25
 
-[node name="BatteryEfficiency" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 upgrade_id = "battery_efficiency"
 max_upgrades = 4
 price = 1000
 
-[node name="ExtraBatteries" parent="MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
+[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 upgrade_id = "extra_batteries"
 max_upgrades = 2
 price = 1000
 
-[node name="Stats" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="Stats" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 2
 
-[node name="Day" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Shop" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Titlebar/MarginContainer" index="0"]
+text = "Browser"
+
+[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_lmtue")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel" index="0"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 0
+
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_w70kp")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.43057036, 0.4305704, 0.4305704, 1)
+theme_override_fonts/font = SubResource("SystemFont_o1c51")
+theme_override_font_sizes/font_size = 6
+theme_override_styles/normal = SubResource("StyleBoxFlat_qefxf")
+text = "https://www.voltaireauto.com/"
+
+[node name="Notes" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Titlebar/MarginContainer" index="0"]
+text = "Notes"
+
+[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_1c0vf")
+
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="0"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_amxgp")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="1"]
+modulate = Color(0.15, 0, 0, 0.09411765)
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("4_mmlud")
+stretch_mode = 1
+flip_v = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="2"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 0.8784314)
+theme_override_constants/line_spacing = 2
+theme_override_fonts/font = SubResource("SystemFont_w70kp")
+theme_override_font_sizes/font_size = 10
+text = "Lorem ipsum"
+
+[node name="Abilities" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
+layout_mode = 2
+
+[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/Abilities/Titlebar/MarginContainer" index="0"]
+text = "Control Panel"
+
+[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/Abilities" index="1"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_o1c51")
+
+[node name="Taskbar" type="PanelContainer" parent="VBoxContainer"]
+material = SubResource("ShaderMaterial_yxe8q")
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ne1tf")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Taskbar"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Taskbar/MarginContainer"]
+layout_mode = 2
+
+[node name="Polygon" type="Control" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="Polygon2D" type="Polygon2D" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/Polygon"]
+position = Vector2(-2, 1)
+texture = SubResource("GradientTexture2D_ne1tf")
+polygon = PackedVector2Array(2, 2, 15, 4, 15, 8, 6, 7, 6, 13, 15, 13, 16, 15, 28, 1, 34, 15, 20, 25, 16, 16, 3, 17)
+uv = PackedVector2Array(3.182416, 10.0529, 27.101276, 13.732726, 28.941189, 33.971764, 51.020138, 8.212988, 62.059612, 33.971764, 36.30084, 52.370888, 28.941189, 35.811676, 5.0223284, 37.65159)
+
+[node name="Polygon2D2" type="Polygon2D" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/Polygon/Polygon2D"]
+show_behind_parent = true
+position = Vector2(2, 2.5)
+color = Color(0, 0, 0, 0.2509804)
+offset = Vector2(0, -1)
+texture = SubResource("GradientTexture2D_ne1tf")
+polygon = PackedVector2Array(2, 2, 15, 4, 15, 8, 6, 7, 6, 13, 15, 13, 16, 15, 28, 1, 34, 15, 20, 25, 16, 16, 3, 17)
+uv = PackedVector2Array(3.182416, 10.0529, 27.101276, 13.732726, 28.941189, 33.971764, 51.020138, 8.212988, 62.059612, 33.971764, 36.30084, 52.370888, 28.941189, 35.811676, 5.0223284, 37.65159)
+
+[node name="Polygon2D3" type="Polygon2D" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/Polygon/Polygon2D"]
+show_behind_parent = true
+position = Vector2(2, 2.5)
+color = Color(0, 0, 0, 0.2509804)
+offset = Vector2(-1, 0)
+texture = SubResource("GradientTexture2D_ne1tf")
+polygon = PackedVector2Array(2, 2, 15, 4, 15, 8, 6, 7, 6, 13, 15, 13, 16, 15, 28, 1, 34, 15, 20, 25, 16, 16, 3, 17)
+uv = PackedVector2Array(3.182416, 10.0529, 27.101276, 13.732726, 28.941189, 33.971764, 51.020138, 8.212988, 62.059612, 33.971764, 36.30084, 52.370888, 28.941189, 35.811676, 5.0223284, 37.65159)
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_3ff7d")
+
+[node name="Padding" type="Control" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator4" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_3ff7d")
+
+[node name="Money" type="Label" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Funds: $%s"
+horizontal_alignment = 2
+script = ExtResource("2_wfkj1")
+display_var = "money"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_3ff7d")
+
+[node name="Day" type="Label" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Day %s"
 horizontal_alignment = 2
 script = ExtResource("2_wfkj1")
 display_var = "day"
 
-[node name="Money" type="Label" parent="MarginContainer/HBoxContainer/Stats"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
 layout_mode = 2
-text = "Money: $%s"
-horizontal_alignment = 2
-script = ExtResource("2_wfkj1")
-display_var = "money"
+theme_override_styles/separator = SubResource("StyleBoxLine_3ff7d")
 
-[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/Stats"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 32)
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Button" type="TextureButton" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer"]
+material = SubResource("ShaderMaterial_amxgp")
 layout_mode = 2
 focus_mode = 0
-text = "Go!"
+texture_normal = SubResource("GradientTexture2D_o1c51")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("8_yxe8q")
+color_tint = Color(0.73, 1, 0.90550005, 1)
+float_intensity = 0.75
+float_offset = 2.0
+rotate_intensity = 1.5
+scale_intensity = 1.04
+click_intensity = 0.1
+do_animation = false
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/Stats/Button" to="." method="start_run"]
+[node name="Label" type="Label" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+text = "Go!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[editable path="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop"]
+[editable path="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes"]
+[editable path="VBoxContainer/MarginContainer/VBoxContainer/Abilities"]
