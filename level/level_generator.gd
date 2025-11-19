@@ -6,6 +6,12 @@ extends Node2D
 @export var car_pos_offset: Vector2
 @export var camera: Camera2D
 
+@export_group("Graphics")
+@export var inner_tile: Texture2D
+@export var outer_tile: Texture2D
+@export var inner_platform: Texture2D
+@export var outer_platform: Texture2D
+
 @export_group("Level")
 @export var level_length: float
 @export var level_depth: float
@@ -104,12 +110,24 @@ func generate_level(_rng_seed: int) -> void:
 			min_height = height
 		x += sample_rate
 	
+	var edge_points: PackedVector2Array = poly.duplicate()
+	
 	poly.append(Vector2(level_length, min_height + level_depth))
 	poly.append(Vector2(-slope_length - sample_rate, min_height + level_depth))
 	
 	var polygon_2d := Polygon2D.new()
 	polygon_2d.polygon = poly
+	polygon_2d.texture = inner_tile
+	polygon_2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
 	static_body_2d.add_child(polygon_2d)
+	
+	var line_2d := Line2D.new()
+	line_2d.points = edge_points
+	line_2d.texture = outer_tile
+	line_2d.texture_mode = Line2D.LINE_TEXTURE_TILE
+	line_2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	line_2d.width = outer_tile.get_height()
+	static_body_2d.add_child(line_2d)
 	
 	var collision_2d := CollisionPolygon2D.new()
 	collision_2d.polygon = poly
@@ -125,10 +143,15 @@ func generate_level(_rng_seed: int) -> void:
 
 
 func place_platform(points: PackedVector2Array, body: StaticBody2D) -> void:
-	var poly_points = points.duplicate()
-	var reverse_points = points.duplicate()
+	var poly_points: PackedVector2Array = points.duplicate()
+	var reverse_points: PackedVector2Array = points.duplicate()
 	reverse_points.reverse()
 	poly_points.append_array(reverse_points)
+	
+	var bottom_offset := Vector2(0, 1000000)
+	var closed_points: PackedVector2Array = points.duplicate()
+	closed_points.append(bottom_offset + closed_points[closed_points.size() - 1])
+	closed_points.append(bottom_offset + closed_points[0])
 	
 	var collision_2d := CollisionPolygon2D.new()
 	collision_2d.build_mode = collision_2d.BUILD_SEGMENTS
@@ -136,8 +159,17 @@ func place_platform(points: PackedVector2Array, body: StaticBody2D) -> void:
 	collision_2d.one_way_collision = true
 	collision_2d.one_way_collision_margin = 0.1
 	body.add_child(collision_2d)
+	
+	var polygon_2d := Polygon2D.new()
+	polygon_2d.polygon = closed_points
+	polygon_2d.texture = inner_platform
+	polygon_2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	body.add_child(polygon_2d)
 
 	var line_2d := Line2D.new()
 	line_2d.points = points
-	line_2d.width = 4
+	line_2d.texture = outer_platform
+	line_2d.texture_mode = Line2D.LINE_TEXTURE_TILE
+	line_2d.texture_repeat = CanvasItem.TEXTURE_REPEAT_ENABLED
+	line_2d.width = outer_platform.get_height()
 	body.add_child(line_2d)

@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bkavqyofikvxb"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://bkavqyofikvxb"]
 
 [ext_resource type="FontFile" uid="uid://dxl8vp3ajwwm5" path="res://misc/fonts/Audiowide-Regular.ttf" id="1_yobfc"]
 
@@ -31,6 +31,26 @@ metadata/_snap_enabled = true
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gwsko"]
 texture = SubResource("GradientTexture2D_f70oy")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yobfc"]
+bg_color = Color(0.8439, 0.844335, 0.87, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.65660006, 0.6499, 0.67, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing_size = 0.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gwh2h"]
+bg_color = Color(0.46799996, 0.49919996, 0.52, 1)
+border_width_left = 4
+border_color = Color(0.19096997, 0.1898, 0.26, 1)
+border_blend = true
+
 [resource]
 default_font = ExtResource("1_yobfc")
 default_font_size = 9
@@ -43,3 +63,5 @@ Label/constants/shadow_outline_size = 5
 ProgressBar/font_sizes/font_size = 7
 ProgressBar/styles/background = SubResource("StyleBoxTexture_kfyo1")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_gwsko")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_yobfc")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_gwh2h")

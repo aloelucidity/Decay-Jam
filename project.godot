@@ -31,8 +31,6 @@ window/size/window_height_override=576
 folder_colors={
 "res://car/": "purple",
 "res://level/": "yellow",
-"res://level/objects/": "green",
-"res://level/ui/": "teal",
 "res://menu/": "orange",
 "res://misc/": "gray",
 "res://music/": "pink"

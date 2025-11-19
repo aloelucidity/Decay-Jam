@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://pr55jgxpx1cn"]
+[gd_scene load_steps=8 format=3 uid="uid://pr55jgxpx1cn"]
 
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="1_qr0sp"]
 
@@ -27,6 +27,28 @@ metadata/_snap_enabled = true
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yxe8q"]
 texture = SubResource("GradientTexture2D_amxgp")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr0sp"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_color = Color(0.4509804, 0.47058824, 0.7294118, 0)
+border_blend = true
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7uy6"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4526, 0.47109333, 0.73, 0)
+border_blend = true
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
 [node name="Window" type="VBoxContainer"]
 offset_right = 71.0
 offset_bottom = 26.0
@@ -38,6 +60,12 @@ theme_override_constants/separation = 0
 material = SubResource("ShaderMaterial_j7uy6")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_yxe8q")
+
+[node name="Glow" type="Panel" parent="Titlebar"]
+show_behind_parent = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qr0sp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Titlebar"]
 layout_mode = 2
@@ -54,3 +82,9 @@ text = "Window"
 [node name="Panel" type="PanelContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Glow" type="Panel" parent="Panel"]
+show_behind_parent = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j7uy6")

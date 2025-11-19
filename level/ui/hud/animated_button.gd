@@ -15,6 +15,7 @@ extends AnimateGradient
 
 @export var scale_speed: float = 6
 @export var scale_intensity: float = 1.075
+@export var children_scale_intensity: float = 1.0
 
 @export var click_decay: float = 5
 @export var click_intensity: float = 0.2
@@ -84,3 +85,8 @@ func _process(delta: float) -> void:
 			delta * scale_speed
 		)
 		scale = base_scale
+	
+	if not is_equal_approx(children_scale_intensity, 1.0): 
+		for child in get_children():
+			if not child is TextureRect:
+				child.scale = Vector2.ONE + (scale - Vector2.ONE) * children_scale_intensity
