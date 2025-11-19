@@ -915,8 +915,8 @@ size_flags_horizontal = 3
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "new record!"
+theme_override_font_sizes/font_size = 12
+text = "new record! (x2)"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount/NewRecord"]
@@ -973,8 +973,8 @@ size_flags_horizontal = 3
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "new record!"
+theme_override_font_sizes/font_size = 12
+text = "new record! (x2)"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount/NewRecord"]
@@ -1031,8 +1031,8 @@ size_flags_horizontal = 3
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "new record!"
+theme_override_font_sizes/font_size = 12
+text = "new record! (x2)"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult/NewRecord"]
@@ -1089,8 +1089,8 @@ size_flags_horizontal = 3
 [node name="NewRecord" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.7529412)
-theme_override_font_sizes/font_size = 14
-text = "new record!"
+theme_override_font_sizes/font_size = 12
+text = "new record! (x2)"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult/NewRecord"]
