@@ -31,7 +31,7 @@
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
-[ext_resource type="Shader" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/sum.gd" id="24_qslh7"]
@@ -482,11 +482,11 @@ stream_1/volume = 0.0
 stream_2/stream = ExtResource("8_m3nah")
 stream_2/volume = 0.0
 stream_3/stream = ExtResource("9_fm1jd")
-stream_3/volume = -60.0
+stream_3/volume = 0.0
 stream_4/stream = ExtResource("10_7jqyl")
-stream_4/volume = -60.0
+stream_4/volume = 0.0
 stream_5/stream = ExtResource("11_m5ivw")
-stream_5/volume = -60.0
+stream_5/volume = 0.0
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("car")]
 script = ExtResource("1_l5lfc")

@@ -1,6 +1,36 @@
-[gd_resource type="Resource" script_class="WheelStats" load_steps=3 format=3 uid="uid://cpsx0l2hyr2c5"]
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://cpsx0l2hyr2c5"]
 
 [ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_cgvly"]
+[ext_resource type="Texture2D" uid="uid://d2qhgup7qrm2r" path="res://car/wheels/graphics/wheel.png" id="2_5wneq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wneq"]
+atlas = ExtResource("2_5wneq")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usn52"]
+atlas = ExtResource("2_5wneq")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxubf"]
+atlas = ExtResource("2_5wneq")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yxubf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5wneq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usn52")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxubf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
 friction = 0.8
@@ -11,3 +41,4 @@ torque = 165000.0
 energy_usage = 0.05
 physics_material = SubResource("PhysicsMaterial_3afhm")
 size = 10.0
+frames = SubResource("SpriteFrames_yxubf")

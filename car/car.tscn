@@ -1,38 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://cktgqcvf538ar"]
+[gd_scene load_steps=9 format=3 uid="uid://cktgqcvf538ar"]
 
 [ext_resource type="Script" uid="uid://cerba5raajrve" path="res://car/car.gd" id="1_2gitb"]
 [ext_resource type="PackedScene" uid="uid://cvn5pkt2owfc8" path="res://car/wheel.tscn" id="2_dxy33"]
 [ext_resource type="Resource" uid="uid://boj2h0ui6dysv" path="res://car/bodies/stats/spring.tres" id="2_vl2bd"]
-[ext_resource type="Script" uid="uid://b0eevn3xd0r8g" path="res://car/light.gd" id="3_hkabp"]
 [ext_resource type="Resource" uid="uid://cpsx0l2hyr2c5" path="res://car/wheels/all_rounder.tres" id="3_vl2bd"]
 [ext_resource type="AudioStream" uid="uid://dd2j373pxmxyx" path="res://car/sounds/engine.wav" id="4_jpe8o"]
 [ext_resource type="Script" uid="uid://c4sl7b5kg0au0" path="res://car/sounds/engine.gd" id="5_h3fet"]
 [ext_resource type="AudioStream" uid="uid://dkce7qxlw2sdn" path="res://car/sounds/outage.wav" id="9_72ido"]
 
-[sub_resource type="Gradient" id="Gradient_dxy33"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hkabp"]
-gradient = SubResource("Gradient_dxy33")
-width = 288
-height = 288
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-metadata/_snap_enabled = true
-
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_72ido"]
 polyphony = 4
 
 [node name="Car" type="RigidBody2D" node_paths=PackedStringArray("wheels")]
+texture_filter = 1
 mass = 200.0
 center_of_mass_mode = 1
 can_sleep = false
 continuous_cd = 2
 script = ExtResource("1_2gitb")
 wheels = [NodePath("PinJoint2D/Wheel"), NodePath("PinJoint2D2/Wheel")]
-multiplier_gain = 0.05
-rise_multiplier_gain = 0.15
 body_stats = ExtResource("2_vl2bd")
 wheel_stats = ExtResource("3_vl2bd")
 fall_thrust = 50000.0
@@ -45,7 +31,7 @@ coyote_time = 0.05
 rotation = -1.5707964
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(-10, -4)
+position = Vector2(-11, -4)
 node_a = NodePath("..")
 node_b = NodePath("Wheel")
 
@@ -54,19 +40,13 @@ can_sleep = false
 continuous_cd = 2
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2(10, -4)
+position = Vector2(11, -4)
 node_a = NodePath("..")
 node_b = NodePath("Wheel")
 
 [node name="Wheel" parent="PinJoint2D2" instance=ExtResource("2_dxy33")]
 can_sleep = false
 continuous_cd = 2
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0, -12)
-blend_mode = 2
-texture = SubResource("GradientTexture2D_hkabp")
-script = ExtResource("3_hkabp")
 
 [node name="Sounds" type="Node2D" parent="."]
 

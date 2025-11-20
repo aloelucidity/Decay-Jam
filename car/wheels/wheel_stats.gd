@@ -7,4 +7,4 @@ extends Resource
 @export var physics_material: PhysicsMaterial
 
 @export var size: float
-@export var graphics: Texture
+@export var frames: SpriteFrames

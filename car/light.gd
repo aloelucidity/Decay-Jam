@@ -1,7 +1,7 @@
 extends PointLight2D
 
 
-@onready var car: Car = get_owner()
+@onready var car: Car = get_owner().car
 
 
 func _process(delta: float) -> void:

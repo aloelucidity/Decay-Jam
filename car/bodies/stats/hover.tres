@@ -4,6 +4,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dfda4"]
 radius = 7.0
+height = 48.0
 
 [resource]
 script = ExtResource("1_y8lva")

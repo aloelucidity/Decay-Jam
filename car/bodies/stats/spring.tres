@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_00je3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dfda4"]
-radius = 7.0
+radius = 6.0
+height = 48.0
 
 [resource]
 script = ExtResource("1_00je3")
 base = "spring_body"
 collision_shape = SubResource("CapsuleShape2D_dfda4")
+collision_offset = Vector2(0, 4)
 armor = 0.875
 metadata/_custom_type_script = "uid://bv7ygilbev78e"
