@@ -3,10 +3,12 @@ extends Area2D
 
 var car: Car
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sprite: AnimatedSprite2D = %Sprite
 @export var stream: AudioStream
 @export var magnet_speed: float = 1.5
 @export var money_amount: int = 1
+var collected: bool
 
 
 func _ready() -> void:
@@ -14,7 +16,7 @@ func _ready() -> void:
 
 
 func body_entered(body: Node2D) -> void:
-	if body is Car:
+	if body is Car and not collected:
 		car = body
 
 
@@ -31,4 +33,6 @@ func _physics_process(delta: float) -> void:
 func collect_body_entered(body: Node2D) -> void:
 	if body is Car:
 		body.collect_coin(money_amount, stream)
-		queue_free()
+		animation_player.play("collect")
+		collected = true
+		car = null

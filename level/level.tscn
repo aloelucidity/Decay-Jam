@@ -1,7 +1,6 @@
-[gd_scene load_steps=76 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=75 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
-[ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
 [ext_resource type="Shader" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
 [ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
@@ -32,10 +31,10 @@
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
-[ext_resource type="Shader" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
-[ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/sum.gd" id="24_qslh7"]
+[ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/ui/results/sum.gd" id="24_qslh7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q4dhf"]
 
@@ -521,10 +520,7 @@ stream_4/volume = -60.0
 stream_5/stream = ExtResource("11_m5ivw")
 stream_5/volume = -60.0
 
-[node name="Level" type="Node2D" node_paths=PackedStringArray("car")]
-script = ExtResource("1_l5lfc")
-intermission_path = "res://menu/intermission.tscn"
-car = NodePath("Car")
+[node name="Level" type="Node2D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -256
@@ -933,6 +929,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("7_tv7ir")
 script = ExtResource("19_h74y2")
+intermission_path = "res://menu/intermission.tscn"
 car = NodePath("../../Car")
 counters = [NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult")]
 

@@ -1,6 +1,7 @@
 extends Control
 
 
+@onready var mouse_blocker: Control = %MouseBlocker
 @export var level_path: String
 
 
@@ -23,4 +24,5 @@ func window_resized() -> void:
 
 
 func start_run() -> void:
-	get_tree().change_scene_to_file(level_path)
+	mouse_blocker.show()
+	Transitions.change_scene_to(level_path)

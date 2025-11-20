@@ -1,12 +1,109 @@
-[gd_scene load_steps=13 format=3 uid="uid://degh58bttmqng"]
+[gd_scene load_steps=16 format=3 uid="uid://degh58bttmqng"]
 
 [ext_resource type="Script" uid="uid://dnttt3ps0y8vm" path="res://level/scenes/coin/coin.gd" id="1_5ok3k"]
 [ext_resource type="AudioStream" uid="uid://cab45qb3hqlyp" path="res://level/scenes/coin/sound.wav" id="2_qqpdq"]
 [ext_resource type="Texture2D" uid="uid://dkd24yc2bfshr" path="res://level/scenes/coin/texture.png" id="3_8wkp1"]
 [ext_resource type="Shader" uid="uid://cyy1ne38ior0e" path="res://misc/shaders/glow.gdshader" id="3_mea4w"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xjwop"]
-radius = 32.0
+[sub_resource type="Animation" id="Animation_mea4w"]
+resource_name = "collect"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.049999997, 0.4),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(0.9, 0.9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.4),
+"transitions": PackedFloat32Array(0.5, 2, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -6), Vector2(0, 6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1.8247963, 1.8247963, 1.8247963, 1), Color(0.5019608, 0, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_frknv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dhyat"]
+_data = {
+&"RESET": SubResource("Animation_frknv"),
+&"collect": SubResource("Animation_mea4w")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_frknv"]
 shader = ExtResource("3_mea4w")
@@ -51,6 +148,9 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjwop"]
+radius = 32.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7gjq"]
 radius = 8.0
 
@@ -60,14 +160,20 @@ monitorable = false
 script = ExtResource("1_5ok3k")
 stream = ExtResource("2_qqpdq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_xjwop")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dhyat")
+}
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_frknv")
 sprite_frames = SubResource("SpriteFrames_mea4w")
 frame_progress = 0.29339442
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 2)
+shape = SubResource("CircleShape2D_xjwop")
 
 [node name="CollectArea" type="Area2D" parent="."]
 monitorable = false

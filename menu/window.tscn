@@ -14,7 +14,7 @@ shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
 [sub_resource type="Gradient" id="Gradient_ne1tf"]
-colors = PackedColorArray(0.78, 0.95966667, 1, 1, 0.2816, 0.3054933, 0.64, 0.7529412)
+colors = PackedColorArray(0.66999996, 0.824, 1, 1, 0.1961, 0.26288003, 0.53, 0.7529412)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_amxgp"]
 gradient = SubResource("Gradient_ne1tf")
@@ -75,8 +75,11 @@ theme_override_constants/margin_right = 4
 
 [node name="Title" type="Label" parent="Titlebar/MarginContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.86, 0.86233336, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2509804)
+theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 3
 text = "Window"
 
 [node name="Panel" type="PanelContainer" parent="."]

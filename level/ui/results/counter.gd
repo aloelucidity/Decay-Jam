@@ -53,3 +53,12 @@ func _process(delta: float) -> void:
 	value.text = value_template % str(
 		ceili(display_value) if display_snap == 1 else snapped(display_value, display_snap)
 	)
+
+
+func force_complete() -> void:
+	is_tallying = false
+	display_value = target_value
+	value.text = value_template % str(
+		ceili(display_value) if display_snap == 1 else snapped(display_value, display_snap)
+	)
+	animation_player.play("transition", -1, INF)

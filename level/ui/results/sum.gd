@@ -14,6 +14,7 @@ var total_mult: float = 1.0
 var total_earnings: int
 
 var tallying_index: int = 0
+var is_calculated: bool
 
 signal sum_calculated
 
@@ -47,6 +48,7 @@ func _process(delta: float) -> void:
 			display_earnings = lerp(display_earnings, float(total_earnings), delta * lerp_speed)
 			if ceili(display_earnings) == total_earnings:
 				tallying_index = 0
+				is_calculated = true
 				emit_signal("sum_calculated")
 	
 	text = text_template % [
@@ -54,3 +56,18 @@ func _process(delta: float) -> void:
 		str(snapped(display_mult, 0.01)),
 		str(ceili(display_earnings))
 	]
+
+
+func force_complete() -> void:
+	display_money = total_money
+	display_mult = total_mult
+	display_earnings = total_earnings
+	text = text_template % [
+		str(ceili(total_money)), 
+		str(snapped(total_mult, 0.01)),
+		str(ceili(total_earnings))
+	]
+	
+	tallying_index = 0
+	is_calculated = true
+	emit_signal("sum_calculated")

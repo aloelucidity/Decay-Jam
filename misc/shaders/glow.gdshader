@@ -6,6 +6,13 @@ uniform float width : hint_range(0.0, 32.0) = 1.0;
 uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform int pixel_size : hint_range(1, 10) = 4;
 
+// Workaround to make modulate work again.
+varying vec4 modulate;
+
+void vertex() {
+	modulate = COLOR;
+}
+
 void fragment()
 {
     vec2 inv_texture_size = 1.0 / vec2(textureSize(TEXTURE, 0));
@@ -14,7 +21,7 @@ void fragment()
     vec4 pixel_color = texture(TEXTURE, UV);
 
     if (pixel_color.a > 0.0) {
-        COLOR = pixel_color;
+        COLOR = modulate * pixel_color;
     }
 	else {
 	    vec4 final_outline_color = outline_color;
@@ -48,7 +55,7 @@ void fragment()
 	    }
 	    if (final_outline_color.a > 0.0) {
 	        final_outline_color.a = min(final_outline_color.a, 1.0);
-	        COLOR = final_outline_color;
+	        COLOR = modulate * final_outline_color;
 	    } else {
 	        COLOR = vec4(0.0);
 	    }
