@@ -31,7 +31,7 @@ coyote_time = 0.05
 rotation = -1.5707964
 
 [node name="PinJoint2D" type="PinJoint2D" parent="."]
-position = Vector2(-11, -4)
+position = Vector2(-12, -4)
 node_a = NodePath("..")
 node_b = NodePath("Wheel")
 
@@ -40,7 +40,7 @@ can_sleep = false
 continuous_cd = 2
 
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
-position = Vector2(11, -4)
+position = Vector2(12, -4)
 node_a = NodePath("..")
 node_b = NodePath("Wheel")
 

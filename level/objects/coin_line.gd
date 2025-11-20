@@ -13,7 +13,7 @@ func build(sample: int) -> void:
 	while index < sample_width:
 		var coin_obj: Area2D = preload("res://level/scenes/coin/coin.tscn").instantiate()
 		coin_obj.position = get_sample_pos(sample + index)
-		coin_obj.position.y -= 12
+		coin_obj.position.y -= 16
 		add_child(coin_obj)
 		
 		index += 3

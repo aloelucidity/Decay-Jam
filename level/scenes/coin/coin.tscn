@@ -1,15 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://degh58bttmqng"]
+[gd_scene load_steps=13 format=3 uid="uid://degh58bttmqng"]
 
 [ext_resource type="Script" uid="uid://dnttt3ps0y8vm" path="res://level/scenes/coin/coin.gd" id="1_5ok3k"]
 [ext_resource type="AudioStream" uid="uid://cab45qb3hqlyp" path="res://level/scenes/coin/sound.wav" id="2_qqpdq"]
+[ext_resource type="Texture2D" uid="uid://dkd24yc2bfshr" path="res://level/scenes/coin/texture.png" id="3_8wkp1"]
+[ext_resource type="Shader" uid="uid://cyy1ne38ior0e" path="res://misc/shaders/glow.gdshader" id="3_mea4w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xjwop"]
 radius = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_frknv"]
+shader = ExtResource("3_mea4w")
+shader_parameter/is_smooth = true
+shader_parameter/width = 4.00000019
+shader_parameter/outline_color = Color(0.48639995, 0.418, 0.76, 1)
+shader_parameter/pixel_size = 4
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mea4w"]
+atlas = ExtResource("3_8wkp1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frknv"]
+atlas = ExtResource("3_8wkp1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhyat"]
+atlas = ExtResource("3_8wkp1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k50in"]
+atlas = ExtResource("3_8wkp1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mea4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mea4w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frknv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhyat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k50in")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r7gjq"]
 radius = 8.0
 
 [node name="Coin" type="Area2D"]
+texture_filter = 1
 monitorable = false
 script = ExtResource("1_5ok3k")
 stream = ExtResource("2_qqpdq")
@@ -17,12 +63,11 @@ stream = ExtResource("2_qqpdq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_xjwop")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -6.0
-offset_top = -6.0
-offset_right = 6.0
-offset_bottom = 6.0
-color = Color(1, 0.8784314, 0.34117648, 1)
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_frknv")
+sprite_frames = SubResource("SpriteFrames_mea4w")
+frame_progress = 0.29339442
 
 [node name="CollectArea" type="Area2D" parent="."]
 monitorable = false

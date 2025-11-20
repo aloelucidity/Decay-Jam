@@ -3,9 +3,14 @@ extends Area2D
 
 var car: Car
 
+@onready var sprite: AnimatedSprite2D = %Sprite
 @export var stream: AudioStream
 @export var magnet_speed: float = 1.5
 @export var money_amount: int = 1
+
+
+func _ready() -> void:
+	sprite.play("default")
 
 
 func body_entered(body: Node2D) -> void:
