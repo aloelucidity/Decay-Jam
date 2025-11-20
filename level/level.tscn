@@ -1,8 +1,9 @@
-[gd_scene load_steps=70 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=76 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://dqhs7x6p66364" path="res://level/level.gd" id="1_l5lfc"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
+[ext_resource type="Shader" uid="uid://cfokrh5r1sjq1" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
 [ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
@@ -35,6 +36,38 @@
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/sum.gd" id="24_qslh7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q4dhf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1dsc"]
+width = 128
+height = 128
+noise = SubResource("FastNoiseLite_q4dhf")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8yb03"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1vdk1"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_8yb03")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dv6e"]
+shader = ExtResource("2_ifo17")
+shader_parameter/dust_strength = 5.0
+shader_parameter/dust_color = Color(0, 0.22, 0.44, 1)
+shader_parameter/arm_count = 4.00000019
+shader_parameter/arm_compression = 0.050000002375
+shader_parameter/core_radius = 0.1250000059375
+shader_parameter/core_color = Color(0.629, 0.6805667, 0.85, 1)
+shader_parameter/galaxy_radius = 0.25000000861512
+shader_parameter/rotation_speed = 0.1
+shader_parameter/sky_color = Color(0.029399997, 0.07548334, 0.14, 1)
+shader_parameter/star_size = 0.537
+shader_parameter/galaxy_center = Vector2(0.5, 0.35)
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_u1dsc")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1vdk1")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("10_m5ivw")
@@ -492,6 +525,26 @@ stream_5/volume = 0.0
 script = ExtResource("1_l5lfc")
 intermission_path = "res://menu/intermission.tscn"
 car = NodePath("Car")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -256
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_3dv6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
 texture_filter = 1
