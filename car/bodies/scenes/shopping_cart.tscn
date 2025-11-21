@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://do36dno85vx35"]
+[gd_scene load_steps=6 format=3 uid="uid://djltxapa7u4q2"]
 
-[ext_resource type="Script" uid="uid://bytadi60e1py8" path="res://car/bodies/body.gd" id="1_kdrh2"]
-[ext_resource type="Script" uid="uid://b0eevn3xd0r8g" path="res://car/light.gd" id="3_244s7"]
+[ext_resource type="Script" uid="uid://bytadi60e1py8" path="res://car/bodies/body.gd" id="1_ygeo3"]
+[ext_resource type="Texture2D" uid="uid://u67h0ssnx0wm" path="res://car/bodies/graphics/shopping_cart.png" id="2_ygeo3"]
+[ext_resource type="Script" uid="uid://b0eevn3xd0r8g" path="res://car/light.gd" id="3_8djmy"]
 
 [sub_resource type="Gradient" id="Gradient_dxy33"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -17,12 +18,14 @@ metadata/_snap_enabled = true
 
 [node name="Body" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_kdrh2")
+script = ExtResource("1_ygeo3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-3, -2)
+texture = ExtResource("2_ygeo3")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(20, 4)
+position = Vector2(1, 0)
 blend_mode = 2
 texture = SubResource("GradientTexture2D_3exjd")
-script = ExtResource("3_244s7")
+script = ExtResource("3_8djmy")

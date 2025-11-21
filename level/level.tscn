@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
-[ext_resource type="Shader" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
+[ext_resource type="Shader" uid="uid://cfokrh5r1sjq1" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
 [ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
@@ -1373,7 +1373,7 @@ libraries = {
 [node name="HSeparator2" type="HSeparator" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Sum" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car")]
+[node name="Sum" type="Label" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" node_paths=PackedStringArray("car", "counters")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1382,6 +1382,7 @@ text = "$%s x %s = $%s"
 horizontal_alignment = 1
 script = ExtResource("24_qslh7")
 car = NodePath("../../../../../../../Car")
+counters = [NodePath("../FragmentsCount"), NodePath("../RobotsCount"), NodePath("../DistanceMult"), NodePath("../AscentMult")]
 
 [node name="TextureRect" type="TextureRect" parent="UI/Results/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/Sum"]
 layout_mode = 1

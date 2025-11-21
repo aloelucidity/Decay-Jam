@@ -3,6 +3,7 @@ extends Resource
 
 
 @export var base: String
+@export var wheel_spacing: float = 24
 @export var collision_shape: Shape2D
 @export var collision_offset: Vector2
 

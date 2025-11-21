@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://cpsx0l2hyr2c5"]
 
 [ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_cgvly"]
-[ext_resource type="Texture2D" uid="uid://d2qhgup7qrm2r" path="res://car/wheels/graphics/wheel.png" id="2_5wneq"]
+[ext_resource type="Texture2D" uid="uid://d2qhgup7qrm2r" path="res://car/wheels/graphics/rubber.png" id="2_5wneq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wneq"]
 atlas = ExtResource("2_5wneq")
@@ -34,6 +34,7 @@ animations = [{
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
 friction = 0.8
+rough = true
 
 [resource]
 script = ExtResource("1_cgvly")
@@ -42,3 +43,7 @@ energy_usage = 0.05
 physics_material = SubResource("PhysicsMaterial_3afhm")
 size = 10.0
 frames = SubResource("SpriteFrames_yxubf")
+shop_name = "Rubber"
+shop_description = "[color=darkred]- Fast speed - Medium friction - Medium size -[/color]
+Good 'ol rubber tires never let me down. These should be able to handle anything I throw at them."
+shop_cost = 4000

@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://cwys7ccg2lpny"]
+
+[ext_resource type="Texture2D" uid="uid://f7iwb7yhya1" path="res://car/wheels/graphics/carriage.png" id="1_gcjnx"]
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_tff45"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3skma"]
+atlas = ExtResource("1_gcjnx")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_umiqa"]
+atlas = ExtResource("1_gcjnx")
+region = Rect2(14, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wubx"]
+atlas = ExtResource("1_gcjnx")
+region = Rect2(28, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_psivv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3skma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_umiqa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wubx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[resource]
+script = ExtResource("1_tff45")
+torque = 250000.0
+energy_usage = 0.075
+physics_material = SubResource("PhysicsMaterial_3afhm")
+size = 14.0
+offset = Vector2(0, 1)
+frames = SubResource("SpriteFrames_psivv")
+shop_name = "Carriage"
+shop_description = "[color=darkred]- Medium speed - High friction - Large size -[/color]
+Hey, this actually looks like a wheel! They're for carriages, not cars, but it's at an affordable price, so why not? Though I should be careful about the power usage."
+shop_cost = 2000

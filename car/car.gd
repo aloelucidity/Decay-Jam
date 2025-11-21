@@ -3,7 +3,7 @@ extends RigidBody2D
 
 
 const BODY_OFFSET := Vector2(0, -14)
-const BODY_PATH: String = "res://car/bodies/%s.tscn"
+const BODY_PATH: String = "res://car/bodies/scenes/%s.tscn"
 
 enum CarStat {
 	Fragments,
@@ -13,6 +13,7 @@ enum CarStat {
 }
 
 @export_group("Nodes")
+@export var joints: Array[PinJoint2D]
 @export var wheels: Array[Wheel]
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var outage_sound := %Outage
@@ -58,6 +59,12 @@ func _ready() -> void:
 	body.car = self
 	add_child(body)
 	move_child(body, 1)
+	
+	for joint in joints:
+		joint.position.x = sign(joint.position.x) * (body_stats.wheel_spacing/2)
+		joint.position += wheel_stats.offset
+		joint.disable_collision = !joint.disable_collision
+		joint.disable_collision = !joint.disable_collision
 	
 	for wheel in wheels:
 		wheel.load_wheel_stats(wheel_stats)

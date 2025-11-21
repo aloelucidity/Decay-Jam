@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcqxm244lb5ty"
-path="res://.godot/imported/race.png-a29b718490c6e3ac9750f1beba46f294.ctex"
+uid="uid://dn7nuw3koqld8"
+path="res://.godot/imported/concrete.png-6218dae4c71be5defc1f0bee495387c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://car/bodies/graphics/race.png"
-dest_files=["res://.godot/imported/race.png-a29b718490c6e3ac9750f1beba46f294.ctex"]
+source_file="res://car/wheels/graphics/concrete.png"
+dest_files=["res://.godot/imported/concrete.png-6218dae4c71be5defc1f0bee495387c2.ctex"]
 
 [params]
 

@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://bq2y1u6xa6ykx"]
+
+[ext_resource type="Texture2D" uid="uid://dn7nuw3koqld8" path="res://car/wheels/graphics/concrete.png" id="1_mq735"]
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="2_ulsta"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulsta"]
+atlas = ExtResource("1_mq735")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5dn3"]
+atlas = ExtResource("1_mq735")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_njsjr"]
+atlas = ExtResource("1_mq735")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ufs5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulsta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5dn3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_njsjr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xx0la"]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[resource]
+script = ExtResource("2_ulsta")
+torque = 75000.0
+energy_usage = 0.05
+physics_material = SubResource("PhysicsMaterial_xx0la")
+size = 10.0
+frames = SubResource("SpriteFrames_1ufs5")
+shop_name = "Concrete"
+shop_description = "[color=darkred]- Low speed - High friction - Medium size -[/color]
+I'm not sure what this is doing in the \"wheels\" section, but on the bright side, it's cheap."
+shop_cost = 100

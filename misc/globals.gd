@@ -17,5 +17,6 @@ var slope_length: int
 var slope_angle: int
 var battery_efficiency: int
 var extra_batteries: int
+var stat_bests: Dictionary
 
 signal stat_changed(stat: String, new_value)

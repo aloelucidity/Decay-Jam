@@ -1,14 +1,51 @@
-[gd_resource type="Resource" script_class="WheelStats" load_steps=3 format=3 uid="uid://figy7xsr8sep"]
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://figy7xsr8sep"]
 
+[ext_resource type="Texture2D" uid="uid://ihqn83shlf3u" path="res://car/wheels/graphics/monster.png" id="1_efqp5"]
 [ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_u38bt"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ql38h"]
+atlas = ExtResource("1_efqp5")
+region = Rect2(0, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_inly6"]
+atlas = ExtResource("1_efqp5")
+region = Rect2(14, 0, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okq3q"]
+atlas = ExtResource("1_efqp5")
+region = Rect2(28, 0, 14, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pf0th"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ql38h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_inly6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_okq3q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
+rough = true
 bounce = 1.0
 absorbent = true
 
 [resource]
 script = ExtResource("1_u38bt")
-torque = 400000.0
-energy_usage = 0.075
+torque = 600000.0
+energy_usage = 0.1
 physics_material = SubResource("PhysicsMaterial_3afhm")
 size = 14.0
+offset = Vector2(0, 1)
+frames = SubResource("SpriteFrames_pf0th")
+shop_name = "Monster"
+shop_description = "[color=darkred]- Very fast speed - High friction - Large size -[/color]
+Monster truck wheels, aww yeah! These are fast and supposedly great at climbing slopes. Though they consume a lot of power..."
+shop_cost = 7500

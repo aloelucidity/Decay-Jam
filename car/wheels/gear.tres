@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://baefbct8mflae"]
+
+[ext_resource type="Texture2D" uid="uid://mdsgqfj4e4nh" path="res://car/wheels/graphics/gear.png" id="1_e7b61"]
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="2_nf1ue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nf1ue"]
+atlas = ExtResource("1_e7b61")
+region = Rect2(0, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5d402"]
+atlas = ExtResource("1_e7b61")
+region = Rect2(10, 0, 10, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oob6q"]
+atlas = ExtResource("1_e7b61")
+region = Rect2(20, 0, 10, 10)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nualc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nf1ue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5d402")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oob6q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xx0la"]
+rough = true
+bounce = 1.0
+absorbent = true
+
+[resource]
+script = ExtResource("2_nf1ue")
+torque = 35000.0
+energy_usage = 0.05
+physics_material = SubResource("PhysicsMaterial_xx0la")
+size = 10.0
+frames = SubResource("SpriteFrames_nualc")
+shop_name = "Gear"
+shop_description = "[color=darkred]- Very low speed - High friction - Medium size -[/color]
+Is it better than nothing? Yes. Should I upgrade this as soon as possible? Also yes."

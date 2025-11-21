@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=57 format=3 uid="uid://tjrj1bcjleo"]
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
@@ -8,17 +8,45 @@
 [ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/window.tscn" id="4_ne1tf"]
 [ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="5_lmtue"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
+[ext_resource type="PackedScene" uid="uid://c7h8khf2k6cid" path="res://menu/shop/wheel_button.tscn" id="6_w70kp"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
 [ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="9_lmtue"]
 
 [sub_resource type="Gradient" id="Gradient_lymqm"]
-colors = PackedColorArray(0.115499996, 0.19757497, 0.35, 1, 0.1672, 0.38, 0.36936, 1)
+offsets = PackedFloat32Array(0, 0.54210526, 1)
+colors = PackedColorArray(0.0837, 0.148905, 0.27, 1, 0.19628993, 0.05940001, 0.27, 1, 0.2196, 0.36, 0.35298002, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ex5vy"]
 gradient = SubResource("Gradient_lymqm")
 fill = 1
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_lmtue"]
+blend_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nnnka"]
+gradient = SubResource("Gradient_lymqm")
+fill = 2
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w70kp"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_ex5vy"]
+offsets = PackedFloat32Array(0.75, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 0.78075, 0.765, 0.9, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mpa3m"]
+gradient = SubResource("Gradient_ex5vy")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_amxgp"]
@@ -184,7 +212,7 @@ shader_parameter/sample_count = 9
 
 [sub_resource type="Gradient" id="Gradient_3ff7d"]
 offsets = PackedFloat32Array(0, 0.3, 0.5, 0.8, 0.85)
-colors = PackedColorArray(0.10799995, 0, 0.24, 0.7529412, 0.13, 0, 0.26, 0.8784314, 0.20702502, 0.08449999, 0.65, 0.7529412, 0.1411, 0.49703166, 0.83, 0.3764706, 0, 0.52156866, 0.50980395, 0)
+colors = PackedColorArray(0.10799995, 0, 0.24, 0.7529412, 0.07599992, 0, 0.38, 0.627451, 0.20702502, 0.08449999, 0.65, 0.627451, 0.1411, 0.49703166, 0.83, 0.3764706, 0, 0.52156866, 0.50980395, 0)
 metadata/_snap_enabled = true
 metadata/_snap_count = 20
 
@@ -249,7 +277,6 @@ script = ExtResource("1_8m4c8")
 level_path = "res://level/level.tscn"
 
 [node name="Wallpaper" type="TextureRect" parent="."]
-modulate = Color(1, 0.74, 0.8396666, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -257,6 +284,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_ex5vy")
+flip_h = true
+
+[node name="Wallpaper2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_lmtue")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_nnnka")
+flip_v = true
+
+[node name="Wallpaper3" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_w70kp")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mpa3m")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -440,135 +491,11 @@ theme_override_constants/margin_bottom = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-material = SubResource("ShaderMaterial_lmtue")
-custom_minimum_size = Vector2(64, 0)
+[node name="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_w70kp")]
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_4nseo")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("8_yxe8q")
-color_tint = Color(0.82, 0.871, 1, 1)
-float_intensity = 0.0
-rotate_intensity = 0.0
-scale_intensity = 1.025
-children_scale_intensity = 1.025
-click_intensity = 0.03
-do_animation = false
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_vees0")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(32, 29)
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
+[node name="Button2" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_w70kp")]
 layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = -2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer/MarginContainer"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_w70kp")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09411765)
-theme_override_constants/line_spacing = 0
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
-theme_override_font_sizes/font_size = 8
-text = "All-Rounder
-[$4000]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button2" type="TextureButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer"]
-material = SubResource("ShaderMaterial_lmtue")
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_4nseo")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("8_yxe8q")
-color_tint = Color(0.82, 0.871, 1, 1)
-float_intensity = 0.0
-rotate_intensity = 0.0
-scale_intensity = 1.025
-children_scale_intensity = 1.025
-click_intensity = 0.03
-do_animation = false
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_vees0")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(32, 29)
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = -2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer/MarginContainer"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_w70kp")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09411765)
-theme_override_constants/line_spacing = 0
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
-theme_override_font_sizes/font_size = 8
-text = "All-Rounder
-[$4000]"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 clip_children = 2
@@ -771,14 +698,14 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 1
-theme_override_colors/font_color = Color(0.12, 0.12, 0.12, 0.8784314)
-theme_override_constants/line_spacing = 2
-theme_override_fonts/font = SubResource("FontVariation_w70kp")
-theme_override_font_sizes/font_size = 12
-text = "Lorem ipsum"
+theme_override_colors/default_color = Color(0.1, 0.1, 0.1, 0.7529412)
+theme_override_fonts/normal_font = SubResource("FontVariation_w70kp")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[color=darkred]- Medium speed - High friction - Large size -[/color]
+They're for carriages, not cars, but it's at an affordable price, so why not? Though I should be careful about the power usage."
 
 [node name="Abilities" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2

@@ -15,6 +15,5 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var speed: float = abs(car.linear_velocity.x)
 	var max_speed: float = car.wheel_stats.torque / car.wheel_stats.physics_material.friction / car.mass
-	
 	material.set_shader_parameter("indicator_angle", speed / max_speed)
 	label.text = label_base_text % int(CalculatorUtil.to_kilometers_per_hour(speed))

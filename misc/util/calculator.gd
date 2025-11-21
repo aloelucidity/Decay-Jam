@@ -32,13 +32,21 @@ static func ascent_to_multiplier(ascent_pixels: float) -> float:
 	return 1 + (ascent_pixels * ASCENT_MULTIPLIER / 1000)
 
 
-static func calculate_money_total(fragments: int, robots: int, multiplier: float = 1.0) -> int:
+static func calculate_money_total(fragments: int, robots: int) -> int:
 	@warning_ignore("narrowing_conversion")
-	return fragments_to_money(fragments * multiplier) + robots_to_money(robots * multiplier)
+	return fragments_to_money(fragments) + robots_to_money(robots)
 
 
-static func calculate_multiplier_total(distance_pixels: float, ascent_pixels: float, multiplier: float = 1.0) -> float:
+static func calculate_multiplier_total(distance_pixels: float, ascent_pixels: float) -> float:
 	return 1 + (
-		(distance_to_multiplier(distance_pixels) * multiplier) - 1
-		+ (ascent_to_multiplier(ascent_pixels) * multiplier) - 1
+		distance_to_multiplier(distance_pixels) - 1
+		+ ascent_to_multiplier(ascent_pixels) - 1
 	)
+
+
+static func mix_money_total(fragments_money: int, robots_money: int) -> int:
+	return fragments_money + robots_money
+
+
+static func mix_multiplier_total(distance_mult: float, ascent_mult: float) -> float:
+	return 1 + distance_mult - 1 + ascent_mult - 1

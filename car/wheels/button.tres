@@ -1,0 +1,70 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=11 format=3 uid="uid://pv3kh0xd7w4x"]
+
+[ext_resource type="Texture2D" uid="uid://bcavjmq0wb41r" path="res://car/wheels/graphics/button.png" id="1_d6pue"]
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="1_r6e4h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gqmfs"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a463w"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0kt6"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jgb0"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(21, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7rvp"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(28, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5a4o"]
+atlas = ExtResource("1_d6pue")
+region = Rect2(35, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m8mfk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gqmfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a463w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0kt6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jgb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7rvp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5a4o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d6pue"]
+friction = 0.4
+rough = true
+
+[resource]
+script = ExtResource("1_r6e4h")
+torque = 35000.0
+energy_usage = 0.05
+physics_material = SubResource("PhysicsMaterial_d6pue")
+size = 7.0
+frames = SubResource("SpriteFrames_m8mfk")
+shop_name = "Button"
+shop_description = "[color=darkred]- Low speed - Low friction - Small size -[/color]
+It might look like a button, but it's actually a wheel. Allegedly. Its speed is low, but it builds momentum quickly. Small, too, so be careful not to flip over..."
+shop_cost = 500

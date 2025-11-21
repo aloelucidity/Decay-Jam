@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjofk047gbxbi"]
+
+[ext_resource type="PackedScene" uid="uid://do36dno85vx35" path="res://car/bodies/body.tscn" id="1_c2a3m"]
+[ext_resource type="Script" uid="uid://bgahybkxya77h" path="res://car/bodies/spring_body.gd" id="2_nbn4n"]
+[ext_resource type="AudioStream" uid="uid://dk0eywi462wo6" path="res://car/sounds/jump.wav" id="3_vgyli"]
+[ext_resource type="Texture2D" uid="uid://dcqxm244lb5ty" path="res://car/bodies/graphics/wing_car.png" id="4_vyik4"]
+
+[node name="Body" instance=ExtResource("1_c2a3m")]
+script = ExtResource("2_nbn4n")
+base_jump_impulse = 42500.0
+wheel_jump_impulse = 2500.0
+jump_energy = 0.5
+jump_cancel_multiplier = 1.0
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="." index="0"]
+unique_name_in_owner = true
+stream = ExtResource("3_vgyli")
+volume_db = 1.5
+bus = &"Sounds"
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("4_vyik4")

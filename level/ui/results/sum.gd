@@ -4,6 +4,8 @@ extends Label
 @onready var text_template: String = text
 @export var car: Car
 @export var lerp_speed: float = 8
+## record checks
+@export var counters: Array[Counter]
 
 var display_money: float
 var display_mult: float = 1.0
@@ -20,13 +22,13 @@ signal sum_calculated
 
 
 func sum_results() -> void:
-	total_money = CalculatorUtil.calculate_money_total(
-		car.fragments_collected, 
-		car.robots_destroyed
+	total_money = CalculatorUtil.mix_money_total(
+		int(counters[0].target_value), 
+		int(counters[1].target_value)
 	)
-	total_mult = CalculatorUtil.calculate_multiplier_total(
-		car.distance_traveled,
-		car.distance_ascended
+	total_mult = CalculatorUtil.mix_multiplier_total(
+		counters[2].target_value,
+		counters[3].target_value
 	)
 	total_earnings = ceil(total_money * total_mult)
 	tallying_index = 1

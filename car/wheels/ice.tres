@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="WheelStats" load_steps=8 format=3 uid="uid://cauo5p0s0isdl"]
+
+[ext_resource type="Texture2D" uid="uid://djfyy3qrctf45" path="res://car/wheels/graphics/ice.png" id="1_nfuab"]
+[ext_resource type="Script" uid="uid://q2lis1nq8r2d" path="res://car/wheels/wheel_stats.gd" id="2_8eblb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dhds"]
+atlas = ExtResource("1_nfuab")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ccp7"]
+atlas = ExtResource("1_nfuab")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pq8l"]
+atlas = ExtResource("1_nfuab")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fbvf4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dhds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ccp7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pq8l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sived"]
+friction = 0.4
+rough = true
+bounce = 4.0
+absorbent = true
+
+[resource]
+script = ExtResource("2_8eblb")
+torque = 110000.0
+energy_usage = 0.05
+physics_material = SubResource("PhysicsMaterial_sived")
+size = 7.0
+frames = SubResource("SpriteFrames_fbvf4")
+shop_name = "Ice"
+shop_description = "[color=darkred]- Fast speed - Low friction - Small size -[/color]
+Experimental technology, huh? Apparently they still have a few kinks to work out. The product description says these excel at preserving momentum."
+shop_cost = 5000

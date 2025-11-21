@@ -45,7 +45,6 @@ func spawn_object(sample: int, ) -> int:
 		for i in range(ceil(score_match * 10)):
 			weighted_list.append(key)
 	
-	#print(difficulty, ": ", weighted_list)
 	var picked_element: String = weighted_list[randi_range(0, weighted_list.size() - 1)]
 	
 	var object = load(BASE_OBJ_PATH % picked_element).new(level_generator)

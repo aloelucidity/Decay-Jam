@@ -30,4 +30,5 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 
 func _process(delta: float) -> void:
 	sprite.global_rotation = 0
-	sprite.speed_scale = angular_velocity / (wheel_stats.torque * delta) * 20
+	sprite.speed_scale = angular_velocity / (wheel_stats.torque * delta) * wheel_stats.physics_material.friction * 2
+	sprite.speed_scale *= 1 + car.body_stats.damp*100
