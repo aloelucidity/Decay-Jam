@@ -1,5 +1,5 @@
-class_name AnimateGradient
-extends BaseButton
+class_name AnimateGradientRect
+extends TextureRect
 
 
 @export var do_animation: bool = true

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://e7ms1hveeaaf"]
+
+[ext_resource type="Script" uid="uid://bytadi60e1py8" path="res://car/bodies/body.gd" id="1_fmx3w"]
+[ext_resource type="Texture2D" uid="uid://0k38if3nrk4l" path="res://car/bodies/graphics/big_truck.png" id="2_fmx3w"]
+
+[node name="Body" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_fmx3w")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(-3, -2)
+texture = ExtResource("2_fmx3w")

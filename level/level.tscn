@@ -1,14 +1,19 @@
-[gd_scene load_steps=75 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=82 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
+[ext_resource type="Script" uid="uid://ho5ym60c6t3e" path="res://level/parallax_layer.gd" id="2_8yb03"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
-[ext_resource type="Shader" uid="uid://cfokrh5r1sjq1" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
+[ext_resource type="Shader" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
+[ext_resource type="Texture2D" uid="uid://d2tiypn0n6k8j" path="res://level/graphics/bg_far.png" id="2_q4dhf"]
 [ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
+[ext_resource type="Texture2D" uid="uid://rnsxiaxdeni7" path="res://level/graphics/bg_near.png" id="4_1vdk1"]
+[ext_resource type="Shader" uid="uid://2wmf8da3ohwc" path="res://misc/shaders/squigglevision.gdshader" id="4_3dv6e"]
 [ext_resource type="Script" uid="uid://d1c7v6q8ib1i8" path="res://level/level_generator.gd" id="5_6gtgk"]
 [ext_resource type="Script" uid="uid://bawauf012neu6" path="res://level/level_objects.gd" id="5_fm1jd"]
 [ext_resource type="Texture2D" uid="uid://drjuxuxhxj18d" path="res://level/graphics/inner_platform.png" id="5_krw8e"]
 [ext_resource type="Texture2D" uid="uid://emnfokpjdtf7" path="res://level/graphics/inner_tile.png" id="5_s1aav"]
+[ext_resource type="Texture2D" uid="uid://kmaepjf8ksjj" path="res://level/graphics/bg_middle.png" id="5_w5qvu"]
 [ext_resource type="Texture2D" uid="uid://d15tvxiufiwjv" path="res://level/graphics/outer_platform.png" id="6_ifo17"]
 [ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://misc/auto_resizer.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
@@ -22,7 +27,6 @@
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="10_m5ivw"]
 [ext_resource type="PackedScene" uid="uid://bauvu2tr2dx3b" path="res://level/ui/hud/ability_button.tscn" id="10_ml0fe"]
 [ext_resource type="AudioStream" uid="uid://dba0mp1l2vavc" path="res://music/main/pad.ogg" id="11_m5ivw"]
-[ext_resource type="Script" uid="uid://esr0d5andrel" path="res://level/ui/hud/animate_gradient.gd" id="11_sui6v"]
 [ext_resource type="Texture2D" uid="uid://tkboymtcjjj1" path="res://level/ui/hud/grid.png" id="12_b7y0n"]
 [ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
@@ -32,11 +36,13 @@
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
 [ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="Script" uid="uid://bpekfoquhm31y" path="res://level/ui/hud/animate_gradient_rect.gd" id="20_1vdk1"]
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/ui/results/sum.gd" id="24_qslh7"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q4dhf"]
+frequency = 0.024
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1dsc"]
 width = 128
@@ -45,6 +51,7 @@ noise = SubResource("FastNoiseLite_q4dhf")
 seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8yb03"]
+frequency = 0.031
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1vdk1"]
 width = 256
@@ -57,7 +64,7 @@ shader = ExtResource("2_ifo17")
 shader_parameter/dust_strength = 5.0
 shader_parameter/dust_color = Color(0.042, 0.18060009, 0.35, 1)
 shader_parameter/arm_count = 4.00000019
-shader_parameter/arm_compression = 0.050000002375
+shader_parameter/arm_compression = 0.1250000059375
 shader_parameter/core_radius = 0.1250000059375
 shader_parameter/core_color = Color(0.629, 0.6805667, 0.85, 1)
 shader_parameter/galaxy_radius = 0.25000000861512
@@ -67,6 +74,17 @@ shader_parameter/star_size = 0.537
 shader_parameter/galaxy_center = Vector2(0.5, 0.35)
 shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_u1dsc")
 shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1vdk1")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3dv6e"]
+seamless = true
+seamless_blend_skirt = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5qvu"]
+shader = ExtResource("4_3dv6e")
+shader_parameter/scale = Vector2(7, 1)
+shader_parameter/strength = 0.25
+shader_parameter/fps = 3.0
+shader_parameter/noise = SubResource("NoiseTexture2D_3dv6e")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("10_m5ivw")
@@ -533,7 +551,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="Sky" type="ColorRect" parent="CanvasLayer/Control"]
 material = SubResource("ShaderMaterial_3dv6e")
 layout_mode = 1
 anchors_preset = 15
@@ -541,6 +559,45 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="FarBG" type="Sprite2D" parent="." node_paths=PackedStringArray("camera")]
+z_as_relative = false
+material = SubResource("ShaderMaterial_w5qvu")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_q4dhf")
+centered = false
+script = ExtResource("2_8yb03")
+camera = NodePath("../Camera2D")
+parallax_offset = Vector2(-256, -144)
+parallax_scale = Vector2(0.99, 0.99)
+repeat = 1535.0
+min_y_offset = -144.0
+
+[node name="MiddleBG" type="Sprite2D" parent="." node_paths=PackedStringArray("camera")]
+z_as_relative = false
+material = SubResource("ShaderMaterial_w5qvu")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("5_w5qvu")
+centered = false
+script = ExtResource("2_8yb03")
+camera = NodePath("../Camera2D")
+parallax_offset = Vector2(-256, -144)
+parallax_scale = Vector2(0.965, 0.965)
+repeat = 1535.0
+min_y_offset = -144.0
+
+[node name="NearBG" type="Sprite2D" parent="." node_paths=PackedStringArray("camera")]
+z_as_relative = false
+material = SubResource("ShaderMaterial_w5qvu")
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("4_1vdk1")
+centered = false
+script = ExtResource("2_8yb03")
+camera = NodePath("../Camera2D")
+parallax_offset = Vector2(-256, -144)
+parallax_scale = Vector2(0.9, 0.9)
+repeat = 1535.0
+min_y_offset = -144.0
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
 texture_filter = 1
@@ -609,6 +666,7 @@ theme_override_constants/margin_bottom = 12
 script = ExtResource("6_m3nah")
 
 [node name="AbilityContainer" type="GridContainer" parent="UI/HUD"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -675,17 +733,17 @@ rotation = -0.017453292
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="Panel" type="TextureRect" parent="UI/HUD/Control/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/HUD/Control/PanelContainer"]
 material = SubResource("ShaderMaterial_sui6v")
 layout_mode = 2
 mouse_filter = 0
 texture = SubResource("GradientTexture2D_kp5pi")
 expand_mode = 1
-script = ExtResource("11_sui6v")
+script = ExtResource("20_1vdk1")
 animate_speed = 1.5
 metadata/_edit_group_ = true
 
-[node name="Shadow" type="TextureRect" parent="UI/HUD/Control/PanelContainer/Panel"]
+[node name="Shadow" type="TextureRect" parent="UI/HUD/Control/PanelContainer/TextureRect"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1412,7 +1470,7 @@ autoplay = true
 bus = &"Music"
 script = ExtResource("12_sui6v")
 car = NodePath("../Car")
-speed_thresholds = Array[float]([200.0, 600.0])
+speed_thresholds = Array[float]([200.0, 550.0])
 tween_time = 2.0
 
 [connection signal="run_ended" from="Car" to="UI/Results" method="end_run"]

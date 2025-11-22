@@ -1,14 +1,16 @@
 [gd_resource type="Resource" script_class="BodyStats" load_steps=3 format=3 uid="uid://dye8pxivgrg5p"]
 
-[ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_y8lva"]
+[ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_ercog"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dfda4"]
 radius = 7.0
 height = 48.0
 
 [resource]
-script = ExtResource("1_y8lva")
-base = "hover_body"
+script = ExtResource("1_ercog")
+base = "aeromobile"
 collision_shape = SubResource("CapsuleShape2D_dfda4")
 armor = 0.75
+shop_name = "Aeromobile"
+shop_cost = 10000
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

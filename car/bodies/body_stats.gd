@@ -11,5 +11,11 @@ extends Resource
 @export var damp: float = 0.1
 @export var resistance: float = 0.3
 @export var resistance_threshold: float = 800
+@export var light_divider: float = 1
 
 @export var modifiers: Dictionary[StringName, Variant]
+
+@export_group("Shop")
+@export var shop_name: String
+@export_multiline var shop_description: String
+@export var shop_cost: int

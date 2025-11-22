@@ -51,6 +51,9 @@ signal battery_used
 
 
 func _ready() -> void:
+	body_stats = Globals.equipped_body
+	wheel_stats = Globals.equipped_wheel
+	
 	collision_shape_2d.shape = body_stats.collision_shape
 	collision_shape_2d.position = body_stats.collision_offset + BODY_OFFSET
 	

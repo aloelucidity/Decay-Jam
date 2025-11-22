@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="BodyStats" load_steps=3 format=3 uid="uid://7p87l8yeff7s"]
+
+[ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_v6dos"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_drv87"]
+radius = 7.0
+height = 32.0
+
+[resource]
+script = ExtResource("1_v6dos")
+base = "xtreme_bike"
+collision_shape = SubResource("CapsuleShape2D_drv87")
+collision_offset = Vector2(0, -4)
+armor = 0.35
+damp = 0.25
+resistance = 0.6
+resistance_threshold = 100.0
+light_divider = 3.0
+shop_name = "Xtreme Bike"
+shop_cost = 250
+metadata/_custom_type_script = "uid://bv7ygilbev78e"

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8unesotr3ltf"]
+
+[ext_resource type="PackedScene" uid="uid://iir3tr6o7ccy" path="res://car/bodies/spring_body.tscn" id="1_xe1l4"]
+[ext_resource type="Script" uid="uid://bu0pj63rymd0b" path="res://car/bodies/hover_body.gd" id="2_u4lij"]
+[ext_resource type="AudioStream" uid="uid://cpvyjui0stbjh" path="res://car/sounds/thruster.wav" id="3_865nb"]
+[ext_resource type="Texture2D" uid="uid://cvucbmjg7uvh1" path="res://car/bodies/graphics/aeromobile.png" id="3_d2h0k"]
+[ext_resource type="Script" uid="uid://cd26h357ngp5e" path="res://car/sounds/thruster.gd" id="4_uswx8"]
+
+[node name="Body" instance=ExtResource("1_xe1l4")]
+script = ExtResource("2_u4lij")
+hover_thrust = 2500.0
+hover_rot_speed = 4.0
+hover_rotation = 0.5235987755982988
+hover_energy = 0.15
+
+[node name="Sprite" parent="." index="1"]
+texture = ExtResource("3_d2h0k")
+
+[node name="Thruster" type="AudioStreamPlayer2D" parent="." index="2"]
+unique_name_in_owner = true
+stream = ExtResource("3_865nb")
+autoplay = true
+bus = &"Sounds"
+script = ExtResource("4_uswx8")
+max_pitch = 4.0
+pitch_up_speed = 4.0
+pitch_down_speed = 1.0

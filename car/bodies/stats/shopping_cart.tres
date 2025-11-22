@@ -15,4 +15,9 @@ armor = 0.35
 damp = 0.25
 resistance = 0.6
 resistance_threshold = 100.0
+light_divider = 3.0
+shop_name = "Shopping Cart"
+shop_description = "[color=darkred]- Very low speed - High friction - Medium size -[/color]
+[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
+Yeah... I just didn't have anything else on hand, okay? if it ain't broke, don't fix it. Or something along those lines anyways."
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

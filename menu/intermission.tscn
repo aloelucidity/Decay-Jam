@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/window.tscn" id="4_ne1tf"]
 [ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="5_lmtue"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
-[ext_resource type="PackedScene" uid="uid://c7h8khf2k6cid" path="res://menu/shop/wheel_button.tscn" id="6_w70kp"]
+[ext_resource type="Script" uid="uid://bfdwagfi14gfo" path="res://menu/shop/wheels_container.gd" id="6_w70kp"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
 [ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="9_lmtue"]
 
@@ -487,15 +487,10 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
+[node name="WheelsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_w70kp")]
-layout_mode = 2
-
-[node name="Button2" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource("6_w70kp")]
-layout_mode = 2
+script = ExtResource("6_w70kp")
 
 [node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 clip_children = 2
@@ -698,14 +693,15 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
+[node name="NotesLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0.1, 0.1, 0.1, 0.7529412)
 theme_override_fonts/normal_font = SubResource("FontVariation_w70kp")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[color=darkred]- Medium speed - High friction - Large size -[/color]
-They're for carriages, not cars, but it's at an affordable price, so why not? Though I should be careful about the power usage."
+text = "[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
+Yeah... I just didn't have anything else on hand, okay? if it ain't broke, don't fix it. Or something along those lines anyways."
 
 [node name="Abilities" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
