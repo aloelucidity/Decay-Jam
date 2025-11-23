@@ -1,12 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://e7ms1hveeaaf"]
+[gd_scene load_steps=6 format=3 uid="uid://e7ms1hveeaaf"]
 
 [ext_resource type="Script" uid="uid://bytadi60e1py8" path="res://car/bodies/body.gd" id="1_fmx3w"]
 [ext_resource type="Texture2D" uid="uid://0k38if3nrk4l" path="res://car/bodies/graphics/big_truck.png" id="2_fmx3w"]
+[ext_resource type="Script" uid="uid://b0eevn3xd0r8g" path="res://car/light.gd" id="3_tvvl1"]
+
+[sub_resource type="Gradient" id="Gradient_dxy33"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_404xo"]
+gradient = SubResource("Gradient_dxy33")
+width = 288
+height = 288
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
 
 [node name="Body" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_fmx3w")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(-3, -2)
+position = Vector2(-2, 1.5)
 texture = ExtResource("2_fmx3w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(17, 0)
+blend_mode = 2
+texture = SubResource("GradientTexture2D_404xo")
+script = ExtResource("3_tvvl1")

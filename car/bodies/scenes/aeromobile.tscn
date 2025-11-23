@@ -8,12 +8,14 @@
 
 [node name="Body" instance=ExtResource("1_xe1l4")]
 script = ExtResource("2_u4lij")
+hover_multiplier = Vector2(0.5, 1)
 hover_thrust = 2500.0
-hover_rot_speed = 4.0
-hover_rotation = 0.5235987755982988
-hover_energy = 0.15
+hover_energy = 0.3
+max_hover_length = 1.0
 
 [node name="Sprite" parent="." index="1"]
+z_index = 1
+position = Vector2(0, 5)
 texture = ExtResource("3_d2h0k")
 
 [node name="Thruster" type="AudioStreamPlayer2D" parent="." index="2"]

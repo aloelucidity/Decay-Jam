@@ -1,0 +1,266 @@
+[gd_scene load_steps=14 format=3 uid="uid://tuo4pgmxtyst"]
+
+[ext_resource type="Script" uid="uid://bpxwqbk3uop1g" path="res://level/scenes/robot/robot.gd" id="1_58ghy"]
+[ext_resource type="Texture2D" uid="uid://c1ilto7wl237a" path="res://level/scenes/robot/top.png" id="1_hchjj"]
+[ext_resource type="Texture2D" uid="uid://iabtijoqrse3" path="res://level/scenes/robot/body.png" id="2_58ghy"]
+
+[sub_resource type="Animation" id="Animation_58ghy"]
+resource_name = "pressed"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x6isl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vjrp4"]
+resource_name = "rammed"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1.8247963, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i8uly"]
+_data = {
+&"RESET": SubResource("Animation_x6isl"),
+&"pressed": SubResource("Animation_58ghy"),
+&"rammed": SubResource("Animation_vjrp4")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6isl"]
+atlas = ExtResource("1_hchjj")
+region = Rect2(0, 0, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjrp4"]
+atlas = ExtResource("1_hchjj")
+region = Rect2(12, 0, 12, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i8uly"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6isl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjrp4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_58ghy"]
+length = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x6isl"]
+radius = 13.0
+
+[sub_resource type="Gradient" id="Gradient_knly7"]
+offsets = PackedFloat32Array(0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_enabled = true
+
+[node name="Robot" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 0
+floor_constant_speed = true
+script = ExtResource("1_58ghy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_i8uly")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_i8uly")
+frame_progress = 0.8994036
+offset = Vector2(0, -3.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatedSprite2D"]
+position = Vector2(0, -14)
+texture = ExtResource("2_58ghy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("SeparationRayShape2D_58ghy")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -13)
+shape = SubResource("CircleShape2D_x6isl")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -10)
+rect = Rect2(-24, -16, 48, 32)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -10)
+emitting = false
+amount = 1
+texture = ExtResource("2_58ghy")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 15.0
+gravity = Vector2(0, 686)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+angle_min = -25.0
+angle_max = 25.0
+color_ramp = SubResource("Gradient_knly7")
+
+[connection signal="body_entered" from="Area2D" to="." method="body_entered"]

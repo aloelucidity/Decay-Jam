@@ -2,22 +2,22 @@ class_name HoverBody
 extends SpringBody
 
 
+@export var hover_multiplier := Vector2.ONE
 @export var hover_thrust: float
-@export var hover_rot_speed: float = 1
-@export_range(0, 360, 0.1, "radians_as_degrees") var hover_rotation: float
 @export var hover_energy: float
+@export var max_hover_length: float
+var hover_timer: float
 
 
 func integrate_forces() -> void:
 	super()
 	
 	var delta: float = get_physics_process_delta_time()
-	var direction: float = Input.get_axis("move_left", "move_right")
-	
-	if Input.is_action_pressed("move_up") and not car.on_ground and car.has_battery(hover_energy):
+	if Input.is_action_pressed("move_up") and not car.on_ground and car.has_battery(hover_energy) and hover_timer > 0:
 		if car.linear_velocity.y > -hover_thrust * delta:
-			car.apply_central_impulse(Vector2(0, -hover_thrust).rotated(rotation))
+			car.apply_central_impulse(Vector2(0, -hover_thrust).rotated(car.rotation) * hover_multiplier)
 			car.use_battery(hover_energy)
-		
-		var target_rot: float = hover_rotation * direction
-		car.rotation = lerp_angle(car.rotation, target_rot, delta * hover_rot_speed)
+			hover_timer -= delta
+	
+	if car.on_ground:
+		hover_timer = max_hover_length

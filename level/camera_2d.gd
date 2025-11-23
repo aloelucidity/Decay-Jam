@@ -9,9 +9,16 @@ extends Camera2D
 @export var air_offset: float
 @export var ground_offset: float
 @export var offset_lerp_speed: float
+@export var shake_lerp_speed: float = 8
+@export var zoom_lerp_speed: float = 6
+@export var zoom_decay_speed: float = 3
 
 var cam_offset: Vector2
 var look_direction: float
+var shake_intensity: float
+var base_zoom: Vector2
+var zoom_out: float
+var zoom_out_vector: Vector2
 
 
 func _ready() -> void:
@@ -22,6 +29,19 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	zoom = base_zoom
+	zoom -= zoom_out_vector * base_zoom
+	
+	zoom_out_vector = lerp(zoom_out_vector, Vector2(zoom_out, zoom_out), delta * zoom_lerp_speed)
+	zoom_out = lerp(zoom_out, 0.0, delta * zoom_decay_speed)
+	
+	shake_intensity = lerp(shake_intensity, 0.0, delta * shake_lerp_speed)
+	shake_intensity = max(0, shake_intensity)
+	offset = Vector2(
+		randf_range(-1.0, 1.0) * shake_intensity, 
+		randf_range(-1.0, 1.0) * shake_intensity
+	)
+	
 	if is_instance_valid(car):
 		if abs(car.linear_velocity.x * delta) < look_ahead_threshold:
 			look_direction = (car.linear_velocity.x * delta) / look_ahead_threshold
@@ -44,4 +64,4 @@ func window_resized() -> void:
 	)
 	var window: Window = get_window()
 	var new_zoom: float = float(window.size.x + window.size.y) / (base_size)
-	zoom = Vector2(new_zoom, new_zoom)
+	base_zoom = Vector2(new_zoom, new_zoom)

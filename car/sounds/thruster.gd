@@ -21,7 +21,8 @@ func _physics_process(delta: float) -> void:
 	var thrust_conditions: bool = (
 		Input.is_action_pressed("move_up") and 
 		not car.on_ground and
-		car.has_battery(body.hover_energy)
+		car.has_battery(body.hover_energy) and
+		body.hover_timer > 0
 	)
 	
 	var sound_playing: bool = thrust_conditions

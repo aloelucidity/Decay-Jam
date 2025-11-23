@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=53 format=3 uid="uid://tjrj1bcjleo"]
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="5_lmtue"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
 [ext_resource type="Script" uid="uid://bfdwagfi14gfo" path="res://menu/shop/wheels_container.gd" id="6_w70kp"]
+[ext_resource type="Script" uid="uid://e6etmgslqkix" path="res://menu/shop/bodies_container.gd" id="7_o1c51"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
 [ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="9_lmtue"]
 
@@ -122,50 +123,6 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(0.27383333, 0.24800001, 0.31, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmtue"]
-shader = ExtResource("6_amxgp")
-shader_parameter/highlight_color = Color(0.81, 0.81, 0.81, 0)
-shader_parameter/shadow_color = Color(0.29636002, 0.29140002, 0.31, 1)
-shader_parameter/strength = 0.75
-shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 4.0
-shader_parameter/knockout = false
-shader_parameter/blur_radius = 1.0
-shader_parameter/sample_count = 9
-
-[sub_resource type="Gradient" id="Gradient_vees0"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.89318895, 0.89318895, 0.8931888, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4nseo"]
-gradient = SubResource("Gradient_vees0")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.6, 1)
-fill_to = Vector2(0.6, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="Gradient" id="Gradient_qefxf"]
-colors = PackedColorArray(0.45882353, 0.45882353, 0.6117647, 0.3764706, 0.01, 0.01, 0.01, 0)
-metadata/_snap_enabled = true
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vees0"]
-gradient = SubResource("Gradient_qefxf")
-fill = 1
-fill_from = Vector2(0.7, 0.8)
-fill_to = Vector2(1, 0.3)
-metadata/_snap_enabled = true
-
-[sub_resource type="Gradient" id="Gradient_1c0vf"]
-colors = PackedColorArray(0.23681614, 0.23681614, 0.23681611, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w70kp"]
-gradient = SubResource("Gradient_1c0vf")
-fill = 1
-fill_from = Vector2(0.5, 0.8)
-metadata/_snap_enabled = true
-
 [sub_resource type="Gradient" id="Gradient_ne1tf"]
 colors = PackedColorArray(1, 1, 1, 1, 0.82, 0.82, 0.7708, 1)
 metadata/_snap_enabled = true
@@ -195,6 +152,15 @@ base_font = ExtResource("9_lmtue")
 variation_opentype = {
 2003265652: 700
 }
+
+[sub_resource type="Gradient" id="Gradient_1c0vf"]
+colors = PackedColorArray(0.23681614, 0.23681614, 0.23681611, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w70kp"]
+gradient = SubResource("Gradient_1c0vf")
+fill = 1
+fill_from = Vector2(0.5, 0.8)
+metadata/_snap_enabled = true
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o1c51"]
 texture = SubResource("GradientTexture2D_w70kp")
@@ -328,69 +294,30 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
-visible = false
-layout_mode = 2
-alignment = 2
-
-[node name="Shop" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SlopeLength" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
-layout_mode = 2
-max_upgrades = 4
-price = 25
-
-[node name="SlopeAngle" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
-layout_mode = 2
-upgrade_id = "slope_angle"
-max_upgrades = 4
-price = 25
-
-[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
-layout_mode = 2
-upgrade_id = "battery_efficiency"
-max_upgrades = 4
-price = 1000
-
-[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" instance=ExtResource("2_fpmmv")]
-layout_mode = 2
-upgrade_id = "extra_batteries"
-max_upgrades = 2
-price = 1000
-
-[node name="Stats" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-alignment = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="Shop" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Shop" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
 
-[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Titlebar/MarginContainer" index="0"]
+[node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Titlebar/MarginContainer" index="0"]
 text = "Browser"
 
-[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop" index="1"]
+[node name="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop" index="1"]
 theme_override_styles/panel = SubResource("StyleBoxTexture_lmtue")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel" index="1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel" index="1"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_w70kp")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -402,7 +329,7 @@ theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 1
 theme_override_constants/margin_bottom = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel/MarginContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Panel/MarginContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.43057036, 0.4305704, 0.4305704, 1)
 theme_override_fonts/font = SubResource("SystemFont_o1c51")
@@ -410,11 +337,11 @@ theme_override_font_sizes/font_size = 6
 theme_override_styles/normal = SubResource("StyleBoxFlat_qefxf")
 text = "https://www.voltaireauto.com/"
 
-[node name="Shop" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
+[node name="Shop" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -422,11 +349,11 @@ theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 1
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 clip_children = 2
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
@@ -438,7 +365,7 @@ theme_override_font_sizes/font_size = 11
 text = "-Vøltaire Autø-"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -448,51 +375,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_qefxf")
 expand_mode = 1
 
-[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
-clip_children = 2
-layout_mode = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
-theme_override_constants/shadow_offset_x = 1
-theme_override_constants/shadow_offset_y = 1
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
-theme_override_font_sizes/font_size = 8
-theme_override_styles/normal = SubResource("StyleBoxTexture_ex5vy")
-text = " Wheels"
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_qefxf")
-expand_mode = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_vees0")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
-
-[node name="WheelsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("6_w70kp")
-
-[node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 clip_children = 2
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
@@ -504,7 +387,7 @@ theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_ex5vy")
 text = " Bodies"
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label3"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -514,15 +397,15 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_qefxf")
 expand_mode = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vees0")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -531,154 +414,73 @@ theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer"]
+[node name="BodiesContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("7_o1c51")
 
-[node name="Button" type="TextureButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer"]
-material = SubResource("ShaderMaterial_lmtue")
-custom_minimum_size = Vector2(64, 0)
+[node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+clip_children = 2
 layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_4nseo")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("8_yxe8q")
-color_tint = Color(0.82, 0.871, 1, 1)
-float_intensity = 0.0
-rotate_intensity = 0.0
-scale_intensity = 1.025
-children_scale_intensity = 1.025
-click_intensity = 0.03
-do_animation = false
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_vees0")
-expand_mode = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(32, 29)
-theme_override_constants/separation = 2
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = -2
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer/MarginContainer"]
-layout_mode = 2
-texture = SubResource("GradientTexture2D_w70kp")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09411765)
-theme_override_constants/line_spacing = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 2
 theme_override_fonts/font = ExtResource("5_lmtue")
 theme_override_font_sizes/font_size = 8
-text = "All-Rounder
-[$4000]"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_styles/normal = SubResource("StyleBoxTexture_ex5vy")
+text = " Wheels"
 
-[node name="Button2" type="TextureButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer"]
-material = SubResource("ShaderMaterial_lmtue")
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-texture_normal = SubResource("GradientTexture2D_4nseo")
-ignore_texture_size = true
-stretch_mode = 0
-script = ExtResource("8_yxe8q")
-color_tint = Color(0.82, 0.871, 1, 1)
-float_intensity = 0.0
-rotate_intensity = 0.0
-scale_intensity = 1.025
-children_scale_intensity = 1.025
-click_intensity = 0.03
-do_animation = false
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/Label2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_vees0")
+texture = SubResource("GradientTexture2D_qefxf")
 expand_mode = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(32, 29)
-theme_override_constants/separation = 2
-alignment = 1
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vees0")
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="WheelsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-size_flags_stretch_ratio = 1.5
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 3
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = -2
+script = ExtResource("6_w70kp")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
-texture = SubResource("GradientTexture2D_w70kp")
-expand_mode = 1
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer/HBoxContainer/Button2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.09411765)
-theme_override_constants/line_spacing = 0
-theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
-theme_override_font_sizes/font_size = 8
-text = "All-Rounder
-[$4000]"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Notes" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Notes" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
 
-[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Titlebar/MarginContainer" index="0"]
+[node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Titlebar/MarginContainer" index="0"]
 text = "Notes"
 
-[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes" index="1"]
+[node name="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes" index="1"]
 theme_override_styles/panel = SubResource("StyleBoxTexture_1c0vf")
 
-[node name="Shadow" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="1"]
+[node name="Shadow" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Panel" index="1"]
 layout_mode = 2
 texture = SubResource("GradientTexture2D_amxgp")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="2"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Panel" index="2"]
 modulate = Color(0.15, 0, 0, 0.09411765)
 texture_filter = 1
 layout_mode = 2
@@ -686,31 +488,47 @@ texture = ExtResource("4_mmlud")
 stretch_mode = 1
 flip_v = true
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel" index="3"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Panel" index="3"]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="NotesLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes/Panel/MarginContainer"]
+[node name="NotesLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Panel/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0.1, 0.1, 0.1, 0.7529412)
 theme_override_fonts/normal_font = SubResource("FontVariation_w70kp")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
-Yeah... I just didn't have anything else on hand, okay? if it ain't broke, don't fix it. Or something along those lines anyways."
 
-[node name="Abilities" parent="VBoxContainer/MarginContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Abilities" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
 
-[node name="Title" parent="VBoxContainer/MarginContainer/VBoxContainer/Abilities/Titlebar/MarginContainer" index="0"]
+[node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Titlebar/MarginContainer" index="0"]
 text = "Control Panel"
 
-[node name="Panel" parent="VBoxContainer/MarginContainer/VBoxContainer/Abilities" index="1"]
+[node name="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities" index="1"]
 theme_override_styles/panel = SubResource("StyleBoxTexture_o1c51")
+
+[node name="GridContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel" index="1"]
+layout_mode = 2
+alignment = 1
+
+[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/GridContainer" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+alignment = 1
+upgrade_id = "battery_efficiency"
+max_upgrades = 4
+prices = Array[int]([250, 500, 1000, 3000])
+
+[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/GridContainer" instance=ExtResource("2_fpmmv")]
+layout_mode = 2
+alignment = 1
+upgrade_id = "extra_batteries"
+max_upgrades = 2
+prices = Array[int]([5000, 10000])
 
 [node name="Taskbar" type="PanelContainer" parent="VBoxContainer"]
 material = SubResource("ShaderMaterial_yxe8q")
@@ -839,6 +657,6 @@ grow_vertical = 2
 
 [connection signal="pressed" from="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer/Button" to="." method="start_run"]
 
-[editable path="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Shop"]
-[editable path="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/Notes"]
-[editable path="VBoxContainer/MarginContainer/VBoxContainer/Abilities"]
+[editable path="VBoxContainer/MarginContainer/HBoxContainer/Shop"]
+[editable path="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes"]
+[editable path="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities"]

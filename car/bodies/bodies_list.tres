@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://ccjesbfh24c4k"]
+
+[ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_prubp"]
+[ext_resource type="Script" uid="uid://rkfuy3xkcg2l" path="res://car/bodies/bodies_list.gd" id="2_e8ghl"]
+[ext_resource type="Resource" uid="uid://cix687dolssn8" path="res://car/bodies/stats/shopping_cart.tres" id="2_qyp6a"]
+[ext_resource type="Resource" uid="uid://7p87l8yeff7s" path="res://car/bodies/stats/avian_bike.tres" id="3_5xyru"]
+[ext_resource type="Resource" uid="uid://d2ouqgwj02x1g" path="res://car/bodies/stats/big_truck.tres" id="4_saw73"]
+[ext_resource type="Resource" uid="uid://boj2h0ui6dysv" path="res://car/bodies/stats/wing_car.tres" id="5_yr6b7"]
+[ext_resource type="Resource" uid="uid://dye8pxivgrg5p" path="res://car/bodies/stats/aeromobile.tres" id="6_o55lj"]
+
+[resource]
+script = ExtResource("2_e8ghl")
+bodies_list = Array[ExtResource("1_prubp")]([ExtResource("2_qyp6a"), ExtResource("3_5xyru"), ExtResource("4_saw73"), ExtResource("5_yr6b7"), ExtResource("6_o55lj")])

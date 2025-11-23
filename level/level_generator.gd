@@ -139,7 +139,7 @@ func generate_level(_rng_seed: int) -> void:
 	
 	camera.limit_left = int(-slope_length - sample_rate)
 	camera.limit_bottom = int(min_height + level_depth)
-	camera.limit_right = int(level_length)
+	camera.limit_right = int(level_length) - 32
 
 
 func place_platform(points: PackedVector2Array, body: StaticBody2D) -> void:

@@ -7,7 +7,7 @@ var day: int = 1:
 		emit_signal("stat_changed", "day", new_value)
 		day = new_value
 
-var money: int = 100:
+var money: int:
 	set(new_value):
 		emit_signal("stat_changed", "money", new_value)
 		money = new_value

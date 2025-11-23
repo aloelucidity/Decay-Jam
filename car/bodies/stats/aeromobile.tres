@@ -1,16 +1,22 @@
-[gd_resource type="Resource" script_class="BodyStats" load_steps=3 format=3 uid="uid://dye8pxivgrg5p"]
+[gd_resource type="Resource" script_class="BodyStats" load_steps=4 format=3 uid="uid://dye8pxivgrg5p"]
 
 [ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_ercog"]
+[ext_resource type="Texture2D" uid="uid://cvucbmjg7uvh1" path="res://car/bodies/graphics/aeromobile.png" id="2_mokkr"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dfda4"]
-radius = 7.0
-height = 48.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mokkr"]
+radius = 4.0
+height = 36.0
 
 [resource]
 script = ExtResource("1_ercog")
 base = "aeromobile"
-collision_shape = SubResource("CapsuleShape2D_dfda4")
-armor = 0.75
+wheel_spacing = 34.0
+collision_shape = SubResource("CapsuleShape2D_mokkr")
+collision_offset = Vector2(0, 1)
+damp = 0.075
+resistance = 0.2
+resistance_threshold = 1200.0
 shop_name = "Aeromobile"
 shop_cost = 10000
+shop_sprite = ExtResource("2_mokkr")
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

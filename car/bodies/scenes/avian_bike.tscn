@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://iucl50744ahr"]
+
+[ext_resource type="PackedScene" uid="uid://do36dno85vx35" path="res://car/bodies/body.tscn" id="1_cqmr4"]
+[ext_resource type="Texture2D" uid="uid://cq7avo7eptuve" path="res://car/bodies/graphics/xtreme_bike.png" id="2_d48ly"]
+[ext_resource type="Script" uid="uid://bgahybkxya77h" path="res://car/bodies/spring_body.gd" id="2_kljpl"]
+[ext_resource type="AudioStream" uid="uid://dk0eywi462wo6" path="res://car/sounds/jump.wav" id="3_w0vx3"]
+
+[node name="Body" instance=ExtResource("1_cqmr4")]
+script = ExtResource("2_kljpl")
+base_jump_impulse = 30000.0
+wheel_jump_impulse = 2500.0
+jump_energy = 0.5
+jump_cancel_multiplier = 1.0
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="." index="0"]
+unique_name_in_owner = true
+stream = ExtResource("3_w0vx3")
+volume_db = 1.5
+bus = &"Sounds"
+
+[node name="Sprite" parent="." index="1"]
+z_index = 1
+position = Vector2(-2, 1)
+texture = ExtResource("2_d48ly")
+
+[node name="PointLight2D" parent="." index="2"]
+position = Vector2(9, 0)

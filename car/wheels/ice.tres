@@ -35,12 +35,12 @@ animations = [{
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sived"]
 friction = 0.4
 rough = true
-bounce = 4.0
+bounce = 1.0
 absorbent = true
 
 [resource]
 script = ExtResource("2_8eblb")
-torque = 110000.0
+torque = 140000.0
 energy_usage = 0.05
 physics_material = SubResource("PhysicsMaterial_sived")
 size = 7.0

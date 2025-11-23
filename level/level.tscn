@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=88 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://ho5ym60c6t3e" path="res://level/parallax_layer.gd" id="2_8yb03"]
@@ -31,15 +31,19 @@
 [ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
 [ext_resource type="Script" uid="uid://bnbia4jickmey" path="res://level/music.gd" id="12_sui6v"]
 [ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="12_v4yay"]
+[ext_resource type="Shader" uid="uid://bsg41d04rumqf" path="res://misc/shaders/static.gdshader" id="16_3dv6e"]
 [ext_resource type="Material" uid="uid://tvuyymkegtfl" path="res://level/ui/hud/battery_bevel.tres" id="16_7cdnq"]
 [ext_resource type="Shader" uid="uid://ci1hlij182ng7" path="res://misc/shaders/speedometer.gdshader" id="16_xl7j7"]
 [ext_resource type="Script" uid="uid://bphhj410lh7hn" path="res://level/ui/hud/speedometer.gd" id="17_o0wo3"]
+[ext_resource type="Script" uid="uid://b1qgyqi6ploco" path="res://level/ui/static.gd" id="17_w5qvu"]
 [ext_resource type="Script" uid="uid://ditveu3nkc1ki" path="res://level/ui/results/results.gd" id="19_h74y2"]
 [ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="19_ml0fe"]
+[ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="19_w18mj"]
 [ext_resource type="Script" uid="uid://bpekfoquhm31y" path="res://level/ui/hud/animate_gradient_rect.gd" id="20_1vdk1"]
 [ext_resource type="Script" uid="uid://ipbqkmnpi3as" path="res://level/ui/results/any_key.gd" id="22_lsj08"]
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/ui/results/sum.gd" id="24_qslh7"]
+[ext_resource type="Script" uid="uid://fximh3ls1mts" path="res://level/ui/hud/air_time.gd" id="31_4vkke"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q4dhf"]
 frequency = 0.024
@@ -85,6 +89,13 @@ shader_parameter/scale = Vector2(7, 1)
 shader_parameter/strength = 0.25
 shader_parameter/fps = 3.0
 shader_parameter/noise = SubResource("NoiseTexture2D_3dv6e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w18mj"]
+shader = ExtResource("16_3dv6e")
+shader_parameter/noise_intensity = 0.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_w18mj"]
+viewport_path = NodePath("UI/AirTimeViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
 shader = ExtResource("10_m5ivw")
@@ -600,6 +611,7 @@ repeat = 1535.0
 min_y_offset = -144.0
 
 [node name="LevelGenerator" type="Node2D" parent="." node_paths=PackedStringArray("car", "camera")]
+unique_name_in_owner = true
 texture_filter = 1
 script = ExtResource("5_6gtgk")
 car = NodePath("../Car")
@@ -609,14 +621,14 @@ inner_tile = ExtResource("5_s1aav")
 outer_tile = ExtResource("6_xdahv")
 inner_platform = ExtResource("5_krw8e")
 outer_platform = ExtResource("6_ifo17")
-level_length = 50000.0
+level_length = 45000.0
 level_depth = 1000.0
 sample_rate = 10.0
 base_slope_length = 200.0
 extra_slope_length = 200.0
 max_slope_angle = 0.375
 hill_frequency = 0.1
-max_hill_strength = 10000.0
+max_hill_strength = 4500.0
 bump_frequency = 5.0
 bump_strength = 10.0
 platform_hill_frequency = 0.25
@@ -632,6 +644,7 @@ camera = NodePath("../Camera2D")
 object_chance = 0.03
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("car")]
+unique_name_in_owner = true
 offset = Vector2(0, -10)
 script = ExtResource("1_ktfr2")
 car = NodePath("../Car")
@@ -646,6 +659,7 @@ offset_lerp_speed = 3.0
 position = Vector2(-462.99994, -110)
 rotation = 1.00048
 scale = Vector2(0.99999994, 0.99999994)
+collision_layer = 3
 battery_efficiency_step = 0.5
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." node_paths=PackedStringArray("car")]
@@ -653,7 +667,56 @@ script = ExtResource("3_ivpvi")
 car = NodePath("../Car")
 darkness_color = Color(0.019607844, 0.023529412, 0.101960786, 1)
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Static" type="ColorRect" parent="CanvasLayer2"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_w18mj")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_w5qvu")
+
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="AirTimeViewport" type="SubViewport" parent="UI"]
+transparent_bg = true
+gui_snap_controls_to_pixels = false
+oversampling = false
+size = Vector2i(80, 24)
+
+[node name="AirTimeLabel" type="Label" parent="UI/AirTimeViewport"]
+texture_filter = 1
+offset_right = 92.0
+offset_bottom = 67.0
+theme = ExtResource("7_tv7ir")
+theme_override_colors/font_color = Color(0.531, 0.9, 0.777, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 6
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("19_w18mj")
+theme_override_font_sizes/font_size = 16
+text = "0.00"
+
+[node name="AirTime" type="TextureRect" parent="UI" node_paths=PackedStringArray("car", "label")]
+modulate = Color(0, 0.7529412, 1, 0)
+texture_filter = 1
+offset_right = 80.0
+offset_bottom = 24.0
+texture = SubResource("ViewportTexture_w18mj")
+expand_mode = 1
+script = ExtResource("31_4vkke")
+visible_color = Color(1, 1, 1, 1)
+invisible_color = Color(0, 0.7529412, 1, 0)
+lerp_speed = 16.0
+car = NodePath("../../Car")
+label = NodePath("../AirTimeViewport/AirTimeLabel")
+pos_offset = Vector2(32, -40)
 
 [node name="HUD" type="MarginContainer" parent="UI"]
 offset_right = 512.0
@@ -950,6 +1013,7 @@ layout_mode = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 ratio = 2.0

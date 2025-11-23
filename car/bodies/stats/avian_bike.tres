@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="BodyStats" load_steps=4 format=3 uid="uid://7p87l8yeff7s"]
+
+[ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_gcrh2"]
+[ext_resource type="Texture2D" uid="uid://cq7avo7eptuve" path="res://car/bodies/graphics/xtreme_bike.png" id="2_itcp0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_drv87"]
+radius = 4.0
+height = 28.0
+
+[resource]
+script = ExtResource("1_gcrh2")
+base = "avian_bike"
+wheel_spacing = 20.0
+collision_shape = SubResource("CapsuleShape2D_drv87")
+armor = 0.5
+resistance = 0.4
+resistance_threshold = 650.0
+light_divider = 1.5
+shop_name = "Avian Bike"
+shop_cost = 75
+shop_sprite = ExtResource("2_itcp0")
+metadata/_custom_type_script = "uid://bv7ygilbev78e"

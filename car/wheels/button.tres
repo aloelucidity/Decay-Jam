@@ -56,6 +56,8 @@ animations = [{
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d6pue"]
 friction = 0.4
 rough = true
+bounce = 1.0
+absorbent = true
 
 [resource]
 script = ExtResource("1_r6e4h")

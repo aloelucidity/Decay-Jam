@@ -47,4 +47,4 @@ frames = SubResource("SpriteFrames_1ufs5")
 shop_name = "Concrete"
 shop_description = "[color=darkred]- Low speed - High friction - Medium size -[/color]
 I'm not sure what this is doing in the \"wheels\" section, but on the bright side, it's cheap."
-shop_cost = 100
+shop_cost = 150

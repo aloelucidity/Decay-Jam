@@ -27,6 +27,7 @@ func _ready() -> void:
 
 
 func battery_used() -> void:
+	bars[0].queue_free()
 	bars.remove_at(0)
 
 

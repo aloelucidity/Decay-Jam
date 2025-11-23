@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("3_7t3du")
 object_list = Dictionary[String, float]({
-"coin_arc": 0.05,
-"coin_line": 0.0
+"coin_arc": 0.025,
+"coin_line": 0.0,
+"robot_spawner": 0.05
 })

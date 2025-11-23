@@ -1,23 +1,23 @@
-[gd_resource type="Resource" script_class="BodyStats" load_steps=3 format=3 uid="uid://cix687dolssn8"]
+[gd_resource type="Resource" script_class="BodyStats" load_steps=4 format=3 uid="uid://cix687dolssn8"]
 
 [ext_resource type="Script" uid="uid://bv7ygilbev78e" path="res://car/bodies/body_stats.gd" id="1_drv87"]
+[ext_resource type="Texture2D" uid="uid://u67h0ssnx0wm" path="res://car/bodies/graphics/shopping_cart.png" id="2_ppfy6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_drv87"]
-radius = 7.0
+radius = 4.0
 height = 32.0
 
 [resource]
 script = ExtResource("1_drv87")
 base = "shopping_cart"
 collision_shape = SubResource("CapsuleShape2D_drv87")
-collision_offset = Vector2(0, -4)
-armor = 0.35
+armor = 0.5
 damp = 0.25
 resistance = 0.6
 resistance_threshold = 100.0
 light_divider = 3.0
 shop_name = "Shopping Cart"
-shop_description = "[color=darkred]- Very low speed - High friction - Medium size -[/color]
-[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
-Yeah... I just didn't have anything else on hand, okay? if it ain't broke, don't fix it. Or something along those lines anyways."
+shop_description = "[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
+Yeah... I just didn't have anything else on hand, okay? If it ain't broke, don't fix it. Or something along those lines anyways."
+shop_sprite = ExtResource("2_ppfy6")
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

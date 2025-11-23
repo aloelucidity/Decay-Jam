@@ -47,5 +47,5 @@ offset = Vector2(0, 1)
 frames = SubResource("SpriteFrames_psivv")
 shop_name = "Carriage"
 shop_description = "[color=darkred]- Medium speed - High friction - Large size -[/color]
-Hey, this actually looks like a wheel! They're for carriages, not cars, but it's at an affordable price, so why not? Though I should be careful about the power usage."
-shop_cost = 2000
+They're for carriages, not cars, but it's at an affordable price, so why not? Though I should be careful about the power usage."
+shop_cost = 1000

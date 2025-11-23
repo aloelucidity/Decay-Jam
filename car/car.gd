@@ -12,12 +12,18 @@ enum CarStat {
 	Ascent
 }
 
+@export var ending_path: String
+
 @export_group("Nodes")
 @export var joints: Array[PinJoint2D]
 @export var wheels: Array[Wheel]
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var outage_sound := %Outage
 @onready var coin_sound := %Coin
+@onready var static_rect: ColorRect = %Static
+@onready var camera_2d: Camera2D = %Camera2D
+@onready var level_generator: LevelGenerator = %LevelGenerator
+
 
 @export_group("Stats")
 @export var fragments_collected: int
@@ -90,6 +96,16 @@ func collect_coin(amount: int, stream: AudioStream) -> void:
 	coin_sound.get_stream_playback().play_stream(stream, 0, 0, pitch_scale)
 
 
+func damage(hit_percent: float) -> void:
+	hit_percent /= body_stats.armor
+	hit_percent = min(hit_percent, get_total_battery() - 0.01)
+	use_battery(hit_percent)
+	
+	static_rect.noise_intensity = max(0.15, hit_percent / 200)
+	camera_2d.shake_intensity = max(4, hit_percent / 5)
+	linear_velocity /= 1 + (hit_percent / 80 / body_stats.armor)
+
+
 func is_on_ground() -> bool:
 	for wheel in wheels:
 		if wheel.on_ground:
@@ -131,6 +147,11 @@ func use_battery(amount: float) -> void:
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+	if position.x < -level_generator.base_slope_length + 20:
+		linear_velocity.x = 100
+	if position.x > level_generator.level_length + 16:
+		Transitions.change_scene_to(ending_path)
+	
 	var last_battery = get_total_battery()
 	var delta: float = get_physics_process_delta_time()
 	

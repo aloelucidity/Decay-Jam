@@ -35,6 +35,8 @@ animations = [{
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3afhm"]
 friction = 0.8
 rough = true
+bounce = 1.0
+absorbent = true
 
 [resource]
 script = ExtResource("1_cgvly")

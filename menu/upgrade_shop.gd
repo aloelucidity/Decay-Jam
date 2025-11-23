@@ -1,15 +1,14 @@
 class_name UpgradeShop
-extends HBoxContainer
+extends VBoxContainer
 
 
-@onready var label: Label = $Label
+@onready var label: Label = $HBoxContainer/Label
 @onready var progress_bar: ProgressBar = $ProgressBar
-@onready var button: Button = $Button
+@onready var button: Button = $HBoxContainer/Button
 
 @export var upgrade_id: String
 @export var max_upgrades: int
-@export var price: int
-@export var price_multiplier: float = 1.05
+@export var prices: Array[int]
 
 
 func _ready() -> void:
@@ -19,23 +18,17 @@ func _ready() -> void:
 
 
 func update_display() -> void:
-	var final_price: int = get_final_price()
-	button.text = "+ ($%s)" % final_price
-	
 	var upgrades: int = Globals[upgrade_id]
 	progress_bar.value = upgrades
 	if upgrades == max_upgrades:
 		button.hide()
-
-
-func get_final_price() -> int:
-	var upgrades: int = Globals[upgrade_id]
-	return floor(price * pow(price_multiplier, upgrades))
+	else:
+		button.text = "+ ($%s)" % prices[upgrades]
 
 
 func purchase():
-	var final_price: int = get_final_price()
-	if Globals.money >= final_price and Globals[upgrade_id] < max_upgrades:
-		Globals.money -= final_price
+	var upgrades: int = Globals[upgrade_id]
+	if Globals.money >= prices[upgrades] and upgrades < max_upgrades:
+		Globals.money -= prices[upgrades]
 		Globals[upgrade_id] += 1
 		update_display()
