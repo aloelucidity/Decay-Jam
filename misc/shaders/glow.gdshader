@@ -5,59 +5,72 @@ uniform bool is_smooth = true;
 uniform float width : hint_range(0.0, 32.0) = 1.0;
 uniform vec4 outline_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
 uniform int pixel_size : hint_range(1, 10) = 4;
+uniform int step_count : hint_range(1, 8) = 4;
 
-// Workaround to make modulate work again.
 varying vec4 modulate;
+
 
 void vertex() {
 	modulate = COLOR;
 }
 
+
 void fragment()
 {
-    vec2 inv_texture_size = 1.0 / vec2(textureSize(TEXTURE, 0));
-    vec2 unit = inv_texture_size * (1.0 / float(pixel_size));
+	vec4 pixel_color = texture(TEXTURE, UV);
+	vec4 final_color;
 
-    vec4 pixel_color = texture(TEXTURE, UV);
-
-    if (pixel_color.a > 0.0) {
-        COLOR = modulate * pixel_color;
-    }
+	if (pixel_color.a > 0.0) {
+		final_color = modulate * pixel_color;
+	} 
 	else {
-	    vec4 final_outline_color = outline_color;
-	    final_outline_color.a = 0.0;
-
-	    float radius = max(1.0, width);
-	    float ceil_radius = ceil(radius);
-
-	    bool found_neighbor = false;
-
-	    for (float x = -ceil_radius; x <= ceil_radius; x++) {
-	        for (float y = -ceil_radius; y <= ceil_radius; y++) {
-	            if (x == 0.0 && y == 0.0) {
-	                continue;
-	            }
-	            vec2 neighbor_uv = UV + vec2(x, y) * unit;
-	            if (texture(TEXTURE, neighbor_uv).a > 0.0) {
-	                found_neighbor = true;
-	                if (is_smooth) {
-	                    final_outline_color.a += outline_color.a / (pow(x,2)+pow(y,2)) * (1.0-pow(2.0, -width));
-	                    final_outline_color.a = min(final_outline_color.a, 1.0);
-	                } else {
-	                    final_outline_color.a = outline_color.a;
-	                    break;
-	                }
-	            }
-	        }
-	        if (!is_smooth && found_neighbor) {
-	            break;
-	        }
-	    }
-	    if (final_outline_color.a > 0.0) {
-	        final_outline_color.a = min(final_outline_color.a, 1.0);
-	        COLOR = modulate * final_outline_color;
-	    } else {
-	        COLOR = vec4(0.0);
-	    }
+		vec2 inv_texture_size = 1.0 / vec2(textureSize(TEXTURE, 0));
+		float max_radius = max(1.0, width);
+		
+		vec2 uv_radius_step = inv_texture_size * (max_radius / float(pixel_size)); 
+		
+		vec4 outline_result = outline_color;
+		outline_result.a = 0.0;
+		
+		// 8 Direction vectors (Normalized)
+		vec2 directions[8] = {
+		    vec2(1.0, 0.0), vec2(-1.0, 0.0),    
+		    vec2(0.0, 1.0), vec2(0.0, -1.0),    
+		    vec2(0.707, 0.707), vec2(-0.707, -0.707),  
+		    vec2(0.707, -0.707), vec2(-0.707, 0.707)   
+		};
+		
+		float accumulated_alpha = 0.0;
+		float total_weight = 0.0;
+		
+		for (int i = 0; i < 8; i++) {
+			for (int j = 1; j <= step_count; j++) {
+				float current_dist_norm = float(j) / float(step_count);
+				vec2 current_offset = directions[i] * uv_radius_step * current_dist_norm;
+				vec2 sample_uv = UV + current_offset;
+				
+				if (texture(TEXTURE, sample_uv).a > 0.0) {
+					float weight = (1.0 - current_dist_norm);
+					accumulated_alpha += weight * max_radius;
+					break;
+			    }
+			}
+		}
+		
+		if (accumulated_alpha > 0.0) {
+			if (is_smooth) {
+				float intensity = clamp(accumulated_alpha / 8.0, 0.0, 1.0);
+				outline_result.a = outline_color.a * intensity;
+			} else {
+				outline_result.a = outline_color.a;
+			}
+		}
+		
+		if (outline_result.a > 0.0) {
+			final_color = modulate * outline_result;
+		} else {
+			final_color = vec4(0.0);
+		}
 	}
+	COLOR = final_color;
 }

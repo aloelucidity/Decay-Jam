@@ -18,3 +18,7 @@ extends Resource
 @export_multiline var shop_description: String
 @export var shop_cost: int
 @export var shop_sprite: Texture
+
+@export_group("Ending")
+@export var ending_offset: Vector2
+@export var wheels_behind: bool

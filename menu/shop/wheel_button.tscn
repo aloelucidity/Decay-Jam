@@ -108,6 +108,7 @@ texture_pressed = SubResource("GradientTexture2D_4nseo")
 ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("3_iv7ee")
+too_expensive_color = Color(0.5365, 0.52779996, 0.58, 1)
 color_tint = Color(0.82, 0.871, 1, 1)
 float_intensity = 0.0
 rotate_intensity = 0.0

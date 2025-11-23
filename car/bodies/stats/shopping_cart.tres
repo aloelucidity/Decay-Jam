@@ -17,7 +17,8 @@ resistance = 0.6
 resistance_threshold = 100.0
 light_divider = 3.0
 shop_name = "Shopping Cart"
-shop_description = "[color=darkred]- Very high wind resistance - Low armor - Low light -[/color]
+shop_description = "[color=darkred]- Very high wind resistance - Low armor - Can't jump -[/color]
 Yeah... I just didn't have anything else on hand, okay? If it ain't broke, don't fix it. Or something along those lines anyways."
 shop_sprite = ExtResource("2_ppfy6")
+ending_offset = Vector2(-3, -2)
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

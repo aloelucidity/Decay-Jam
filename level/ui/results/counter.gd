@@ -4,6 +4,7 @@ extends HBoxContainer
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var label: Label = $Label
+@onready var text_template: String = label.text
 @onready var new_record: Label = $NewRecord
 @onready var value: Label = $Value
 @onready var value_template: String = value.text
@@ -17,6 +18,10 @@ var display_value: float
 var display_snap: float = 0.01
 var is_tallying: bool
 var is_record: bool
+
+
+func _ready() -> void:
+	label.text = text_template % "0"
 
 
 func tally_results():
@@ -62,7 +67,7 @@ func tally_results():
 	if is_record:
 		target_value *= 2
 	
-	label.text = label.text % stat_string
+	label.text = text_template % stat_string
 	new_record.visible = is_record
 	animation_player.play("transition")
 	is_tallying = true

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nvyd6gn137ug"
-path="res://.godot/imported/graphics.png-73f49bef8b0277d80dbcaf508022bd94.ctex"
+uid="uid://brf5qekangnje"
+path="res://.godot/imported/out-out-brief-candle.png-4b4c544e5deb5199279e97b077ed8969.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level/scenes/robot/graphics.png"
-dest_files=["res://.godot/imported/graphics.png-73f49bef8b0277d80dbcaf508022bd94.ctex"]
+source_file="res://menu/title/out-out-brief-candle.png"
+dest_files=["res://.godot/imported/out-out-brief-candle.png-4b4c544e5deb5199279e97b077ed8969.ctex"]
 
 [params]
 

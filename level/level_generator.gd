@@ -50,6 +50,10 @@ func _ready() -> void:
 func generate_level(_rng_seed: int) -> void:
 	rng_seed = _rng_seed
 	
+	var platform_body_2d := StaticBody2D.new()
+	platform_body_2d.collision_layer = 4
+	add_child(platform_body_2d)
+	
 	var static_body_2d := StaticBody2D.new()
 	add_child(static_body_2d)
 	
@@ -103,7 +107,7 @@ func generate_level(_rng_seed: int) -> void:
 			platform_buffer.append(Vector2(x, platform_height))
 		else:
 			if platform_buffer.size() > 10:
-				place_platform(platform_buffer, static_body_2d)
+				place_platform(platform_buffer, platform_body_2d)
 			platform_buffer.clear()
 		
 		if min_height < height:
@@ -132,7 +136,6 @@ func generate_level(_rng_seed: int) -> void:
 	var collision_2d := CollisionPolygon2D.new()
 	collision_2d.polygon = poly
 	static_body_2d.add_child(collision_2d)
-	
 	
 	car.position = Vector2(-slope_length, -slope_length * slope_angle) + car_pos_offset
 	car.rotation = PI/2 * slope_angle

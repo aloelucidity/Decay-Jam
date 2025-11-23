@@ -1,0 +1,409 @@
+[gd_scene load_steps=37 format=3 uid="uid://dygfprx4fajp6"]
+
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_77xvq"]
+[ext_resource type="FontFile" uid="uid://clcpxtdggy2uq" path="res://misc/fonts/StalinistOne-Regular.ttf" id="2_8yamo"]
+[ext_resource type="Script" uid="uid://yw88q4qb84ah" path="res://menu/title/title.gd" id="2_uemcc"]
+[ext_resource type="Texture2D" uid="uid://d2tiypn0n6k8j" path="res://level/graphics/bg_far.png" id="3_k3twf"]
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="5_3mts2"]
+[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="6_ewfva"]
+[ext_resource type="Texture2D" uid="uid://rnsxiaxdeni7" path="res://level/graphics/bg_near.png" id="6_syce6"]
+[ext_resource type="PackedScene" uid="uid://mpu4no1rdq2a" path="res://menu/ending/ending_button.tscn" id="8_k3twf"]
+[ext_resource type="Script" uid="uid://28mjhck82vsx" path="res://menu/title/logo_bob.gd" id="8_uemcc"]
+
+[sub_resource type="Gradient" id="Gradient_lymqm"]
+offsets = PackedFloat32Array(0, 0.54210526, 1)
+colors = PackedColorArray(0.0837, 0.148905, 0.27, 1, 0.19628993, 0.05940001, 0.27, 1, 0.2196, 0.36, 0.35298002, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cfn05"]
+gradient = SubResource("Gradient_lymqm")
+fill = 1
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ewfva"]
+blend_mode = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uemcc"]
+gradient = SubResource("Gradient_lymqm")
+fill = 2
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6a477"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_ex5vy"]
+offsets = PackedFloat32Array(0.75, 0.8)
+colors = PackedColorArray(1, 1, 1, 1, 0.78075, 0.765, 0.9, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_04j8c"]
+gradient = SubResource("Gradient_ex5vy")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2phj8"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_odihs"]
+offsets = PackedFloat32Array(0.30927834, 0.8)
+colors = PackedColorArray(0.0686, 0.10668, 0.14, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wck1e"]
+gradient = SubResource("Gradient_odihs")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.7, 0.6)
+fill_to = Vector2(0.8, 0.4)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2arch"]
+gradient = SubResource("Gradient_odihs")
+width = 256
+height = 128
+fill = 1
+fill_from = Vector2(0.7, 0.6)
+fill_to = Vector2(0.7, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0awap"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_cfn05"]
+colors = PackedColorArray(0, 0, 0, 0.32156864, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ewfva"]
+gradient = SubResource("Gradient_cfn05")
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k3twf"]
+gradient = SubResource("Gradient_cfn05")
+fill_from = Vector2(0.5, 0.3)
+fill_to = Vector2(0.5, 0.6)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3twf"]
+shader = ExtResource("6_ewfva")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/brightness = 1.0
+shader_parameter/contrast = 1.0
+shader_parameter/saturation = 1.0
+shader_parameter/blur = 1.0
+shader_parameter/mix_amount = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uemcc"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_6a477"]
+colors = PackedColorArray(0.16, 0.041599996, 0.0435733, 1, 0.9276666, 0.69, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_syce6"]
+gradient = SubResource("Gradient_6a477")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_04j8c"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_2phj8"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 1)
+colors = PackedColorArray(0.16, 0.081599995, 0.15477334, 1, 0, 0, 0, 1, 0.072294965, 0.0703, 0.19, 1, 0.1125, 0.20416665, 0.25, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_stx60"]
+gradient = SubResource("Gradient_2phj8")
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_meabm"]
+offsets = PackedFloat32Array(0.9, 1)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u3gtr"]
+gradient = SubResource("Gradient_meabm")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uemcc"]
+shader = ExtResource("5_3mts2")
+shader_parameter/highlight_color = Color(1, 1, 1, 0)
+shader_parameter/shadow_color = Color(0.046000004, 0.046000004, 0.2, 1)
+shader_parameter/strength = 1.0
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 4.8149999999999995
+shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
+shader_parameter/blur_radius = 5.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ewfva"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="SystemFont" id="SystemFont_uemcc"]
+
+[node name="Title" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_77xvq")
+script = ExtResource("2_uemcc")
+intermission_path = "res://menu/intermission.tscn"
+
+[node name="Wallpaper" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_cfn05")
+flip_h = true
+
+[node name="Wallpaper2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_ewfva")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_uemcc")
+flip_v = true
+
+[node name="Wallpaper3" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_6a477")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_04j8c")
+
+[node name="Wallpaper4" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_2phj8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_wck1e")
+
+[node name="Wallpaper5" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.65882355)
+material = SubResource("CanvasItemMaterial_2phj8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_2arch")
+
+[node name="BGFar" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_k3twf")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BGNear" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_0awap")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_syce6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(512, 64)
+
+[node name="Label" type="Label" parent="SubViewport"]
+clip_children = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_77xvq")
+theme_override_colors/font_color = Color(0, 0.94, 0.5796668, 1)
+theme_override_colors/font_shadow_color = Color(0.13, 0.72450006, 1, 0.56078434)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.60784316)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 8
+theme_override_fonts/font = ExtResource("2_8yamo")
+theme_override_font_sizes/font_size = 48
+text = "Uplift Drift"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="SubViewport/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ewfva")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewport/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_k3twf")
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_k3twf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_uemcc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_syce6")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_04j8c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_stx60")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+material = SubResource("CanvasItemMaterial_04j8c")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_u3gtr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 48
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 48
+alignment = 1
+
+[node name="Logo" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="TextureRect" parent="MarginContainer/VBoxContainer/Logo"]
+material = SubResource("ShaderMaterial_uemcc")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(128, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("ViewportTexture_ewfva")
+expand_mode = 1
+script = ExtResource("8_uemcc")
+bob_speed = 1.5
+bob_strength = 1.5
+rot_speed = 1.0
+rot_strength = 0.013
+
+[node name="Label2" type="TextureRect" parent="MarginContainer/VBoxContainer/Logo/Label"]
+modulate = Color(3.2760074, 1.4198191, 9.374904, 0.2509804)
+show_behind_parent = true
+material = SubResource("ShaderMaterial_uemcc")
+custom_minimum_size = Vector2(256, 32)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 256.0
+offset_bottom = 36.0
+scale = Vector2(0.95, 0.95)
+pivot_offset = Vector2(128, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("ViewportTexture_ewfva")
+expand_mode = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("8_k3twf")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Button" index="2"]
+theme_override_fonts/font = SubResource("SystemFont_uemcc")
+text = "Start!"
+
+[node name="MouseBlocker" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="start_game"]
+
+[editable path="MarginContainer/VBoxContainer/HBoxContainer/Button"]

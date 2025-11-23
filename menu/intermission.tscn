@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://tjrj1bcjleo"]
+[gd_scene load_steps=55 format=3 uid="uid://tjrj1bcjleo"]
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
 [ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
@@ -12,13 +12,15 @@
 [ext_resource type="Script" uid="uid://e6etmgslqkix" path="res://menu/shop/bodies_container.gd" id="7_o1c51"]
 [ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
 [ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="9_lmtue"]
+[ext_resource type="AudioStream" uid="uid://klch5e45b16a" path="res://music/menu.ogg" id="13_qefxf"]
+[ext_resource type="Script" uid="uid://ky07vjir7wvd" path="res://menu/audio_stream_player.gd" id="14_vees0"]
 
-[sub_resource type="Gradient" id="Gradient_lymqm"]
+[sub_resource type="Gradient" id="Gradient_qefxf"]
 offsets = PackedFloat32Array(0, 0.54210526, 1)
 colors = PackedColorArray(0.0837, 0.148905, 0.27, 1, 0.19628993, 0.05940001, 0.27, 1, 0.2196, 0.36, 0.35298002, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ex5vy"]
-gradient = SubResource("Gradient_lymqm")
+gradient = SubResource("Gradient_qefxf")
 fill = 1
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 1)
@@ -28,7 +30,7 @@ metadata/_snap_enabled = true
 blend_mode = 1
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nnnka"]
-gradient = SubResource("Gradient_lymqm")
+gradient = SubResource("Gradient_qefxf")
 fill = 2
 fill_from = Vector2(1, 0)
 fill_to = Vector2(0, 1)
@@ -37,12 +39,12 @@ metadata/_snap_enabled = true
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w70kp"]
 blend_mode = 3
 
-[sub_resource type="Gradient" id="Gradient_ex5vy"]
+[sub_resource type="Gradient" id="Gradient_vees0"]
 offsets = PackedFloat32Array(0.75, 0.8)
 colors = PackedColorArray(1, 1, 1, 1, 0.78075, 0.765, 0.9, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mpa3m"]
-gradient = SubResource("Gradient_ex5vy")
+gradient = SubResource("Gradient_vees0")
 width = 256
 height = 128
 fill = 1
@@ -173,6 +175,7 @@ shader_parameter/strength = 1.0
 shader_parameter/bevel_type = 0
 shader_parameter/bevel_offset = 5.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
@@ -216,8 +219,9 @@ shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 0.75
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 2.0
+shader_parameter/bevel_offset = 3.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
@@ -505,6 +509,7 @@ bbcode_enabled = true
 
 [node name="Abilities" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
 layout_mode = 2
+size_flags_vertical = 1
 
 [node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Titlebar/MarginContainer" index="0"]
 text = "Control Panel"
@@ -512,18 +517,24 @@ text = "Control Panel"
 [node name="Panel" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities" index="1"]
 theme_override_styles/panel = SubResource("StyleBoxTexture_o1c51")
 
-[node name="GridContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel" index="1"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel" index="1"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GridContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/GridContainer" instance=ExtResource("2_fpmmv")]
+[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 alignment = 1
 upgrade_id = "battery_efficiency"
 max_upgrades = 4
-prices = Array[int]([250, 500, 1000, 3000])
+prices = Array[int]([500, 1000, 2000, 3000])
 
-[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/GridContainer" instance=ExtResource("2_fpmmv")]
+[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("2_fpmmv")]
 layout_mode = 2
 alignment = 1
 upgrade_id = "extra_batteries"
@@ -654,6 +665,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_qefxf")
+volume_db = -80.0
+autoplay = true
+bus = &"Music"
+script = ExtResource("14_vees0")
 
 [connection signal="pressed" from="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer/Button" to="." method="start_run"]
 

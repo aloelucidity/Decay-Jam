@@ -21,6 +21,14 @@ var is_calculated: bool
 signal sum_calculated
 
 
+func _ready() -> void:
+	text = text_template % [
+		"0", 
+		"1.00",
+		"0"
+	]
+
+
 func sum_results() -> void:
 	total_money = CalculatorUtil.mix_money_total(
 		int(counters[0].target_value), 

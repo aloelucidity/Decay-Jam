@@ -11,8 +11,11 @@ height = 32.0
 script = ExtResource("1_00je3")
 base = "wing_car"
 collision_shape = SubResource("CapsuleShape2D_dfda4")
+armor = 2.0
 damp = 0.08
 shop_name = "Wing Car"
+shop_description = "[color=darkred]- Low wind resistance - Medium armor - Can jump[/color]
+I'm invincible, and you can't touch me! Seriously, keep this away from robots, it's not a truck. It's pretty aerodynamic though!"
 shop_cost = 5000
 shop_sprite = ExtResource("2_5trjd")
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

@@ -48,4 +48,4 @@ frames = SubResource("SpriteFrames_yxubf")
 shop_name = "Rubber"
 shop_description = "[color=darkred]- Fast speed - Medium friction - Medium size -[/color]
 Good 'ol rubber tires never let me down. These should be able to handle anything I throw at them."
-shop_cost = 4000
+shop_cost = 2500

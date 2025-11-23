@@ -17,6 +17,7 @@ enum CarStat {
 @export_group("Nodes")
 @export var joints: Array[PinJoint2D]
 @export var wheels: Array[Wheel]
+@export var wheel_casts: Array[RayCast2D]
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var outage_sound := %Outage
 @onready var coin_sound := %Coin
@@ -147,9 +148,21 @@ func use_battery(amount: float) -> void:
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
+	var colliding_casts: int = 0
+	for cast: RayCast2D in wheel_casts:
+		cast.position.y = -linear_velocity.y / 200
+		cast.rotation = -rotation / 4
+		if cast.is_colliding():
+			colliding_casts += 1
+	
+	var collide_one_ways: bool = colliding_casts >= wheel_casts.size()
+	collision_mask = 1 if not collide_one_ways else 5
+	for wheel: Wheel in wheels:
+		wheel.collision_mask = 1 if not collide_one_ways else 5
+	
 	if position.x < -level_generator.base_slope_length + 20:
 		linear_velocity.x = 100
-	if position.x > level_generator.level_length + 16:
+	if position.x > level_generator.level_length + 16 or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		Transitions.change_scene_to(ending_path)
 	
 	var last_battery = get_total_battery()

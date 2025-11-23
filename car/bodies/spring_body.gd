@@ -8,7 +8,7 @@ extends Body
 @export var wheel_jump_impulse: float
 
 @export var jump_energy: float
-@export var jump_cancel_multiplier: float = 1
+@export var jump_cancel_multiplier: float = 0.65
 
 var jump_cancelled: bool
 

@@ -22,11 +22,11 @@ var stat_bests: Dictionary
 ## Shop
 var owned_wheels: Array[WheelStats]
 var owned_bodies: Array[BodyStats]
-var equipped_wheel: WheelStats = preload("res://car/wheels/gear.tres"):
+var equipped_wheel: WheelStats:
 	set(new_value):
 		emit_signal("wheel_equipped", new_value)
 		equipped_wheel = new_value
-var equipped_body: BodyStats = preload("res://car/bodies/stats/shopping_cart.tres"):
+var equipped_body: BodyStats:
 	set(new_value):
 		emit_signal("body_equipped", new_value)
 		equipped_body = new_value
@@ -36,6 +36,24 @@ signal wheel_equipped(wheel: WheelStats)
 signal body_equipped(body: BodyStats)
 
 
-func _ready() -> void:
+func reset() -> void:
+	day = 1
+	money = 0
+	
+	slope_length = 0
+	slope_angle = 0
+	battery_efficiency = 0
+	extra_batteries = 0
+	stat_bests = {}
+	
+	equipped_wheel = preload("res://car/wheels/gear.tres")
+	equipped_body = preload("res://car/bodies/stats/shopping_cart.tres")
+	
+	owned_wheels = []
+	owned_bodies = []
 	owned_wheels.append(equipped_wheel)
 	owned_bodies.append(equipped_body)
+
+
+func _ready() -> void:
+	reset()

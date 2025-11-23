@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=90 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://ho5ym60c6t3e" path="res://level/parallax_layer.gd" id="2_8yb03"]
@@ -44,11 +44,13 @@
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/ui/results/sum.gd" id="24_qslh7"]
 [ext_resource type="Script" uid="uid://fximh3ls1mts" path="res://level/ui/hud/air_time.gd" id="31_4vkke"]
+[ext_resource type="Script" uid="uid://ovejq14s5gpr" path="res://level/ui/hud/to_goal.gd" id="33_j1fdq"]
+[ext_resource type="AudioStream" uid="uid://d2ht2ig3wv6q5" path="res://music/results.ogg" id="35_bm65w"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q4dhf"]
 frequency = 0.024
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1dsc"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5002v"]
 width = 128
 height = 128
 noise = SubResource("FastNoiseLite_q4dhf")
@@ -57,7 +59,7 @@ seamless = true
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_8yb03"]
 frequency = 0.031
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1vdk1"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j88iw"]
 width = 256
 height = 256
 noise = SubResource("FastNoiseLite_8yb03")
@@ -76,10 +78,10 @@ shader_parameter/rotation_speed = 0.1
 shader_parameter/sky_color = Color(0.055999998, 0.072799996, 0.14, 1)
 shader_parameter/star_size = 0.537
 shader_parameter/galaxy_center = Vector2(0.5, 0.35)
-shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_u1dsc")
-shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_1vdk1")
+shader_parameter/noise_texture_1 = SubResource("NoiseTexture2D_5002v")
+shader_parameter/noise_texture_2 = SubResource("NoiseTexture2D_j88iw")
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3dv6e"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3xl46"]
 seamless = true
 seamless_blend_skirt = 1.0
 
@@ -88,7 +90,7 @@ shader = ExtResource("4_3dv6e")
 shader_parameter/scale = Vector2(7, 1)
 shader_parameter/strength = 0.25
 shader_parameter/fps = 3.0
-shader_parameter/noise = SubResource("NoiseTexture2D_3dv6e")
+shader_parameter/noise = SubResource("NoiseTexture2D_3xl46")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w18mj"]
 shader = ExtResource("16_3dv6e")
@@ -105,6 +107,7 @@ shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 7.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 2.0
 shader_parameter/sample_count = 9
 
@@ -116,6 +119,7 @@ shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 5.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 1.5
 shader_parameter/sample_count = 9
 
@@ -153,6 +157,7 @@ shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 5.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 1.0
 shader_parameter/sample_count = 9
 
@@ -419,6 +424,7 @@ shader_parameter/strength = 0.75
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 3.0
 shader_parameter/knockout = false
+shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 3.0
 shader_parameter/sample_count = 9
 
@@ -659,7 +665,6 @@ offset_lerp_speed = 3.0
 position = Vector2(-462.99994, -110)
 rotation = 1.00048
 scale = Vector2(0.99999994, 0.99999994)
-collision_layer = 3
 battery_efficiency_step = 0.5
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." node_paths=PackedStringArray("car")]
@@ -828,7 +833,7 @@ mouse_filter = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 6
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 36
 
 [node name="Control" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 14)
@@ -924,7 +929,7 @@ theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer"]
-custom_minimum_size = Vector2(0, 64)
+custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 0
@@ -1040,6 +1045,21 @@ text = "
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Padding3" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 3)
+layout_mode = 2
+
+[node name="ToGoal" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car", "level_generator")]
+layout_mode = 2
+mouse_filter = 0
+theme_override_font_sizes/font_size = 6
+text = "%s m to goal"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("33_j1fdq")
+car = NodePath("../../../../../../../../Car")
+level_generator = NodePath("../../../../../../../../LevelGenerator")
+
 [node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car", "counters")]
 process_mode = 3
 layout_mode = 3
@@ -1054,6 +1074,11 @@ script = ExtResource("19_h74y2")
 intermission_path = "res://menu/intermission.tscn"
 car = NodePath("../../Car")
 counters = [NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Results"]
+stream = ExtResource("35_bm65w")
+volume_db = -4.5
+bus = &"Music"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Results"]
 libraries = {

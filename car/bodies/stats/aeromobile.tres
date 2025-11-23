@@ -17,6 +17,10 @@ damp = 0.075
 resistance = 0.2
 resistance_threshold = 1200.0
 shop_name = "Aeromobile"
+shop_description = "[color=darkred]- Low wind resistance - Medium armor - Can hover -[/color]
+This uses next-gen deep-learning AI technology to... Even the investors don't know how this thing works. It can hover in the air for a bit, though."
 shop_cost = 10000
 shop_sprite = ExtResource("2_mokkr")
+ending_offset = Vector2(0, 5)
+wheels_behind = true
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

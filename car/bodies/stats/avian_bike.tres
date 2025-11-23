@@ -17,6 +17,10 @@ resistance = 0.4
 resistance_threshold = 650.0
 light_divider = 1.5
 shop_name = "Avian Bike"
+shop_description = "[color=darkred]- High wind resistance - Low armor - Can jump -[/color]
+It's a bird! It's a plane! I lied. It's neither. But it can jump! Complete with a snazzy turbo if you stick the landing."
 shop_cost = 75
 shop_sprite = ExtResource("2_itcp0")
+ending_offset = Vector2(-2, 1)
+wheels_behind = true
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

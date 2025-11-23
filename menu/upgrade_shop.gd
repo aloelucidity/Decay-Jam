@@ -4,7 +4,8 @@ extends VBoxContainer
 
 @onready var label: Label = $HBoxContainer/Label
 @onready var progress_bar: ProgressBar = $ProgressBar
-@onready var button: Button = $HBoxContainer/Button
+@onready var button: TextureButton = $HBoxContainer/Control/Button
+@onready var button_label: Label = $HBoxContainer/Control/Button/Label
 
 @export var upgrade_id: String
 @export var max_upgrades: int
@@ -21,9 +22,10 @@ func update_display() -> void:
 	var upgrades: int = Globals[upgrade_id]
 	progress_bar.value = upgrades
 	if upgrades == max_upgrades:
-		button.hide()
+		button.disabled = true
+		button_label.text = "Max"
 	else:
-		button.text = "+ ($%s)" % prices[upgrades]
+		button_label.text = "$%s" % prices[upgrades]
 
 
 func purchase():

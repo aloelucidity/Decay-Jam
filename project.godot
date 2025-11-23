@@ -10,10 +10,17 @@ config_version=5
 
 [application]
 
-config/name="Decay Jam"
-run/main_scene="uid://tjrj1bcjleo"
+config/name="Uplift Drift"
+run/main_scene="uid://dygfprx4fajp6"
 config/features=PackedStringArray("4.5", "GL Compatibility")
+boot_splash/bg_color=Color(0.078431375, 0.13333334, 0.2509804, 1)
+boot_splash/image="uid://dy0p8066sf3da"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=4000
+
+[audio]
+
+general/default_playback_type.web=0
 
 [autoload]
 
@@ -64,6 +71,12 @@ move_right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"location":0,"echo":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="terrain"
+2d_physics/layer_2="car"
+2d_physics/layer_3="one-way"
 
 [physics]
 

@@ -11,13 +11,14 @@ height = 44.0
 script = ExtResource("1_duvx1")
 base = "big_truck"
 collision_shape = SubResource("CapsuleShape2D_drv87")
-armor = 8.0
+armor = 4.0
 damp = 0.02
 resistance = 0.0
 resistance_threshold = inf
 shop_name = "Big Truck"
-shop_description = "[color=darkred]- Very low wind resistance - High armor - High light -[/color]
+shop_description = "[color=darkred]- Very low wind resistance - High armor - Can't jump -[/color]
 Voltaire Auto doesn't mention where they got this from. Hmm... This vehicle can't jump but makes up for it with strong armor and miraculously low drag."
 shop_cost = 500
 shop_sprite = ExtResource("2_q0ath")
+ending_offset = Vector2(-2, 1.5)
 metadata/_custom_type_script = "uid://bv7ygilbev78e"

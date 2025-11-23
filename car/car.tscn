@@ -15,8 +15,9 @@ absorbent = true
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_72ido"]
 polyphony = 4
 
-[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("joints", "wheels")]
+[node name="Car" type="RigidBody2D" node_paths=PackedStringArray("joints", "wheels", "wheel_casts")]
 texture_filter = 1
+collision_layer = 2
 mass = 200.0
 physics_material_override = SubResource("PhysicsMaterial_xhmyn")
 center_of_mass_mode = 1
@@ -25,9 +26,10 @@ inertia = 150000.0
 can_sleep = false
 continuous_cd = 2
 script = ExtResource("1_2gitb")
-ending_path = "res://menu/ending.tscn"
+ending_path = "res://menu/ending/ending.tscn"
 joints = [NodePath("PinJoint2D"), NodePath("PinJoint2D2")]
 wheels = [NodePath("PinJoint2D/Wheel"), NodePath("PinJoint2D2/Wheel")]
+wheel_casts = [NodePath("PinJoint2D/WheelCast"), NodePath("PinJoint2D2/WheelCast")]
 body_stats = ExtResource("2_xhmyn")
 wheel_stats = ExtResource("3_xhmyn")
 fall_thrust = 50000.0
@@ -48,6 +50,11 @@ node_b = NodePath("Wheel")
 can_sleep = false
 continuous_cd = 2
 
+[node name="WheelCast" type="RayCast2D" parent="PinJoint2D"]
+position = Vector2(0, 3)
+target_position = Vector2(0, 500)
+collision_mask = 4
+
 [node name="PinJoint2D2" type="PinJoint2D" parent="."]
 position = Vector2(12, -4)
 node_a = NodePath("..")
@@ -56,6 +63,11 @@ node_b = NodePath("Wheel")
 [node name="Wheel" parent="PinJoint2D2" instance=ExtResource("2_dxy33")]
 can_sleep = false
 continuous_cd = 2
+
+[node name="WheelCast" type="RayCast2D" parent="PinJoint2D2"]
+position = Vector2(0, 3)
+target_position = Vector2(0, 500)
+collision_mask = 4
 
 [node name="Sounds" type="Node2D" parent="."]
 

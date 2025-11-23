@@ -88,5 +88,5 @@ func _process(delta: float) -> void:
 	
 	if not is_equal_approx(children_scale_intensity, 1.0): 
 		for child in get_children():
-			if not child is TextureRect:
+			if not child is TextureRect and not child is TextureProgressBar:
 				child.scale = Vector2.ONE + (scale - Vector2.ONE) * children_scale_intensity

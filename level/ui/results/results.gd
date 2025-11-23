@@ -1,6 +1,7 @@
 extends AutoResizer
 
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var blur: ColorRect = %Blur
 @onready var results_label: Label = %ResultsLabel
@@ -45,6 +46,7 @@ func end_run() -> void:
 	blur.material.set_shader_parameter("mix_amount", 1.0)
 	animation_player.play("transition")
 	get_tree().paused = true
+	audio_stream_player.play()
 	results_label.text = results_label.text % Globals.day
 
 
@@ -59,7 +61,8 @@ func _input(event: InputEvent) -> void:
 		Globals.day += 1
 		Transitions.change_scene_to(intermission_path)
 	elif run_end_buffer <= 0:
-		animation_player.play("transition", -1, INF)
+		animation_player.play("transition")
+		animation_player.seek(animation_player.get_animation("transition").length, true)
 		tallying_index = counters.size() + 1
 		for counter in counters:
 			counter.tally_results()

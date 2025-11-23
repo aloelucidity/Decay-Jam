@@ -6,11 +6,15 @@ const PRICE_SUFFIX: String = "[$%s]"
 const OWNED_SUFFIX: String = "[Owned]"
 const EQUIPPED_SUFFIX: String = "[Equipped]"
 
+const BEVEL_STRENGTH: float = 0.75
+const TOO_EXPENSIVE_STRENGTH: float = 0.35
+
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var shadow: AnimatedSprite2D = %Shadow
 @onready var sprite_bg: TextureRect = %SpriteBG
 @onready var label: Label = %Label
 @export var wheel_stats: WheelStats
+@export var too_expensive_color: Color
 
 
 func _ready() -> void:
@@ -22,6 +26,8 @@ func _ready() -> void:
 	
 	Globals.connect("wheel_equipped", wheel_equipped)
 	wheel_equipped(Globals.equipped_wheel)
+	
+	Globals.connect("body_equipped", update_visuals)
 
 
 func load_wheel_stats():
@@ -50,12 +56,7 @@ func wheel_equipped(wheel: WheelStats):
 	update_visuals()
 
 
-func update_visuals():
-	var strength_sign: float = -1 if button_pressed else 1
-	material.set_shader_parameter(
-		"strength", 
-		abs(material.get_shader_parameter("strength")) * strength_sign
-	)
+func update_visuals(_equipped = null):
 	label.text = wheel_stats.shop_name
 	label.text += "\n"
 	if button_pressed:
@@ -64,3 +65,15 @@ func update_visuals():
 		label.text += OWNED_SUFFIX
 	else:
 		label.text += PRICE_SUFFIX % wheel_stats.shop_cost
+		if wheel_stats.shop_cost > Globals.money:
+			modulate = too_expensive_color
+			disabled = true
+		else:
+			modulate = Color.WHITE
+			disabled = false
+	
+	var strength_sign: float = -1 if button_pressed else 1
+	material.set_shader_parameter(
+		"strength", 
+		TOO_EXPENSIVE_STRENGTH if disabled else BEVEL_STRENGTH * strength_sign
+	)
