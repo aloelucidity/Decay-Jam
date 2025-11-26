@@ -2,13 +2,13 @@
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_77xvq"]
 [ext_resource type="FontFile" uid="uid://clcpxtdggy2uq" path="res://misc/fonts/StalinistOne-Regular.ttf" id="2_8yamo"]
-[ext_resource type="Script" uid="uid://yw88q4qb84ah" path="res://menu/title/title.gd" id="2_uemcc"]
+[ext_resource type="Script" uid="uid://yw88q4qb84ah" path="res://menu/title_old/title.gd" id="2_uemcc"]
 [ext_resource type="Texture2D" uid="uid://d2tiypn0n6k8j" path="res://level/graphics/bg_far.png" id="3_k3twf"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="5_3mts2"]
 [ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="6_ewfva"]
 [ext_resource type="Texture2D" uid="uid://rnsxiaxdeni7" path="res://level/graphics/bg_near.png" id="6_syce6"]
 [ext_resource type="PackedScene" uid="uid://mpu4no1rdq2a" path="res://menu/ending/ending_button.tscn" id="8_k3twf"]
-[ext_resource type="Script" uid="uid://28mjhck82vsx" path="res://menu/title/logo_bob.gd" id="8_uemcc"]
+[ext_resource type="Script" uid="uid://28mjhck82vsx" path="res://menu/title_old/logo_bob.gd" id="8_uemcc"]
 
 [sub_resource type="Gradient" id="Gradient_lymqm"]
 offsets = PackedFloat32Array(0, 0.54210526, 1)
@@ -141,9 +141,8 @@ shader_parameter/highlight_color = Color(1, 1, 1, 0)
 shader_parameter/shadow_color = Color(0.046000004, 0.046000004, 0.2, 1)
 shader_parameter/strength = 1.0
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 4.8149999999999995
+shader_parameter/bevel_offset = 1.0
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
@@ -161,7 +160,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_77xvq")
 script = ExtResource("2_uemcc")
-intermission_path = "res://menu/intermission.tscn"
+intermission_path = "res://menu/shop/shop.tscn"
 
 [node name="Wallpaper" type="TextureRect" parent="."]
 layout_mode = 1

@@ -1,9 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://baesc757bnuca"]
+[gd_scene load_steps=7 format=3 uid="uid://baesc757bnuca"]
 
 [ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_nm6tq"]
-[ext_resource type="Script" uid="uid://dgj1ianh1wihs" path="res://menu/upgrade_shop.gd" id="1_y5r56"]
+[ext_resource type="Script" uid="uid://dgj1ianh1wihs" path="res://menu/shop/upgrade_shop.gd" id="1_y5r56"]
 [ext_resource type="PackedScene" uid="uid://bauvu2tr2dx3b" path="res://level/ui/hud/ability_button.tscn" id="2_0wjsr"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="4_ykpyt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykpyt"]
+shader = ExtResource("4_ykpyt")
+shader_parameter/highlight_color = Color(0.2688, 0.43775994, 0.48, 0)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 0.7
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 2.0
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 2.0
+shader_parameter/sample_count = 9
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1nntp"]
 shader = ExtResource("4_ykpyt")
@@ -11,9 +22,8 @@ shader_parameter/highlight_color = Color(0.79, 0.8495, 1, 0.58431375)
 shader_parameter/shadow_color = Color(0.24010001, 0.24010001, 0.49, 1)
 shader_parameter/strength = 0.5
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 4.0
+shader_parameter/bevel_offset = 2.0
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 6
 
@@ -40,6 +50,7 @@ custom_minimum_size = Vector2(48, 24)
 layout_mode = 2
 
 [node name="Button" parent="HBoxContainer/Control" instance=ExtResource("2_0wjsr")]
+material = SubResource("ShaderMaterial_ykpyt")
 layout_mode = 1
 anchors_preset = -1
 offset_left = 4.0
@@ -47,7 +58,6 @@ offset_top = 4.0
 offset_right = -4.0
 offset_bottom = -4.0
 float_intensity = 0.5
-float_offset = 4.0
 rotate_intensity = 1.0
 scale_intensity = 1.025
 children_scale_intensity = 1.02

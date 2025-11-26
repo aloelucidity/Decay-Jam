@@ -1,19 +1,19 @@
 [gd_scene load_steps=55 format=3 uid="uid://tjrj1bcjleo"]
 
-[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_3ff7d"]
-[ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/intermission.gd" id="1_8m4c8"]
-[ext_resource type="PackedScene" uid="uid://baesc757bnuca" path="res://menu/upgrade_shop.tscn" id="2_fpmmv"]
-[ext_resource type="Script" uid="uid://cnwph2wramvjg" path="res://menu/globals_display.gd" id="2_wfkj1"]
-[ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="4_mmlud"]
-[ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/window.tscn" id="4_ne1tf"]
-[ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="5_lmtue"]
-[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="6_amxgp"]
-[ext_resource type="Script" uid="uid://bfdwagfi14gfo" path="res://menu/shop/wheels_container.gd" id="6_w70kp"]
-[ext_resource type="Script" uid="uid://e6etmgslqkix" path="res://menu/shop/bodies_container.gd" id="7_o1c51"]
-[ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="8_yxe8q"]
-[ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="9_lmtue"]
-[ext_resource type="AudioStream" uid="uid://klch5e45b16a" path="res://music/menu.ogg" id="13_qefxf"]
-[ext_resource type="Script" uid="uid://ky07vjir7wvd" path="res://menu/audio_stream_player.gd" id="14_vees0"]
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_no6pl"]
+[ext_resource type="Script" uid="uid://dgcyx5ft4kl23" path="res://menu/shop/shop.gd" id="2_6qdfj"]
+[ext_resource type="PackedScene" uid="uid://pr55jgxpx1cn" path="res://menu/shop/window.tscn" id="3_xdsol"]
+[ext_resource type="FontFile" uid="uid://cmkwg4n8ewx1" path="res://misc/fonts/DMSerifText-Italic.ttf" id="4_rwxlr"]
+[ext_resource type="Script" uid="uid://e6etmgslqkix" path="res://menu/shop/bodies_container.gd" id="5_rish6"]
+[ext_resource type="Script" uid="uid://bfdwagfi14gfo" path="res://menu/shop/wheels_container.gd" id="6_d50xx"]
+[ext_resource type="Texture2D" uid="uid://c4r81mxlddamg" path="res://level/ui/hud/stripes.png" id="7_200u0"]
+[ext_resource type="FontFile" uid="uid://rdoycvm5ybmi" path="res://misc/fonts/Caveat-VariableFont_wght.ttf" id="8_i3jto"]
+[ext_resource type="PackedScene" uid="uid://baesc757bnuca" path="res://menu/shop/upgrade_shop.tscn" id="9_6dce8"]
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="10_1ovia"]
+[ext_resource type="Script" uid="uid://cnwph2wramvjg" path="res://menu/shop/globals_display.gd" id="11_ix43u"]
+[ext_resource type="Script" uid="uid://bncqom6jaso7k" path="res://level/ui/hud/animated_button.gd" id="12_6fy5a"]
+[ext_resource type="AudioStream" uid="uid://klch5e45b16a" path="res://music/menu.ogg" id="13_ps1v5"]
+[ext_resource type="Script" uid="uid://ky07vjir7wvd" path="res://menu/audio_stream_player.gd" id="14_33uev"]
 
 [sub_resource type="Gradient" id="Gradient_qefxf"]
 offsets = PackedFloat32Array(0, 0.54210526, 1)
@@ -150,7 +150,7 @@ fill_to = Vector2(0, 0.1)
 metadata/_snap_enabled = true
 
 [sub_resource type="FontVariation" id="FontVariation_w70kp"]
-base_font = ExtResource("9_lmtue")
+base_font = ExtResource("8_i3jto")
 variation_opentype = {
 2003265652: 700
 }
@@ -168,14 +168,13 @@ metadata/_snap_enabled = true
 texture = SubResource("GradientTexture2D_w70kp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yxe8q"]
-shader = ExtResource("6_amxgp")
+shader = ExtResource("10_1ovia")
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 1.0
 shader_parameter/bevel_type = 0
-shader_parameter/bevel_offset = 5.0
+shader_parameter/bevel_offset = 3.0
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
@@ -214,14 +213,13 @@ grow_end = -3.0
 vertical = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_amxgp"]
-shader = ExtResource("6_amxgp")
+shader = ExtResource("10_1ovia")
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 0.75
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 3.0
+shader_parameter/bevel_offset = 2.5
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 5.0
 shader_parameter/sample_count = 9
 
@@ -242,8 +240,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_3ff7d")
-script = ExtResource("1_8m4c8")
+theme = ExtResource("1_no6pl")
+script = ExtResource("2_6qdfj")
 level_path = "res://level/level.tscn"
 
 [node name="Wallpaper" type="TextureRect" parent="."]
@@ -302,7 +300,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
-[node name="Shop" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Shop" parent="VBoxContainer/MarginContainer/HBoxContainer" instance=ExtResource("3_xdsol")]
 layout_mode = 2
 
 [node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Titlebar/MarginContainer" index="0"]
@@ -364,7 +362,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
+theme_override_fonts/font = ExtResource("4_rwxlr")
 theme_override_font_sizes/font_size = 11
 text = "-Vøltaire Autø-"
 horizontal_alignment = 1
@@ -386,7 +384,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
+theme_override_fonts/font = ExtResource("4_rwxlr")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_ex5vy")
 text = " Bodies"
@@ -421,7 +419,7 @@ theme_override_constants/margin_bottom = 2
 [node name="BodiesContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer2/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("7_o1c51")
+script = ExtResource("5_rish6")
 
 [node name="Label2" type="Label" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer"]
 clip_children = 2
@@ -430,7 +428,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.1882353)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_outline_size = 2
-theme_override_fonts/font = ExtResource("5_lmtue")
+theme_override_fonts/font = ExtResource("4_rwxlr")
 theme_override_font_sizes/font_size = 8
 theme_override_styles/normal = SubResource("StyleBoxTexture_ex5vy")
 text = " Wheels"
@@ -465,13 +463,13 @@ theme_override_constants/margin_bottom = 2
 [node name="WheelsContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer/Shop/Panel/VBoxContainer/Shop/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("6_w70kp")
+script = ExtResource("6_d50xx")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Notes" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Notes" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_xdsol")]
 layout_mode = 2
 
 [node name="Title" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Notes/Titlebar/MarginContainer" index="0"]
@@ -488,7 +486,7 @@ texture = SubResource("GradientTexture2D_amxgp")
 modulate = Color(0.15, 0, 0, 0.09411765)
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("4_mmlud")
+texture = ExtResource("7_200u0")
 stretch_mode = 1
 flip_v = true
 
@@ -507,7 +505,7 @@ theme_override_fonts/normal_font = SubResource("FontVariation_w70kp")
 theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
 
-[node name="Abilities" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("4_ne1tf")]
+[node name="Abilities" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3_xdsol")]
 layout_mode = 2
 size_flags_vertical = 1
 
@@ -527,14 +525,14 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 1
 
-[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("2_fpmmv")]
+[node name="BatteryEfficiency" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("9_6dce8")]
 layout_mode = 2
 alignment = 1
 upgrade_id = "battery_efficiency"
 max_upgrades = 4
 prices = Array[int]([500, 1000, 2000, 3000])
 
-[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("2_fpmmv")]
+[node name="ExtraBatteries" parent="VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/Abilities/Panel/MarginContainer/GridContainer" instance=ExtResource("9_6dce8")]
 layout_mode = 2
 alignment = 1
 upgrade_id = "extra_batteries"
@@ -600,7 +598,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Funds: $%s"
 horizontal_alignment = 2
-script = ExtResource("2_wfkj1")
+script = ExtResource("11_ix43u")
 display_var = "money"
 
 [node name="VSeparator2" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
@@ -612,7 +610,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Day %s"
 horizontal_alignment = 2
-script = ExtResource("2_wfkj1")
+script = ExtResource("11_ix43u")
 display_var = "day"
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/Taskbar/MarginContainer/HBoxContainer"]
@@ -632,7 +630,7 @@ focus_mode = 0
 texture_normal = SubResource("GradientTexture2D_o1c51")
 ignore_texture_size = true
 stretch_mode = 0
-script = ExtResource("8_yxe8q")
+script = ExtResource("12_6fy5a")
 color_tint = Color(0.19999999, 0.94666654, 1, 1)
 float_intensity = 0.75
 float_offset = 2.0
@@ -667,11 +665,11 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_qefxf")
+stream = ExtResource("13_ps1v5")
 volume_db = -80.0
 autoplay = true
 bus = &"Music"
-script = ExtResource("14_vees0")
+script = ExtResource("14_33uev")
 
 [connection signal="pressed" from="VBoxContainer/Taskbar/MarginContainer/HBoxContainer/MarginContainer/Button" to="." method="start_run"]
 

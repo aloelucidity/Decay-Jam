@@ -12,7 +12,7 @@ const TOO_EXPENSIVE_STRENGTH: float = 0.35
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var shadow: AnimatedSprite2D = %Shadow
 @onready var sprite_bg: TextureRect = %SpriteBG
-@onready var label: Label = %Label
+@onready var item_label: Label = %Label
 @export var wheel_stats: WheelStats
 @export var too_expensive_color: Color
 
@@ -28,6 +28,8 @@ func _ready() -> void:
 	wheel_equipped(Globals.equipped_wheel)
 	
 	Globals.connect("body_equipped", update_visuals)
+	
+	super()
 
 
 func load_wheel_stats():
@@ -57,14 +59,14 @@ func wheel_equipped(wheel: WheelStats):
 
 
 func update_visuals(_equipped = null):
-	label.text = wheel_stats.shop_name
-	label.text += "\n"
+	item_label.text = wheel_stats.shop_name
+	item_label.text += "\n"
 	if button_pressed:
-		label.text += EQUIPPED_SUFFIX
+		item_label.text += EQUIPPED_SUFFIX
 	elif wheel_stats in Globals.owned_wheels:
-		label.text += OWNED_SUFFIX
+		item_label.text += OWNED_SUFFIX
 	else:
-		label.text += PRICE_SUFFIX % wheel_stats.shop_cost
+		item_label.text += PRICE_SUFFIX % wheel_stats.shop_cost
 		if wheel_stats.shop_cost > Globals.money:
 			modulate = too_expensive_color
 			disabled = true

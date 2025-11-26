@@ -22,6 +22,7 @@ var is_record: bool
 
 func _ready() -> void:
 	label.text = text_template % "0"
+	value.text = value_template % "0"
 
 
 func tally_results():

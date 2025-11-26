@@ -4,13 +4,12 @@ uniform vec4 highlight_color : source_color;
 uniform vec4 shadow_color : source_color;
 uniform float strength = 1.0;
 uniform int bevel_type = 0;
-uniform float bevel_offset = 5.0;
+uniform float bevel_offset = 3.0;
 uniform bool knockout = false;
-uniform bool do_size_correction = true;
 
 
 uniform float blur_radius = 5.0;
-uniform int sample_count = 9; 
+uniform int sample_count = 9;
 const int MAX_SAMPLES = 13;
 
 
@@ -95,18 +94,10 @@ float gaussian_1d_sample_v(sampler2D tex, vec2 uv, vec2 pixel_size) {
 
 void fragment() {
 	vec2 node_size = pixel_pos / UV;
-	float aspect_ratio = node_size.x / node_size.y;
-	
-	vec2 offset_dir;
-	if (do_size_correction) {
-		offset_dir = vec2(bevel_offset / (aspect_ratio * 2.0), bevel_offset * (aspect_ratio / 2.0)) / length(node_size);
-	}
-	else {
-		offset_dir = vec2(bevel_offset) / length(node_size);
-	}
-	
-	vec2 blur_uv_left = UV + offset_dir;
-	vec2 blur_uv_right = UV - offset_dir;
+	vec2 offset_vec = vec2(bevel_offset) / node_size;
+
+	vec2 blur_uv_left = UV + offset_vec;
+	vec2 blur_uv_right = UV - offset_vec;
 
 	float blur_left_h = gaussian_1d_sample_h(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE);
 	float blur_left_v = gaussian_1d_sample_v(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE);
@@ -116,38 +107,38 @@ void fragment() {
 	float blur_left = blur_left_h + blur_left_v;
 	float blur_right = blur_right_h + blur_right_v;
 
-	float normalize_factor = 2.0; 
+	float normalize_factor = 2.0;
 	blur_left /= normalize_factor;
 	blur_right /= normalize_factor;
-	
+
 	vec4 dest = texture(TEXTURE, UV);
-	
+
 	bool is_outer = bevel_type == 0 || bevel_type == 2;
 	bool is_inner = bevel_type == 1 || bevel_type == 2;
-	
+
 	float highlight_alpha = clamp((blur_left - blur_right) * strength, 0.0, 1.0);
 	float shadow_alpha = clamp((blur_right - blur_left) * strength, 0.0, 1.0);
-	
+
 	vec4 glow = highlight_color * highlight_alpha + shadow_color * shadow_alpha;
-	
+
 	COLOR = modulate;
 	if (is_inner && is_outer) {
 		if (knockout) {
 			COLOR *= glow;
 		} else {
-			COLOR *= dest - dest * glow.a + glow; 
+			COLOR *= dest - dest * glow.a + glow;
 		}
 	} else if (is_inner) {
 		if (knockout) {
-			COLOR *= glow * dest.a; 
+			COLOR *= glow * dest.a;
 		} else {
-			COLOR *= glow * dest.a + dest * (1.0 - glow.a); 
+			COLOR *= glow * dest.a + dest * (1.0 - glow.a);
 		}
 	} else {
 		if (knockout) {
-			COLOR *= glow - glow * dest.a; 
+			COLOR *= glow - glow * dest.a;
 		} else {
-			COLOR *= dest + glow - glow * dest.a; 
+			COLOR *= dest + glow - glow * dest.a;
 		}
 	}
 }

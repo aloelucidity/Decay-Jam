@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://1tuwdlxmgu8y"]
+
+[ext_resource type="Shader" uid="uid://bera2ur1wxksh" path="res://misc/shaders/blur.gdshader" id="1_edx45"]
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_gho3m"]
+[ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="3_p88kh"]
+
+[sub_resource type="RichTextEffect" id="RichTextEffect_edx45"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h74y2"]
+shader = ExtResource("1_edx45")
+shader_parameter/tint = Color(0.69, 0.69, 1, 1)
+shader_parameter/brightness = 0.7
+shader_parameter/contrast = 0.9
+shader_parameter/saturation = 2.0
+shader_parameter/blur = 3.0
+shader_parameter/mix_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2u7i2"]
+shader = ExtResource("3_p88kh")
+shader_parameter/highlight_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/strength = 1.0
+shader_parameter/bevel_type = 1
+shader_parameter/bevel_offset = 0.575
+shader_parameter/knockout = false
+shader_parameter/blur_radius = 5.0
+shader_parameter/sample_count = 9
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6vbs2"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gho3m")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(384, 144)
+
+[node name="Paused" type="RichTextLabel" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_gho3m")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+text = "[wave amp=30.0 freq=2.0 connected=1]Paused[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+custom_effects = [SubResource("RichTextEffect_edx45")]
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_h74y2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_2u7i2")
+custom_minimum_size = Vector2(128, 48)
+layout_mode = 2
+texture = SubResource("ViewportTexture_6vbs2")
+expand_mode = 1

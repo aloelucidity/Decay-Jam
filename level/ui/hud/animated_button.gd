@@ -2,21 +2,29 @@ class_name AnimatedButton
 extends AnimateGradient
 
 
+@onready var label: Label = get_node_or_null("Label")
+@export var label_text : String
+
+@export_group("Color")
 @export var modulate_self: bool = true
 @export var color_tint: Color = Color.DODGER_BLUE
 @export var tint_speed: float = 8
 
+@export_group("Floating")
 @export var float_speed: float = 1
 @export var float_intensity: float = 2
 @export var float_offset: float
 
+@export_group("Rotating")
 @export var rotate_speed: float = 0.75
 @export var rotate_intensity: float = 5
 
+@export_group("Scaling")
 @export var scale_speed: float = 6
 @export var scale_intensity: float = 1.075
 @export var children_scale_intensity: float = 1.0
 
+@export_group("Pressing")
 @export var click_decay: float = 5
 @export var click_intensity: float = 0.2
 @export var click_ease: float = 0.7
@@ -27,6 +35,7 @@ var tween: Tween
 
 var base_scale := Vector2.ONE
 var override_time: float = 0.0
+var initial_position: Vector2
 
 
 func _init() -> void:
@@ -38,8 +47,18 @@ func _init() -> void:
 	connect("pressed", pressed)
 
 
+func _ready() -> void:
+	await get_tree().process_frame
+	initial_position = position
+	resized()
+	if label_text != "" and is_instance_valid(label):
+		label.text = label_text
+
+
 func resized():
 	pivot_offset = size / 2
+	for child: Control in get_children():
+		child.pivot_offset = child.size / 2
 
 
 func mouse_entered():
@@ -58,8 +77,9 @@ func _process(delta: float) -> void:
 	super(delta)
 	
 	var unix: float = Time.get_unix_time_from_system()
-	position.y = sin(time_offset + unix * float_speed) * float_intensity
-	position.y += float_offset
+	position = initial_position
+	position.y += sin(time_offset + unix * float_speed) * float_intensity
+	position.y -= float_offset
 	rotation_degrees = sin(time_offset + unix * rotate_speed) * rotate_intensity
 	
 	var modulate_var: String = "self_modulate" if modulate_self else "modulate"

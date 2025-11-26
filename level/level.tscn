@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=89 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://ho5ym60c6t3e" path="res://level/parallax_layer.gd" id="2_8yb03"]
@@ -15,7 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://emnfokpjdtf7" path="res://level/graphics/inner_tile.png" id="5_s1aav"]
 [ext_resource type="Texture2D" uid="uid://kmaepjf8ksjj" path="res://level/graphics/bg_middle.png" id="5_w5qvu"]
 [ext_resource type="Texture2D" uid="uid://d15tvxiufiwjv" path="res://level/graphics/outer_platform.png" id="6_ifo17"]
-[ext_resource type="Script" uid="uid://cqn5uoea710h7" path="res://misc/auto_resizer.gd" id="6_m3nah"]
 [ext_resource type="AudioStream" uid="uid://dc22g7tfuntxe" path="res://music/main/bass.ogg" id="6_rhqlf"]
 [ext_resource type="Texture2D" uid="uid://4b83higs6hal" path="res://level/graphics/outer_tile.png" id="6_xdahv"]
 [ext_resource type="AudioStream" uid="uid://cvy57lielouj3" path="res://music/main/melody.ogg" id="7_l5lfc"]
@@ -107,7 +106,6 @@ shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 7.0
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 2.0
 shader_parameter/sample_count = 9
 
@@ -117,9 +115,8 @@ shader_parameter/highlight_color = Color(0.7019608, 0.6862745, 0.8, 0)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 5.0
+shader_parameter/bevel_offset = 2.5
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 1.5
 shader_parameter/sample_count = 9
 
@@ -155,9 +152,8 @@ shader_parameter/highlight_color = Color(0, 0, 0, 1)
 shader_parameter/shadow_color = Color(0.7029333, 0.688, 0.8, 1)
 shader_parameter/strength = 0.7
 shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 5.0
+shader_parameter/bevel_offset = 2.5
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 1.0
 shader_parameter/sample_count = 9
 
@@ -424,7 +420,6 @@ shader_parameter/strength = 0.75
 shader_parameter/bevel_type = 1
 shader_parameter/bevel_offset = 3.0
 shader_parameter/knockout = false
-shader_parameter/do_size_correction = true
 shader_parameter/blur_radius = 3.0
 shader_parameter/sample_count = 9
 
@@ -731,7 +726,6 @@ theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
-script = ExtResource("6_m3nah")
 
 [node name="AbilityContainer" type="GridContainer" parent="UI/HUD"]
 visible = false
@@ -1071,7 +1065,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = ExtResource("7_tv7ir")
 script = ExtResource("19_h74y2")
-intermission_path = "res://menu/intermission.tscn"
+intermission_path = "res://menu/shop/shop.tscn"
 car = NodePath("../../Car")
 counters = [NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/FragmentsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/RobotsCount"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/DistanceMult"), NodePath("CenterContainer/PanelContainer/MarginContainer/VBoxContainer/AscentMult")]
 

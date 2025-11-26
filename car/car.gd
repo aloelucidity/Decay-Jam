@@ -162,7 +162,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	
 	if position.x < -level_generator.base_slope_length + 20:
 		linear_velocity.x = 100
-	if position.x > level_generator.level_length + 16 or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+	if position.x > level_generator.level_length + 16:# or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		Transitions.change_scene_to(ending_path)
 	
 	var last_battery = get_total_battery()

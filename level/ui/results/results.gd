@@ -1,4 +1,4 @@
-extends AutoResizer
+extends Control
 
 
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
