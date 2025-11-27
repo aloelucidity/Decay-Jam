@@ -52,6 +52,7 @@ metadata/_snap_enabled = true
 [node name="Button" type="TextureButton"]
 material = SubResource("ShaderMaterial_kdsbj")
 custom_minimum_size = Vector2(48, 24)
+focus_mode = 0
 action_mode = 0
 texture_normal = SubResource("GradientTexture2D_b1p1f")
 ignore_texture_size = true

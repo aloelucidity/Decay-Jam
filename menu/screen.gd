@@ -9,14 +9,20 @@ signal start_transition
 signal screen_opened ## this is used in the screen manager class
 signal screen_change(new_screen_name: String)
 
+var is_transitioning: bool
+
 
 func transition(new_screen_name: String):
+	if is_transitioning: return
+	is_transitioning = true
+	
 	emit_signal("start_transition")
 	animation_player.play("transition")
 	
 	await animation_player.animation_finished
 
 	emit_signal("screen_change", new_screen_name)
+	is_transitioning = false
 
 
 func get_transition_length() -> float:

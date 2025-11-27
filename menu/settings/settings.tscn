@@ -59,16 +59,19 @@ alignment = 1
 
 [node name="Back" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
 layout_mode = 2
+focus_mode = 0
 text = "go back"
 
 [node name="General" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
 layout_mode = 2
+focus_mode = 0
 toggle_mode = true
 button_group = SubResource("ButtonGroup_2rb37")
 text = "general"
 
 [node name="Controls" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
 layout_mode = 2
+focus_mode = 0
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_2rb37")
@@ -127,37 +130,27 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-columns = 3
-
-[node name="Padding" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Jump" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
-layout_mode = 2
-action_name = "move_up"
-label_text = "jump/hover"
-
-[node name="Padding2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+columns = 2
 
 [node name="Reverse" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_left"
 label_text = "reverse"
 
+[node name="Drive" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "move_right"
+label_text = "drive"
+
 [node name="Fall" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "move_down"
 label_text = "fall"
 
-[node name="Drive" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+[node name="Jump" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
 layout_mode = 2
-action_name = "move_right"
-label_text = "drive"
+action_name = "move_up"
+label_text = "jump/hover"
 
 [node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder"]
 layout_mode = 2
@@ -178,22 +171,12 @@ layout_mode = 2
 layout_mode = 2
 theme_override_constants/h_separation = 12
 theme_override_constants/v_separation = 12
-columns = 3
-
-[node name="Accept" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
-layout_mode = 2
-action_name = "ui_accept"
-label_text = "accept"
+columns = 4
 
 [node name="Up" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
 layout_mode = 2
 action_name = "ui_up"
 label_text = "up"
-
-[node name="Back" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
-layout_mode = 2
-action_name = "ui_cancel"
-label_text = "back"
 
 [node name="Left" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
 layout_mode = 2
@@ -210,6 +193,21 @@ layout_mode = 2
 action_name = "ui_right"
 label_text = "right"
 
+[node name="Accept" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_accept"
+label_text = "accept"
+
+[node name="Back" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_cancel"
+label_text = "back"
+
+[node name="Pause" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlsHolder/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "pause"
+label_text = "pause"
+
 [node name="ControlTabs" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -217,6 +215,7 @@ alignment = 1
 
 [node name="Keyboard" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs"]
 layout_mode = 2
+focus_mode = 0
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_tcj1p")
@@ -224,6 +223,7 @@ text = "keyboard"
 
 [node name="Controller" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs"]
 layout_mode = 2
+focus_mode = 0
 toggle_mode = true
 button_group = SubResource("ButtonGroup_tcj1p")
 text = "controller"
