@@ -1,0 +1,239 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxk1oppwws7yo"]
+
+[ext_resource type="Script" uid="uid://oem4xeu4v13q" path="res://menu/screen.gd" id="1_0i2s0"]
+[ext_resource type="Theme" uid="uid://bkavqyofikvxb" path="res://misc/theme.tres" id="1_5g0rr"]
+[ext_resource type="PackedScene" uid="uid://dpshf45lkva6n" path="res://menu/settings/audio_slider.tscn" id="3_n2qh0"]
+[ext_resource type="PackedScene" uid="uid://dmov7md4gvxio" path="res://menu/settings/keybind.tscn" id="4_tcj1p"]
+
+[sub_resource type="Animation" id="Animation_1wh5u"]
+resource_name = "transition"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5g0rr"]
+_data = {
+&"transition": SubResource("Animation_1wh5u")
+}
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_2rb37"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_tcj1p"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5g0rr")
+script = ExtResource("1_0i2s0")
+metadata/_custom_type_script = "uid://oem4xeu4v13q"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5g0rr")
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Back" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TabButtons" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Back" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+layout_mode = 2
+text = "go back"
+
+[node name="General" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_2rb37")
+text = "general"
+
+[node name="Controls" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabButtons"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_2rb37")
+text = "controls"
+
+[node name="TabContainer" type="MarginContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="General" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/General"]
+visible = false
+layout_mode = 2
+
+[node name="AudioSlider" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/General/VBoxContainer" instance=ExtResource("3_n2qh0")]
+layout_mode = 2
+
+[node name="AudioSlider2" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/General/VBoxContainer" instance=ExtResource("3_n2qh0")]
+layout_mode = 2
+
+[node name="Controls" type="CenterContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+text = "hold accept to clear bindings for an action"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Gameplay" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay"]
+layout_mode = 2
+text = "gameplay controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay"]
+layout_mode = 2
+
+[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Padding" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Jump" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "move_up"
+label_text = "jump/hover"
+
+[node name="Padding2" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Reverse" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "move_left"
+label_text = "reverse"
+
+[node name="Fall" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "move_down"
+label_text = "fall"
+
+[node name="Drive" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/Gameplay/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "move_right"
+label_text = "drive"
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="UI" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI"]
+layout_mode = 2
+text = "ui controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI"]
+layout_mode = 2
+
+[node name="BoxContainer" type="GridContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Accept" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_accept"
+label_text = "accept"
+
+[node name="Up" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_up"
+label_text = "up"
+
+[node name="Back" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_cancel"
+label_text = "back"
+
+[node name="Left" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_left"
+label_text = "left"
+
+[node name="Down" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_down"
+label_text = "down"
+
+[node name="Right" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/HBoxContainer/UI/BoxContainer" instance=ExtResource("4_tcj1p")]
+layout_mode = 2
+action_name = "ui_right"
+label_text = "right"
+
+[node name="ControlTabs" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_tcj1p")
+text = "keyboard"
+
+[node name="Button2" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_tcj1p")
+text = "controller"
+
+[node name="Device" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs/Device"]
+layout_mode = 2
+text = "device:"
+
+[node name="OptionButton" type="OptionButton" parent="CenterContainer/PanelContainer/VBoxContainer/TabContainer/Controls/VBoxContainer/ControlTabs/Device"]
+layout_mode = 2
+
+[connection signal="pressed" from="CenterContainer/PanelContainer/VBoxContainer/TabButtons/Back" to="." method="transition" binds= ["MainMenu"]]

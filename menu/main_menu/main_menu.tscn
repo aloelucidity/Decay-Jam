@@ -38,6 +38,93 @@ metadata/_snap_enabled = true
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_prid6"]
 gradient = SubResource("Gradient_winya")
 
+[sub_resource type="Animation" id="Animation_winya"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Buttons/HBoxContainer:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MarginContainer/CenterContainer/Control/Logo:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_bottom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_top")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [32.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_top")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_q6idt"]
 resource_name = "transition"
 length = 0.5
@@ -57,41 +144,74 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/Buttons/HBoxContainer:position")
+tracks/1/path = NodePath("MarginContainer/CenterContainer/Control/Logo:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_bottom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MarginContainer/CenterContainer/Control/Logo:anchor_top")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [0.0, -1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MarginContainer/CenterContainer/Control/Logo:offset_bottom")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [0.0, -16.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_bottom")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.5),
 "transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [Vector2(0, 232), Vector2(0, 212), Vector2(0, 264)]
+"values": [0.0, -16.0, 32.0]
 }
-
-[sub_resource type="Animation" id="Animation_winya"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MarginContainer/Buttons/HBoxContainer:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MarginContainer/Buttons/HBoxContainer:offset_top")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(0.5, 2, 1),
 "update": 0,
-"values": [Vector2(0.8, 0.8)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MarginContainer/Buttons/HBoxContainer:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 232)]
+"values": [-32.0, -48.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e5xhn"]
@@ -274,12 +394,11 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Buttons"]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = -1
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -32.0
 offset_right = 310.0
-offset_bottom = 6.1035156e-05
+offset_bottom = 32.0
 grow_vertical = 0
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(256, 144)
@@ -312,10 +431,20 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
-[node name="Logo" type="TextureRect" parent="MarginContainer/CenterContainer"]
-material = SubResource("ShaderMaterial_winya")
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/CenterContainer/Control"]
+material = SubResource("ShaderMaterial_winya")
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(0, 192)
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 script = ExtResource("5_winya")
@@ -324,7 +453,7 @@ bob_strength = 0.5
 rot_speed = 0.5
 rot_strength = 0.01
 
-[node name="Shadow" type="TextureRect" parent="MarginContainer/CenterContainer/Logo"]
+[node name="Shadow" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo"]
 modulate = Color(0.025000095, 0, 0.5, 0.2509804)
 show_behind_parent = true
 custom_minimum_size = Vector2(128, 128)
@@ -338,7 +467,7 @@ pivot_offset = Vector2(64, 64)
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 
-[node name="Outline" type="TextureRect" parent="MarginContainer/CenterContainer/Logo"]
+[node name="Outline" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo"]
 show_behind_parent = true
 clip_children = 2
 custom_minimum_size = Vector2(128, 128)
@@ -351,7 +480,7 @@ pivot_offset = Vector2(64, 64)
 texture = SubResource("ViewportTexture_prid6")
 expand_mode = 1
 
-[node name="OutlineGradient" type="TextureRect" parent="MarginContainer/CenterContainer/Logo/Outline"]
+[node name="OutlineGradient" type="TextureRect" parent="MarginContainer/CenterContainer/Control/Logo/Outline"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -363,4 +492,4 @@ texture = SubResource("GradientTexture2D_x87vx")
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Story" to="." method="transition" binds= [""]]
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Endless" to="." method="transition" binds= [""]]
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Medals" to="." method="transition" binds= [""]]
-[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Settings" to="." method="transition" binds= [""]]
+[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Settings" to="." method="transition" binds= ["Settings"]]

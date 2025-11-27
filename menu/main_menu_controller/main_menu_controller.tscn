@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://41gs0at3fv0t"]
+[gd_scene load_steps=4 format=3 uid="uid://41gs0at3fv0t"]
 
 [ext_resource type="Script" uid="uid://cs68siwgb60vw" path="res://menu/screen_manager.gd" id="1_31mi0"]
 [ext_resource type="PackedScene" uid="uid://dlftt0fxvvmkk" path="res://menu/main_menu/main_menu.tscn" id="2_1e71q"]
+[ext_resource type="PackedScene" uid="uid://bxk1oppwws7yo" path="res://menu/settings/settings.tscn" id="3_qj08i"]
 
 [node name="MainMenuController" type="Control"]
 layout_mode = 3
@@ -23,4 +24,7 @@ default_screen = NodePath("MainMenu")
 metadata/_custom_type_script = "uid://cs68siwgb60vw"
 
 [node name="MainMenu" parent="ScreenManager" instance=ExtResource("2_1e71q")]
+layout_mode = 1
+
+[node name="Settings" parent="ScreenManager" instance=ExtResource("3_qj08i")]
 layout_mode = 1

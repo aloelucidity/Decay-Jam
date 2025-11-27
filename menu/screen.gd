@@ -5,7 +5,8 @@ extends Control
 @onready var animation_player = $AnimationPlayer
 
 signal start_transition
-signal screen_opened
+@warning_ignore("unused_signal")
+signal screen_opened ## this is used in the screen manager class
 signal screen_change(new_screen_name: String)
 
 

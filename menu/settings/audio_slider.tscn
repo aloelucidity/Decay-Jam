@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dpshf45lkva6n"]
+
+[node name="AudioSlider" type="HBoxContainer"]
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "audio -"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3

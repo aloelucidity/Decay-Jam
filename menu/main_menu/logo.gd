@@ -17,5 +17,6 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if scale != Vector2.ONE: return
 	position.y = initial_pos.y + sin(Time.get_unix_time_from_system() * bob_speed) * bob_strength
 	rotation = sin(Time.get_unix_time_from_system() * rot_speed) * rot_strength
