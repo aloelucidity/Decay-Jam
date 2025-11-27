@@ -16,7 +16,6 @@ extends Camera2D
 var cam_offset: Vector2
 var look_direction: float
 var shake_intensity: float
-var base_zoom: Vector2
 var zoom_out: float
 var zoom_out_vector: Vector2
 
@@ -27,8 +26,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	zoom = base_zoom
-	zoom -= zoom_out_vector * base_zoom
+	zoom = Vector2.ONE - zoom_out_vector
 	
 	zoom_out_vector = lerp(zoom_out_vector, Vector2(zoom_out, zoom_out), delta * zoom_lerp_speed)
 	zoom_out = lerp(zoom_out, 0.0, delta * zoom_decay_speed)

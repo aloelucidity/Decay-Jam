@@ -4,6 +4,7 @@ extends Node
 
 signal setting_changed(key, new_value)
 
+const DEFAULT_SETTINGS_PATH: String = "res://misc/default_settings.cfg"
 const FILE_PATH: String = "user://settings.cfg"
 var config := ConfigFile.new()
 
@@ -19,6 +20,25 @@ func _init():
 
 	if err != OK:
 		push_error("Error loading config file!")
+
+
+func _ready() -> void:
+	load_defaults()
+
+
+func load_defaults():
+	var default_settings := ConfigFile.new()
+	var error: int = default_settings.load(DEFAULT_SETTINGS_PATH)
+	
+	if error != OK:
+		push_error("WARNING: Could not load default settings at %s!" % DEFAULT_SETTINGS_PATH)
+
+	var sections: PackedStringArray = default_settings.get_sections()
+	for section: String in sections:
+		var keys: PackedStringArray = default_settings.get_section_keys(section)
+		for key: String in keys:
+			if not has_setting(section, key):
+				change_setting(section, key, default_settings.get_value(section, key))
 
 
 ## Load a setting [param key] at a category [param section] in the config file.
@@ -42,6 +62,13 @@ func change_setting(section: String, key: String, value: Variant):
 ## Returns whether or not a key exists and has a value.
 func has_setting(section: String, key: String):
 	return config.has_section_key(section, key)
+
+
+## This method exists mainly to more cleanly handle sections that don't currently exist.
+func get_section_keys(section: String) -> PackedStringArray:
+	if config.has_section(section):
+		return config.get_section_keys(section)
+	return PackedStringArray([])
 
 
 ## Sets all settings back to their default values.

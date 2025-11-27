@@ -92,19 +92,17 @@ const JOY_BUTTONS: Array = [
 	"B",
 	"X",
 	"Y",
-	"LB",
-	"RB",
-	"LT",
-	"RT",
+	"Select",
+	"Logo",
+	"Start",
 	"LS",
 	"RS",
-	"Select",
-	"Start",
+	"LB",
+	"RB",
 	"Up",
 	"Down",
 	"Left",
 	"Right",
-	"Logo",
 	"Misc",
 	"Paddle 1",
 	"Paddle 2",
@@ -113,12 +111,12 @@ const JOY_BUTTONS: Array = [
 	"Touchpad"
 ]
 const JOY_AXES: Array = [
-	"Left Stick X",
-	"Left Stick Y",
-	"Right Stick X",
-	"Right Stick Y",
-	"Left Trigger",
-	"Right Trigger"
+	"LS X",
+	"LS Y",
+	"RS X",
+	"RS Y",
+	"LT",
+	"RT"
 ]
 
 func get_human_name() -> String:
@@ -137,5 +135,5 @@ func get_human_name() -> String:
 			var axis_string: String = UNKNOWN
 			if input_value < JOY_AXES.size():
 				axis_string = JOY_AXES[input_value]
-			return axis_string + "-" if axis_sign < 0 else "+"
+			return axis_string + ("-" if axis_sign < 0 else "+")
 	return UNKNOWN

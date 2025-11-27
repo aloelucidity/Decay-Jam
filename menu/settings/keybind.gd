@@ -1,13 +1,9 @@
+class_name KeybindUI
 extends VBoxContainer
 
 
 const LISTENING_TEXT: String = "Press..."
-const ACCEPTED_TYPES: Array[String] = [
-	"InputEventKey",
-	"InputEventMouseButton",
-	"InputEventJoypadButton",
-	"InputEventJoypadMotion"
-]
+
 
 @onready var label: Label = $Label
 @onready var button: AnimatedButton = $MarginContainer/Button
@@ -26,6 +22,11 @@ func _ready() -> void:
 	label.text = label_text
 	button.connect("button_down", button_down)
 	button.connect("button_up", button_up)
+	load_bindings(ControlManager.get_bindings(action_name, is_controller))
+
+
+func change_controller_mode(new_is_controller: bool) -> void:
+	is_controller = new_is_controller
 	load_bindings(ControlManager.get_bindings(action_name, is_controller))
 
 
@@ -79,8 +80,9 @@ func start_listening() -> void:
 
 func _input(event: InputEvent) -> void:
 	if not is_listening: return
-	if not event.get_class() in ACCEPTED_TYPES: return
 	if not event.is_pressed(): return
+	if is_controller and not event.get_class() in ControlManager.ACCEPTED_CONTROLLER: return
+	if not is_controller and not event.get_class() in ControlManager.ACCEPTED_KEYBOARD: return
 	if event is InputEventJoypadMotion and abs(event.axis_value) < ControlManager.DEADZONE: return
 	
 	is_listening = false
@@ -88,8 +90,16 @@ func _input(event: InputEvent) -> void:
 	var bindings: Array[ControlBinding] = ControlManager.get_bindings(action_name, is_controller)
 	var new_binding := ControlBinding.new()
 	new_binding.load_input_event(event)
-	bindings.append(new_binding)
-	ControlManager.set_bindings(bindings, action_name, is_controller)
 	
+	var matching_found: bool
+	for binding in bindings:
+		if new_binding.save_raw_data().hash() == binding.save_raw_data().hash():
+			bindings.erase(binding)
+			matching_found = true
+	
+	if not matching_found:
+		bindings.append(new_binding)
+	
+	ControlManager.set_bindings(bindings, action_name, is_controller)
 	load_bindings(bindings)
 	get_viewport().set_input_as_handled()

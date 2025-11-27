@@ -132,7 +132,7 @@ func _process(delta: float) -> void:
 			if not child is TextureRect and not child is TextureProgressBar:
 				child.scale = Vector2.ONE + (scale - Vector2.ONE) * children_scale_intensity
 	
-	if scroll_container.size.x < label.size.x:
+	if is_instance_valid(scroll_container) and scroll_container.size.x < label.size.x:
 		if scroll_timer > 0:
 			scroll_timer -= delta
 			if scroll_timer <= scroll_wait / 2:
