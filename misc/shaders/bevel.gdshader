@@ -19,11 +19,6 @@ varying vec4 modulate;
 varying vec2 pixel_pos;
 
 
-varying float v_weights[MAX_SAMPLES];
-varying float v_offsets[MAX_SAMPLES];
-varying flat int v_samples;
-
-
 float calculate_gaussian_weight(float offset, float sigma) {
 	float exponent = -(offset * offset) / (2.0 * sigma * sigma);
 	return exp(exponent);
@@ -33,9 +28,51 @@ float calculate_gaussian_weight(float offset, float sigma) {
 void vertex() {
 	modulate = COLOR;
 	pixel_pos = VERTEX;
+}
 
+
+vec4 safe_texture_sample(sampler2D tex, vec2 uv) {
+	if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
+		return vec4(0.0);
+	}
+	return texture(tex, uv);
+}
+
+
+// Horizontal Pass (returns only the alpha channel's blurred value)
+float gaussian_1d_sample_h(sampler2D tex, vec2 uv, vec2 pixel_size, float[MAX_SAMPLES] v_offsets, float[MAX_SAMPLES] v_weights, int v_samples) {
+	float final_alpha = 0.0;
+	for (int i = 0; i < MAX_SAMPLES; i++) {
+		if (i >= v_samples) {
+		    break;
+		}
+		vec2 sample_uv = uv + vec2(v_offsets[i], 0.0) * pixel_size;
+		final_alpha += safe_texture_sample(tex, sample_uv).a * v_weights[i];
+	}
+	return final_alpha;
+}
+
+// Vertical Pass (returns only the alpha channel's blurred value)
+float gaussian_1d_sample_v(sampler2D tex, vec2 uv, vec2 pixel_size, float[MAX_SAMPLES] v_offsets, float[MAX_SAMPLES] v_weights, int v_samples) {
+	float final_alpha = 0.0;
+	for (int i = 0; i < MAX_SAMPLES; i++) {
+		if (i >= v_samples) {
+			break;
+		}
+		vec2 sample_uv = uv + vec2(0.0, v_offsets[i]) * pixel_size;
+		final_alpha += safe_texture_sample(tex, sample_uv).a * v_weights[i];
+	}
+	return final_alpha;
+}
+
+
+void fragment() {
 	int center_index = sample_count / 2;
+	
 	float total_weight = 0.0;
+	float[MAX_SAMPLES] v_offsets;
+	float[MAX_SAMPLES] v_weights;
+	int v_samples;
 
 	// Ensure the sample count doesn't exceed the array size and is odd.
 	v_samples = min(sample_count, MAX_SAMPLES);
@@ -54,55 +91,17 @@ void vertex() {
 	for (int i = 0; i < v_samples; i++) {
 		v_weights[i] /= total_weight;
 	}
-}
-
-
-vec4 safe_texture_sample(sampler2D tex, vec2 uv) {
-	if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-		return vec4(0.0);
-	}
-	return texture(tex, uv);
-}
-
-
-// Horizontal Pass (returns only the alpha channel's blurred value)
-float gaussian_1d_sample_h(sampler2D tex, vec2 uv, vec2 pixel_size) {
-	float final_alpha = 0.0;
-	for (int i = 0; i < MAX_SAMPLES; i++) {
-		if (i >= v_samples) {
-		    break;
-		}
-		vec2 sample_uv = uv + vec2(v_offsets[i], 0.0) * pixel_size;
-		final_alpha += safe_texture_sample(tex, sample_uv).a * v_weights[i];
-	}
-	return final_alpha;
-}
-
-// Vertical Pass (returns only the alpha channel's blurred value)
-float gaussian_1d_sample_v(sampler2D tex, vec2 uv, vec2 pixel_size) {
-	float final_alpha = 0.0;
-	for (int i = 0; i < MAX_SAMPLES; i++) {
-		if (i >= v_samples) {
-			break;
-		}
-		vec2 sample_uv = uv + vec2(0.0, v_offsets[i]) * pixel_size;
-		final_alpha += safe_texture_sample(tex, sample_uv).a * v_weights[i];
-	}
-	return final_alpha;
-}
-
-
-void fragment() {
+	
 	vec2 node_size = pixel_pos / UV;
 	vec2 offset_vec = vec2(bevel_offset) / node_size;
 
 	vec2 blur_uv_left = UV + offset_vec;
 	vec2 blur_uv_right = UV - offset_vec;
 
-	float blur_left_h = gaussian_1d_sample_h(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE);
-	float blur_left_v = gaussian_1d_sample_v(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE);
-	float blur_right_h = gaussian_1d_sample_h(TEXTURE, blur_uv_right, TEXTURE_PIXEL_SIZE);
-	float blur_right_v = gaussian_1d_sample_v(TEXTURE, blur_uv_right, TEXTURE_PIXEL_SIZE);
+	float blur_left_h = gaussian_1d_sample_h(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE, v_offsets, v_weights, v_samples);
+	float blur_left_v = gaussian_1d_sample_v(TEXTURE, blur_uv_left, TEXTURE_PIXEL_SIZE, v_offsets, v_weights, v_samples);
+	float blur_right_h = gaussian_1d_sample_h(TEXTURE, blur_uv_right, TEXTURE_PIXEL_SIZE, v_offsets, v_weights, v_samples);
+	float blur_right_v = gaussian_1d_sample_v(TEXTURE, blur_uv_right, TEXTURE_PIXEL_SIZE, v_offsets, v_weights, v_samples);
 
 	float blur_left = blur_left_h + blur_left_v;
 	float blur_right = blur_right_h + blur_right_v;
