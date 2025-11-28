@@ -1,9 +1,9 @@
-[gd_scene load_steps=89 format=3 uid="uid://8jvrirsicmsi"]
+[gd_scene load_steps=90 format=3 uid="uid://8jvrirsicmsi"]
 
 [ext_resource type="Script" uid="uid://vhv7qld0px1u" path="res://level/camera_2d.gd" id="1_ktfr2"]
 [ext_resource type="Script" uid="uid://ho5ym60c6t3e" path="res://level/parallax_layer.gd" id="2_8yb03"]
 [ext_resource type="PackedScene" uid="uid://cktgqcvf538ar" path="res://car/car.tscn" id="2_44x8d"]
-[ext_resource type="Shader" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
+[ext_resource type="Shader" uid="uid://cfokrh5r1sjq1" path="res://misc/shaders/sparkle.gdshader" id="2_ifo17"]
 [ext_resource type="Texture2D" uid="uid://d2tiypn0n6k8j" path="res://level/graphics/bg_far.png" id="2_q4dhf"]
 [ext_resource type="Script" uid="uid://3ytb6gp6nt3p" path="res://level/canvas_modulate.gd" id="3_ivpvi"]
 [ext_resource type="Script" uid="uid://50uuqk8bud68" path="res://level/ui/hud/batteries.gd" id="4_0v1st"]
@@ -24,7 +24,6 @@
 [ext_resource type="AudioStream" uid="uid://f75smqgej453" path="res://music/main/drums.ogg" id="9_fm1jd"]
 [ext_resource type="AudioStream" uid="uid://bo158a1bh5w5v" path="res://music/main/arp.ogg" id="10_7jqyl"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="10_m5ivw"]
-[ext_resource type="PackedScene" uid="uid://bauvu2tr2dx3b" path="res://level/ui/hud/ability_button.tscn" id="10_ml0fe"]
 [ext_resource type="AudioStream" uid="uid://dba0mp1l2vavc" path="res://music/main/pad.ogg" id="11_m5ivw"]
 [ext_resource type="Texture2D" uid="uid://tkboymtcjjj1" path="res://level/ui/hud/grid.png" id="12_b7y0n"]
 [ext_resource type="Script" uid="uid://ceedbyrdeeh68" path="res://level/pattern_scroll.gd" id="12_kp5pi"]
@@ -43,6 +42,9 @@
 [ext_resource type="Script" uid="uid://bf11s3pkf4aas" path="res://level/ui/results/counter.gd" id="23_u5n7q"]
 [ext_resource type="Script" uid="uid://kfcw7fd1gaaf" path="res://level/ui/results/sum.gd" id="24_qslh7"]
 [ext_resource type="Script" uid="uid://fximh3ls1mts" path="res://level/ui/hud/air_time.gd" id="31_4vkke"]
+[ext_resource type="Script" uid="uid://blbnqpq811w8l" path="res://level/ui/pause_controller.gd" id="32_5002v"]
+[ext_resource type="Script" uid="uid://cs68siwgb60vw" path="res://menu/screen_manager.gd" id="32_bm65w"]
+[ext_resource type="PackedScene" uid="uid://bxk1oppwws7yo" path="res://menu/settings/settings.tscn" id="33_5002v"]
 [ext_resource type="Script" uid="uid://ovejq14s5gpr" path="res://level/ui/hud/to_goal.gd" id="33_j1fdq"]
 [ext_resource type="AudioStream" uid="uid://d2ht2ig3wv6q5" path="res://music/results.ogg" id="35_bm65w"]
 
@@ -97,17 +99,6 @@ shader_parameter/noise_intensity = 0.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_w18mj"]
 viewport_path = NodePath("UI/AirTimeViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_kdsbj"]
-shader = ExtResource("10_m5ivw")
-shader_parameter/highlight_color = Color(0.2688, 0.43775994, 0.48, 0)
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
-shader_parameter/strength = 0.7
-shader_parameter/bevel_type = 1
-shader_parameter/bevel_offset = 7.0
-shader_parameter/knockout = false
-shader_parameter/blur_radius = 2.0
-shader_parameter/sample_count = 9
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sui6v"]
 shader = ExtResource("10_m5ivw")
@@ -718,73 +709,20 @@ car = NodePath("../../Car")
 label = NodePath("../AirTimeViewport/AirTimeLabel")
 pos_offset = Vector2(32, -40)
 
-[node name="HUD" type="MarginContainer" parent="UI"]
-offset_right = 512.0
-offset_bottom = 288.0
-theme = ExtResource("7_tv7ir")
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="AbilityContainer" type="GridContainer" parent="UI/HUD"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-columns = 3
-
-[node name="Padding" type="Control" parent="UI/HUD/AbilityContainer"]
-material = SubResource("ShaderMaterial_kdsbj")
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ButtonHolder" type="Control" parent="UI/HUD/AbilityContainer"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder" instance=ExtResource("10_ml0fe")]
-layout_mode = 1
-
-[node name="Padding2" type="Control" parent="UI/HUD/AbilityContainer"]
-material = SubResource("ShaderMaterial_kdsbj")
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ButtonHolder2" type="Control" parent="UI/HUD/AbilityContainer"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder2" instance=ExtResource("10_ml0fe")]
-layout_mode = 1
-
-[node name="ButtonHolder3" type="Control" parent="UI/HUD/AbilityContainer"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder3" instance=ExtResource("10_ml0fe")]
-layout_mode = 1
-
-[node name="ButtonHolder4" type="Control" parent="UI/HUD/AbilityContainer"]
-custom_minimum_size = Vector2(28, 28)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Button" parent="UI/HUD/AbilityContainer/ButtonHolder4" instance=ExtResource("10_ml0fe")]
-layout_mode = 1
-
-[node name="Control" type="Control" parent="UI/HUD"]
-custom_minimum_size = Vector2(80, 60)
-layout_mode = 2
+[node name="Dragonfruit" type="Control" parent="UI"]
+layout_mode = 3
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = -60.0
+offset_right = 80.0
+offset_bottom = -24.0
+grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme = ExtResource("7_tv7ir")
 
-[node name="PanelContainer" type="PanelContainer" parent="UI/HUD/Control"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Dragonfruit"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -795,7 +733,7 @@ rotation = -0.017453292
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="TextureRect" type="TextureRect" parent="UI/HUD/Control/PanelContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Dragonfruit/PanelContainer"]
 material = SubResource("ShaderMaterial_sui6v")
 layout_mode = 2
 mouse_filter = 0
@@ -805,7 +743,7 @@ script = ExtResource("20_1vdk1")
 animate_speed = 1.5
 metadata/_edit_group_ = true
 
-[node name="Shadow" type="TextureRect" parent="UI/HUD/Control/PanelContainer/TextureRect"]
+[node name="Shadow" type="TextureRect" parent="UI/Dragonfruit/PanelContainer/TextureRect"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -821,7 +759,7 @@ mouse_filter = 0
 texture = SubResource("GradientTexture2D_sui6v")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Dragonfruit/PanelContainer"]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/margin_left = 6
@@ -829,12 +767,12 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 36
 
-[node name="Control" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+[node name="Control" type="Control" parent="UI/Dragonfruit/PanelContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/Control"]
+[node name="Label" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -1.0
@@ -850,7 +788,7 @@ text = "dragonfruit"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Screen" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+[node name="Screen" type="TextureRect" parent="UI/Dragonfruit/PanelContainer/MarginContainer"]
 clip_children = 2
 material = SubResource("ShaderMaterial_m5ivw")
 layout_mode = 2
@@ -858,7 +796,7 @@ mouse_filter = 0
 texture = SubResource("GradientTexture2D_tv7ir")
 expand_mode = 1
 
-[node name="Pattern3" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+[node name="Pattern3" type="TextureRect" parent="UI/Dragonfruit/PanelContainer/MarginContainer/Screen"]
 modulate = Color(2.117753e-06, 0.70300174, 0.82874405, 0.0627451)
 show_behind_parent = true
 texture_filter = 1
@@ -877,7 +815,7 @@ stretch_mode = 1
 script = ExtResource("12_kp5pi")
 scroll_speed = Vector2(0, 7)
 
-[node name="Pattern" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+[node name="Pattern" type="TextureRect" parent="UI/Dragonfruit/PanelContainer/MarginContainer/Screen"]
 modulate = Color(0, 0.89677805, 0.8821105, 0.0627451)
 show_behind_parent = true
 texture_filter = 1
@@ -895,7 +833,7 @@ expand_mode = 1
 stretch_mode = 1
 script = ExtResource("12_kp5pi")
 
-[node name="Pattern2" type="TextureRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/Screen"]
+[node name="Pattern2" type="TextureRect" parent="UI/Dragonfruit/PanelContainer/MarginContainer/Screen"]
 modulate = Color(0, 0.89677805, 0.8821105, 0.0627451)
 show_behind_parent = true
 texture_filter = 1
@@ -914,7 +852,7 @@ stretch_mode = 1
 script = ExtResource("12_kp5pi")
 scroll_speed = Vector2(-5, -5)
 
-[node name="MarginContainer" type="MarginContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Dragonfruit/PanelContainer/MarginContainer"]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/margin_left = 4
@@ -922,45 +860,45 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer"]
 custom_minimum_size = Vector2(0, 80)
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Batteries" type="HBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car")]
+[node name="Batteries" type="HBoxContainer" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car")]
 layout_mode = 2
 mouse_filter = 0
 alignment = 2
 script = ExtResource("4_0v1st")
-car = NodePath("../../../../../../../../Car")
+car = NodePath("../../../../../../../Car")
 bevel_image = SubResource("GradientTexture2D_o0wo3")
 bevel_material = ExtResource("16_7cdnq")
 
-[node name="Padding" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="Padding" type="Control" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 material = SubResource("CanvasItemMaterial_tv7ir")
 layout_mode = 2
 
-[node name="Stats" type="VBoxContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="Stats" type="VBoxContainer" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 0
 
-[node name="Money" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
+[node name="Money" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
 texture_filter = 2
 layout_mode = 2
 mouse_filter = 0
 text = "$0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-car = NodePath("../../../../../../../../../Car")
+car = NodePath("../../../../../../../../Car")
 
-[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Money"]
+[node name="Label" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Money"]
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
@@ -974,21 +912,21 @@ theme_override_font_sizes/font_size = 6
 text = "funds:"
 vertical_alignment = 2
 
-[node name="HSeparator" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats"]
+[node name="HSeparator" type="HSeparator" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats"]
 material = SubResource("CanvasItemMaterial_tv7ir")
 layout_mode = 2
 
-[node name="Multiplier" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
+[node name="Multiplier" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats" node_paths=PackedStringArray("car")]
 texture_filter = 2
 layout_mode = 2
 mouse_filter = 0
 text = "x1.0"
 horizontal_alignment = 2
 script = ExtResource("9_7jqyl")
-car = NodePath("../../../../../../../../../Car")
+car = NodePath("../../../../../../../../Car")
 stat_to_track = 1
 
-[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Multiplier"]
+[node name="Label" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/Stats/Multiplier"]
 texture_filter = 2
 layout_mode = 1
 anchors_preset = 15
@@ -1002,30 +940,30 @@ theme_override_font_sizes/font_size = 6
 text = "multiplier:"
 vertical_alignment = 2
 
-[node name="HSeparator2" type="HSeparator" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="HSeparator2" type="HSeparator" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 material = SubResource("CanvasItemMaterial_tv7ir")
 layout_mode = 2
 
-[node name="Padding2" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="Padding2" type="Control" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 0
 ratio = 2.0
 
-[node name="Speedometer" type="ColorRect" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer" node_paths=PackedStringArray("car")]
+[node name="Speedometer" type="ColorRect" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer" node_paths=PackedStringArray("car")]
 material = SubResource("ShaderMaterial_o0wo3")
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0, 0, 0, 0)
 script = ExtResource("17_o0wo3")
-car = NodePath("../../../../../../../../../Car")
+car = NodePath("../../../../../../../../Car")
 
-[node name="Label" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer/Speedometer"]
+[node name="Label" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2/AspectRatioContainer/Speedometer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1039,11 +977,11 @@ text = "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Padding3" type="Control" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
+[node name="Padding3" type="Control" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 2
 
-[node name="ToGoal" type="Label" parent="UI/HUD/Control/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car", "level_generator")]
+[node name="ToGoal" type="Label" parent="UI/Dragonfruit/PanelContainer/MarginContainer/MarginContainer/VBoxContainer2" node_paths=PackedStringArray("car", "level_generator")]
 layout_mode = 2
 mouse_filter = 0
 theme_override_font_sizes/font_size = 6
@@ -1051,8 +989,32 @@ text = "%s m to goal"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("33_j1fdq")
-car = NodePath("../../../../../../../../Car")
-level_generator = NodePath("../../../../../../../../LevelGenerator")
+car = NodePath("../../../../../../../Car")
+level_generator = NodePath("../../../../../../../LevelGenerator")
+
+[node name="PauseController" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("32_5002v")
+
+[node name="ScreenManager" type="Control" parent="UI/PauseController" node_paths=PackedStringArray("default_screen")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("32_bm65w")
+default_screen = NodePath("")
+metadata/_custom_type_script = "uid://cs68siwgb60vw"
+
+[node name="Settings" parent="UI/PauseController/ScreenManager" instance=ExtResource("33_5002v")]
+visible = false
+layout_mode = 1
 
 [node name="Results" type="Control" parent="UI" node_paths=PackedStringArray("car", "counters")]
 process_mode = 3

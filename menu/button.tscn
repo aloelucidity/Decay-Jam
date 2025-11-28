@@ -65,8 +65,8 @@ rotate_speed = 0.25
 rotate_intensity = 2.0
 scale_intensity = 1.05
 click_decay = 3.0
-click_intensity = 0.3
-children_scale_intensity = 1.2
+click_intensity = 0.15
+children_scale_intensity = 1.1
 animate_speed = 2.0
 
 [node name="Shadow" type="TextureRect" parent="."]

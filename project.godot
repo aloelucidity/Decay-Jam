@@ -23,10 +23,11 @@ general/default_playback_type.web=0
 
 [autoload]
 
-Globals="*res://misc/globals.gd"
-Transitions="*res://misc/transitions.tscn"
-LocalSettings="*res://misc/local_settings.gd"
-ControlManager="*res://misc/controls/control_manager.gd"
+Globals="*res://misc/globals/globals.gd"
+Transitions="*res://misc/globals/transitions.tscn"
+LocalSettings="*res://misc/globals/local_settings.gd"
+SettingsApplier="*res://misc/globals/settings_applier.gd"
+ControlManager="*res://misc/globals/control_manager.gd"
 
 [display]
 

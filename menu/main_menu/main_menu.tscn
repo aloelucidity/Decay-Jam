@@ -1,7 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dlftt0fxvvmkk"]
+[gd_scene load_steps=21 format=3 uid="uid://dlftt0fxvvmkk"]
 
 [ext_resource type="Script" uid="uid://oem4xeu4v13q" path="res://menu/screen.gd" id="1_q6idt"]
 [ext_resource type="PackedScene" uid="uid://8gdwiai7i0gj" path="res://menu/button.tscn" id="2_e5xhn"]
+[ext_resource type="Script" uid="uid://dim8221ufp2aq" path="res://menu/main_menu/button_functions.gd" id="2_prid6"]
 [ext_resource type="FontFile" uid="uid://cq4nckdgrjf3o" path="res://misc/fonts/Shrikhand-Regular.ttf" id="3_qs6vt"]
 [ext_resource type="Shader" uid="uid://cw0wphwhg5eqg" path="res://misc/shaders/bevel.gdshader" id="4_7r8i1"]
 [ext_resource type="Script" uid="uid://binf0xss8mnvi" path="res://menu/main_menu/logo.gd" id="5_winya"]
@@ -277,6 +278,13 @@ grow_vertical = 2
 script = ExtResource("1_q6idt")
 metadata/_custom_type_script = "uid://oem4xeu4v13q"
 
+[node name="ButtonFunctions" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_prid6")
+shop_path = "res://menu/shop/shop.tscn"
+
 [node name="Logo" type="SubViewport" parent="."]
 transparent_bg = true
 size_2d_override = Vector2i(128, 128)
@@ -434,21 +442,29 @@ theme_override_constants/separation = 18
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Story"
+click_intensity = 0.3
+children_scale_intensity = 1.2
 
 [node name="Endless" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Endless"
+click_intensity = 0.3
+children_scale_intensity = 1.2
 
 [node name="Medals" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Medals"
+click_intensity = 0.3
+children_scale_intensity = 1.2
 
 [node name="Settings" parent="MarginContainer/Buttons/HBoxContainer" instance=ExtResource("2_e5xhn")]
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 label_text = "Settings"
+click_intensity = 0.3
+children_scale_intensity = 1.2
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -513,6 +529,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_x87vx")
 
+[connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Story" to="ButtonFunctions" method="run_story_mode"]
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Story" to="." method="transition" binds= [""]]
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Endless" to="." method="transition" binds= [""]]
 [connection signal="pressed" from="MarginContainer/Buttons/HBoxContainer/Medals" to="." method="transition" binds= [""]]
