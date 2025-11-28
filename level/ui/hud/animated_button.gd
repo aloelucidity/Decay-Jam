@@ -41,7 +41,7 @@ var base_scale := Vector2.ONE
 var override_time: float = 0.0
 var initial_position: Vector2
 
-var scroll_timer: float
+var do_scroll: bool
 
 
 func _init() -> void:
@@ -51,7 +51,6 @@ func _init() -> void:
 	connect("mouse_exited", mouse_exited)
 	connect("resized", resized)
 	connect("pressed", pressed)
-	connect("visibility_changed", visibility_changed)
 
 
 func _ready() -> void:
@@ -73,21 +72,18 @@ func resized():
 		child.pivot_offset = child.size / 2
 
 
-func visibility_changed():
-	if is_instance_valid(scroll_container):
-		scroll_timer = scroll_wait / 2
-		scroll_container.scroll_horizontal = 0
-
-
 func mouse_entered():
 	hovered = true
 	if is_instance_valid(scroll_container):
-		scroll_timer = 0
+		do_scroll = true
 		scroll_container.scroll_horizontal = 0
 
 
 func mouse_exited():
 	hovered = false
+	if is_instance_valid(scroll_container):
+		do_scroll = false
+		scroll_container.scroll_horizontal = 0
 
 
 func pressed():
@@ -132,17 +128,9 @@ func _process(delta: float) -> void:
 			if not child is TextureRect and not child is TextureProgressBar:
 				child.scale = Vector2.ONE + (scale - Vector2.ONE) * children_scale_intensity
 	
-	if is_instance_valid(scroll_container) and scroll_container.size.x < label.size.x:
-		if scroll_timer > 0:
-			scroll_timer -= delta
-			if scroll_timer <= scroll_wait / 2:
-				scroll_container.scroll_horizontal = 0
-			if scroll_timer <= 0:
-				scroll_timer = 0
-		else:
+	if is_instance_valid(scroll_container) and scroll_container.size.x < label.size.x and do_scroll:
 			scroll_container.scroll_horizontal += int(delta * 100)
 			var scroll_max: int = int(scroll_container.get_h_scroll_bar().max_value)
 			scroll_max -= int(scroll_container.size.x)
 			if scroll_container.scroll_horizontal >= scroll_max:
 				scroll_container.scroll_horizontal = scroll_max
-				scroll_timer = scroll_wait
